@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="8.822">
+    <testcase classname="As an administrator I should be able to delete the visitor puspose record in the system via API connection." name="Verify that a DELETE request to `/api/visitorsPurposeDelete` with invalid authorization and `id` returns a" time="8.11">
+        <system-out><![CDATA[* The api user constructs the base url with the "invalid" token.............passed
+* The api user sets "api/visitorsPurposeDelete" path parameters.............passed
+* The api user prepares a DELETE request to send to the api visitorsPurposeDelete endpoint containing the information 1278..passed
+* The api user sends a DELETE request, saves the returned response, and verifies that the status code is '403' with the reason phrase Forbidden..passed
+]]></system-out>
+    </testcase>
+</testsuite>
