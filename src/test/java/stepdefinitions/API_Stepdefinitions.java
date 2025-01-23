@@ -124,8 +124,8 @@ public class API_Stepdefinitions {
     @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string} and {string}.")
     public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information_and(String visitors_purpose, String description) {
         jsonObjectRequestBody = new JSONObject();
-        jsonObjectRequestBody.put("visitors_purpose",visitors_purpose);
-        jsonObjectRequestBody.put("description",description);
+        jsonObjectRequestBody.put("visitors_purpose", visitors_purpose);
+        jsonObjectRequestBody.put("description", description);
 
         System.out.println("Post Body : " + jsonObjectRequestBody);
     }
@@ -134,10 +134,11 @@ public class API_Stepdefinitions {
     public void the_api_user_prepares_a_post_request_that_does_not_contain_data_to_the_api_visitors_purpose_add_endpoint() {
         jsonObjectRequestBody = new JSONObject();
     }
+
     @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string}.")
     public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information(String description) {
         jsonObjectRequestBody = new JSONObject();
-        jsonObjectRequestBody.put("description",description);
+        jsonObjectRequestBody.put("description", description);
 
         System.out.println("Post Body : " + jsonObjectRequestBody);
     }
@@ -151,6 +152,7 @@ public class API_Stepdefinitions {
 
         System.out.println("Patch Body : " + hashMapRequestBody);
     }
+
     @Given("The api user sends a PATCH request and saves the returned response.")
     public void the_api_user_sends_a_patch_request_and_saves_the_returned_response() {
         response = given()
@@ -162,6 +164,7 @@ public class API_Stepdefinitions {
 
         response.prettyPrint();
     }
+
     @Given("The api user verifies that the updateid information in the response body is the same as the id information in the request body.")
     public void the_api_user_verifies_that_the_updateid_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
         Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updateId"));
@@ -175,6 +178,7 @@ public class API_Stepdefinitions {
 
         System.out.println("Patch Body : " + hashMapRequestBody);
     }
+
     @Given("The api user sends a PATCH request, saves the returned response, and verifies that the status code is '403' with the reason phrase Forbidden.")
     public void the_api_user_sends_a_patch_request_saves_the_returned_response_and_verifies_that_the_status_code_is_with_the_reason_phrase_forbidden() {
         try {
@@ -191,6 +195,7 @@ public class API_Stepdefinitions {
         System.out.println("exceptionMesaj : " + exceptionMesaj);
         Assert.assertEquals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api"), exceptionMesaj);
     }
+
     @Given("The api user verifies visitors_purpose as {string}")
     public void the_api_user_verifies_visitors_purpose_as(String visitors_purpose) {
         response.then()
@@ -204,6 +209,7 @@ public class API_Stepdefinitions {
 
         System.out.println("Delete Body : " + requestBody);
     }
+
     @Given("The api user sends a DELETE request and saves the returned response.")
     public void the_api_user_sends_a_delete_request_and_saves_the_returned_response() {
         response = given()
@@ -215,9 +221,10 @@ public class API_Stepdefinitions {
 
         response.prettyPrint();
     }
+
     @Given("The api user verifies that the Deletedid information in the response body is the same as the id information in the request body.")
     public void the_api_user_verifies_that_the_deletedid_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
-       jsonPath = response.jsonPath();
+        jsonPath = response.jsonPath();
 
         Assert.assertEquals(requestBody.getId(), jsonPath.getInt("DeletedId"));
     }
@@ -236,6 +243,23 @@ public class API_Stepdefinitions {
         }
 
         System.out.println("exceptionMesaj : " + exceptionMesaj);
-        Assert.assertEquals(ConfigReader.getProperty("unauthorizedExceptionMessage","api"), exceptionMesaj);
+        Assert.assertEquals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api"), exceptionMesaj);
     }
+
+    @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string},{string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including_and(int dataIndex, String student_id, String current_email, String current_phone, String occupation, String address, String photo, String created_at) {
+
+        jsonPath = response.jsonPath();
+
+        Assert.assertEquals(student_id, jsonPath.getString("lists[" + dataIndex + "].student_id"));
+        Assert.assertEquals(current_email, jsonPath.getString("lists[" + dataIndex + "].current_email"));
+        Assert.assertEquals(current_phone, jsonPath.getString("lists[" + dataIndex + "].current_phone"));
+        Assert.assertEquals(current_phone, jsonPath.getString("lists[" + dataIndex + "].current_phone"));
+        Assert.assertEquals(occupation, jsonPath.getString("lists[" + dataIndex + "].occupation"));
+        Assert.assertEquals(address, jsonPath.getString("lists[" + dataIndex + "].address"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].photo"));
+        Assert.assertEquals(created_at, jsonPath.getString("lists[" + dataIndex + "].created_at"));
+
+    }
+
 }
