@@ -124,8 +124,8 @@ public class API_Stepdefinitions {
     @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string} and {string}.")
     public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information_and(String visitors_purpose, String description) {
         jsonObjectRequestBody = new JSONObject();
-        jsonObjectRequestBody.put("visitors_purpose",visitors_purpose);
-        jsonObjectRequestBody.put("description",description);
+        jsonObjectRequestBody.put("visitors_purpose", visitors_purpose);
+        jsonObjectRequestBody.put("description", description);
 
         System.out.println("Post Body : " + jsonObjectRequestBody);
     }
@@ -134,10 +134,11 @@ public class API_Stepdefinitions {
     public void the_api_user_prepares_a_post_request_that_does_not_contain_data_to_the_api_visitors_purpose_add_endpoint() {
         jsonObjectRequestBody = new JSONObject();
     }
+
     @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string}.")
     public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information(String description) {
         jsonObjectRequestBody = new JSONObject();
-        jsonObjectRequestBody.put("description",description);
+        jsonObjectRequestBody.put("description", description);
 
         System.out.println("Post Body : " + jsonObjectRequestBody);
     }
@@ -151,6 +152,7 @@ public class API_Stepdefinitions {
 
         System.out.println("Patch Body : " + hashMapRequestBody);
     }
+
     @Given("The api user sends a PATCH request and saves the returned response.")
     public void the_api_user_sends_a_patch_request_and_saves_the_returned_response() {
         response = given()
@@ -162,6 +164,7 @@ public class API_Stepdefinitions {
 
         response.prettyPrint();
     }
+
     @Given("The api user verifies that the updateid information in the response body is the same as the id information in the request body.")
     public void the_api_user_verifies_that_the_updateid_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
         Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updateId"));
@@ -175,6 +178,7 @@ public class API_Stepdefinitions {
 
         System.out.println("Patch Body : " + hashMapRequestBody);
     }
+
     @Given("The api user sends a PATCH request, saves the returned response, and verifies that the status code is '403' with the reason phrase Forbidden.")
     public void the_api_user_sends_a_patch_request_saves_the_returned_response_and_verifies_that_the_status_code_is_with_the_reason_phrase_forbidden() {
         try {
@@ -191,6 +195,7 @@ public class API_Stepdefinitions {
         System.out.println("exceptionMesaj : " + exceptionMesaj);
         Assert.assertEquals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api"), exceptionMesaj);
     }
+
     @Given("The api user verifies visitors_purpose as {string}")
     public void the_api_user_verifies_visitors_purpose_as(String visitors_purpose) {
         response.then()
@@ -204,6 +209,7 @@ public class API_Stepdefinitions {
 
         System.out.println("Delete Body : " + requestBody);
     }
+
     @Given("The api user sends a DELETE request and saves the returned response.")
     public void the_api_user_sends_a_delete_request_and_saves_the_returned_response() {
         response = given()
@@ -217,7 +223,7 @@ public class API_Stepdefinitions {
     }
     @Given("The api user verifies that the Deletedid information in the response body is the same as the id information in the request body.")
     public void the_api_user_verifies_that_the_deletedid_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
-       jsonPath = response.jsonPath();
+        jsonPath = response.jsonPath();
 
         Assert.assertEquals(requestBody.getId(), jsonPath.getInt("DeletedId"));
     }
@@ -236,6 +242,108 @@ public class API_Stepdefinitions {
         }
 
         System.out.println("exceptionMesaj : " + exceptionMesaj);
-        Assert.assertEquals(ConfigReader.getProperty("unauthorizedExceptionMessage","api"), exceptionMesaj);
+        Assert.assertEquals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api"), exceptionMesaj);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}.")
+    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_data_ındex_index_including(Integer dataIndex, String staff_id, String subject_id, String question_type, String level, String class_id, String section_id, String class_section_id, String question, String opt_a, String opt_b, String opt_c, String opt_d, String opt_e, String correct, String descriptive_word_limit, String created_at, String updated_at, String name, String code, String class_name, String section_name) {
+
+        jsonPath = response.jsonPath();
+
+        Assert.assertEquals(staff_id, jsonPath.getString("lists[" + dataIndex + "].staff_id"));
+        Assert.assertEquals(subject_id, jsonPath.getString("lists[" + dataIndex + "].subject_id"));
+        Assert.assertEquals(question_type, jsonPath.getString("lists[" + dataIndex + "].question_type"));
+        Assert.assertEquals(level, jsonPath.getString("lists[" + dataIndex + "].level"));
+        Assert.assertEquals(class_id, jsonPath.getString("lists[" + dataIndex + "].class_id"));
+        Assert.assertEquals(section_id, jsonPath.getString("lists[" + dataIndex + "].section_id"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].class_section_id"));
+        Assert.assertEquals(question, jsonPath.getString("lists[" + dataIndex + "].question"));
+        Assert.assertEquals(opt_a, jsonPath.getString("lists[" + dataIndex + "].opt_a"));
+        Assert.assertEquals(opt_b, jsonPath.getString("lists[" + dataIndex + "].opt_b"));
+        Assert.assertEquals(opt_c, jsonPath.getString("lists[" + dataIndex + "].opt_c"));
+        Assert.assertEquals(opt_d, jsonPath.getString("lists[" + dataIndex + "].opt_d"));
+        Assert.assertEquals(opt_e, jsonPath.getString("lists[" + dataIndex + "].opt_e"));
+        Assert.assertEquals(correct, jsonPath.getString("lists[" + dataIndex + "].correct"));
+        Assert.assertEquals(descriptive_word_limit, jsonPath.getString("lists[" + dataIndex + "].descriptive_word_limit"));
+        Assert.assertEquals(created_at, jsonPath.getString("lists[" + dataIndex + "].created_at"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].updated_at"));
+        Assert.assertEquals(name, jsonPath.getString("lists[" + dataIndex + "].name"));
+        Assert.assertEquals(code, jsonPath.getString("lists[" + dataIndex + "].code"));
+        Assert.assertEquals(class_name, jsonPath.getString("lists[" + dataIndex + "].class_name"));
+        Assert.assertEquals(section_name, jsonPath.getString("lists[" + dataIndex + "].section_name"));
+    }
+    @Given("The api user prepares a POST request to send to the api questionDetailsById endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_question_details_by_ıd_endpoint_containing_the_information(Integer id) {
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("id", id);
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+
+    }
+    @Given("The api user verifies that the data in the response body includes {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string},  {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}.")
+    public void the_api_user_verifies_that_the_data_in_the_response_body_includes(String id, String staff_id, String subject_id, String question_type, String level, String class_id, String section_id, String class_section_id, String question, String opt_a, String opt_b, String opt_c, String opt_d, String opt_e, String correct, String descriptive_word_limit, String created_at, String updated_at, String name, String code, String class_name, String section_name) {
+        response.then()
+                .assertThat()
+                .body("lists.id", Matchers.equalTo(id),
+                        "lists.staff_id", Matchers.equalTo(staff_id),
+                        "lists.subject_id", Matchers.equalTo(subject_id),
+                        "lists.question_type", Matchers.equalTo(question_type),
+                        "lists.level", Matchers.equalTo(level),
+                        "lists.class_id", Matchers.equalTo(class_id),
+                        "lists.section_id", Matchers.equalTo(section_id),
+                        "lists.class_section_id", Matchers.nullValue(),
+                        "lists.question", Matchers.equalTo(question),
+                        "lists.opt_a", Matchers.equalTo(opt_a),
+                        "lists.opt_b", Matchers.equalTo(opt_b),
+                        "lists.opt_c", Matchers.equalTo(opt_c),
+                        "lists.opt_d", Matchers.equalTo(opt_d),
+                        "lists.opt_e", Matchers.equalTo(opt_e),
+                        "lists.correct", Matchers.equalTo(correct),
+                        "lists.descriptive_word_limit", Matchers.equalTo(descriptive_word_limit),
+                        "lists.created_at", Matchers.equalTo(created_at),
+                        "lists.updated_at", Matchers.nullValue(),
+                        "lists.name", Matchers.equalTo(name),
+                        "lists.code", Matchers.equalTo(code),
+                        "lists.class_name", Matchers.equalTo(class_name),
+                        "lists.section_name", Matchers.equalTo(section_name)
+                );
+    }
+    @Given("The api user prepares a post request that does not contain data to the api questionDetailsById endpoint.")
+    public void the_api_user_prepares_a_post_request_that_does_not_contain_data_to_the_api_question_details_by_ıd_endpoint() {
+        jsonObjectRequestBody = new JSONObject();
     }
 }
