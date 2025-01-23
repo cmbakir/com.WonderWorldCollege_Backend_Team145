@@ -238,4 +238,21 @@ public class API_Stepdefinitions {
         System.out.println("exceptionMesaj : " + exceptionMesaj);
         Assert.assertEquals(ConfigReader.getProperty("unauthorizedExceptionMessage","api"), exceptionMesaj);
     }
+
+    @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including_and(int dataIndex, String staff_id , String student_session_id, String source, String purpose, String name, String email) {
+
+        jsonPath = response.jsonPath();
+
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].staff_id"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].student_session_id"));
+        Assert.assertEquals(source, jsonPath.getString("lists[" + dataIndex + "].source"));
+        Assert.assertEquals(purpose, jsonPath.getString("lists[" + dataIndex + "].purpose"));
+        Assert.assertEquals(name, jsonPath.getString("lists[" + dataIndex + "].name"));
+        Assert.assertEquals(email, jsonPath.getString("lists[" + dataIndex + "].email"));
+    }
+
+
+
+
 }
