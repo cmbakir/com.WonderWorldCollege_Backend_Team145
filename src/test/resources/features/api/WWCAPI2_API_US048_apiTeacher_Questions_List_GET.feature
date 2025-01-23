@@ -32,3 +32,4 @@ Feature: As a teacher I should be able to delete the question record in the syst
     # Api kullanicisi "apiteacher/questionList" path parametrelerini olusturur
     * The api user sends a GET request, saves the returned response, and verifies that the status code is '403' with the reason phrase Forbidden.
     # Api kullanicisi GET request gonderir, donen responsei kaydeder, status codeun '403' ve reason phrase bilgisinin Forbidden oldugunu dogrular
+
