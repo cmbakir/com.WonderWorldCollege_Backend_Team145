@@ -221,6 +221,7 @@ public class API_Stepdefinitions {
 
         response.prettyPrint();
     }
+
     @Given("The api user verifies that the Deletedid information in the response body is the same as the id information in the request body.")
     public void the_api_user_verifies_that_the_deletedid_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
         jsonPath = response.jsonPath();
@@ -244,41 +245,6 @@ public class API_Stepdefinitions {
         System.out.println("exceptionMesaj : " + exceptionMesaj);
         Assert.assertEquals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api"), exceptionMesaj);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}.")
     public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_data_ındex_index_including(Integer dataIndex, String staff_id, String subject_id, String question_type, String level, String class_id, String section_id, String class_section_id, String question, String opt_a, String opt_b, String opt_c, String opt_d, String opt_e, String correct, String descriptive_word_limit, String created_at, String updated_at, String name, String code, String class_name, String section_name) {
@@ -346,4 +312,36 @@ public class API_Stepdefinitions {
     public void the_api_user_prepares_a_post_request_that_does_not_contain_data_to_the_api_question_details_by_ıd_endpoint() {
         jsonObjectRequestBody = new JSONObject();
     }
+
+    @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including_and(int dataIndex, String staff_id , String student_session_id, String source, String purpose, String name, String email) {
+
+        jsonPath = response.jsonPath();
+
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].staff_id"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].student_session_id"));
+        Assert.assertEquals(source, jsonPath.getString("lists[" + dataIndex + "].source"));
+        Assert.assertEquals(purpose, jsonPath.getString("lists[" + dataIndex + "].purpose"));
+        Assert.assertEquals(name, jsonPath.getString("lists[" + dataIndex + "].name"));
+        Assert.assertEquals(email, jsonPath.getString("lists[" + dataIndex + "].email"));
+    }
+
+
+
+    @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string},{string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including_and(int dataIndex, String student_id, String current_email, String current_phone, String occupation, String address, String photo, String created_at) {
+
+        jsonPath = response.jsonPath();
+
+        Assert.assertEquals(student_id, jsonPath.getString("lists[" + dataIndex + "].student_id"));
+        Assert.assertEquals(current_email, jsonPath.getString("lists[" + dataIndex + "].current_email"));
+        Assert.assertEquals(current_phone, jsonPath.getString("lists[" + dataIndex + "].current_phone"));
+        Assert.assertEquals(current_phone, jsonPath.getString("lists[" + dataIndex + "].current_phone"));
+        Assert.assertEquals(occupation, jsonPath.getString("lists[" + dataIndex + "].occupation"));
+        Assert.assertEquals(address, jsonPath.getString("lists[" + dataIndex + "].address"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].photo"));
+        Assert.assertEquals(created_at, jsonPath.getString("lists[" + dataIndex + "].created_at"));
+
+    }
+
 }
