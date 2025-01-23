@@ -344,4 +344,58 @@ public class API_Stepdefinitions {
 
     }
 
+
+    @Given("The api user prepares a POST request to send to the api questionAdd endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string},  {string}, {string}, {string}, {string}, {string}, {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_question_add_endpoint_containing_the_information(String subject_id, String question_type, String level, String class_id, String section_id, String class_section_id, String question, String opt_a, String opt_b, String opt_c, String opt_d, String opt_e, String correct, String descriptive_word_limit) {
+
+        jsonObjectRequestBody = new JSONObject();
+
+        jsonObjectRequestBody.put("subject_id", subject_id);
+        jsonObjectRequestBody.put("question_type", question_type);
+        jsonObjectRequestBody.put("level", level);
+        jsonObjectRequestBody.put("class_id", class_id);
+        jsonObjectRequestBody.put("section_id", section_id);
+        jsonObjectRequestBody.put("class_section_id", class_section_id);
+        jsonObjectRequestBody.put("question", question);
+        jsonObjectRequestBody.put("opt_a", opt_a);
+        jsonObjectRequestBody.put("opt_b", opt_b);
+        jsonObjectRequestBody.put("opt_c", opt_c);
+        jsonObjectRequestBody.put("opt_d", opt_d);
+        jsonObjectRequestBody.put("opt_e", opt_e);
+        jsonObjectRequestBody.put("correct", correct);
+        jsonObjectRequestBody.put("descriptive_word_limit", descriptive_word_limit);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+
+    @Given("The api user prepares a post request that does not contain data to the api questionAdd endpoint.")
+    public void the_api_user_prepares_a_post_request_that_does_not_contain_data_to_the_api_question_add_endpoint() {
+        jsonObjectRequestBody = new JSONObject();
+    }
+
+    @Given("The api user prepares a POST request to send to the api questionAdd endpoint containing the information {string}, {string}, {string}, {string}, {string},  {string}, {string}, {string}, {string}, {string}, {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_question_add_endpoint_containing_the_information(String class_id, String section_id, String class_section_id, String question, String opt_a, String opt_b, String opt_c, String opt_d, String opt_e, String correct, String descriptive_word_limit) {
+        jsonObjectRequestBody = new JSONObject();
+
+        jsonObjectRequestBody.put("class_id", class_id);
+        jsonObjectRequestBody.put("section_id", section_id);
+        jsonObjectRequestBody.put("class_section_id", class_section_id);
+        jsonObjectRequestBody.put("question", question);
+        jsonObjectRequestBody.put("opt_a", opt_a);
+        jsonObjectRequestBody.put("opt_b", opt_b);
+        jsonObjectRequestBody.put("opt_c", opt_c);
+        jsonObjectRequestBody.put("opt_d", opt_d);
+        jsonObjectRequestBody.put("opt_e", opt_e);
+        jsonObjectRequestBody.put("correct", correct);
+        jsonObjectRequestBody.put("descriptive_word_limit", descriptive_word_limit);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+    @Given("The api user prepares a POST request to send to the api questionAdd endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_question_add_endpoint_containing_the_information(Integer id) {
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("id", id);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
 }
