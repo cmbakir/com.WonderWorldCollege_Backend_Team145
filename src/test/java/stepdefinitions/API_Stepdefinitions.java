@@ -246,6 +246,73 @@ public class API_Stepdefinitions {
         Assert.assertEquals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api"), exceptionMesaj);
     }
 
+    @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}.")
+    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_data_ındex_index_including(Integer dataIndex, String staff_id, String subject_id, String question_type, String level, String class_id, String section_id, String class_section_id, String question, String opt_a, String opt_b, String opt_c, String opt_d, String opt_e, String correct, String descriptive_word_limit, String created_at, String updated_at, String name, String code, String class_name, String section_name) {
+
+        jsonPath = response.jsonPath();
+
+        Assert.assertEquals(staff_id, jsonPath.getString("lists[" + dataIndex + "].staff_id"));
+        Assert.assertEquals(subject_id, jsonPath.getString("lists[" + dataIndex + "].subject_id"));
+        Assert.assertEquals(question_type, jsonPath.getString("lists[" + dataIndex + "].question_type"));
+        Assert.assertEquals(level, jsonPath.getString("lists[" + dataIndex + "].level"));
+        Assert.assertEquals(class_id, jsonPath.getString("lists[" + dataIndex + "].class_id"));
+        Assert.assertEquals(section_id, jsonPath.getString("lists[" + dataIndex + "].section_id"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].class_section_id"));
+        Assert.assertEquals(question, jsonPath.getString("lists[" + dataIndex + "].question"));
+        Assert.assertEquals(opt_a, jsonPath.getString("lists[" + dataIndex + "].opt_a"));
+        Assert.assertEquals(opt_b, jsonPath.getString("lists[" + dataIndex + "].opt_b"));
+        Assert.assertEquals(opt_c, jsonPath.getString("lists[" + dataIndex + "].opt_c"));
+        Assert.assertEquals(opt_d, jsonPath.getString("lists[" + dataIndex + "].opt_d"));
+        Assert.assertEquals(opt_e, jsonPath.getString("lists[" + dataIndex + "].opt_e"));
+        Assert.assertEquals(correct, jsonPath.getString("lists[" + dataIndex + "].correct"));
+        Assert.assertEquals(descriptive_word_limit, jsonPath.getString("lists[" + dataIndex + "].descriptive_word_limit"));
+        Assert.assertEquals(created_at, jsonPath.getString("lists[" + dataIndex + "].created_at"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].updated_at"));
+        Assert.assertEquals(name, jsonPath.getString("lists[" + dataIndex + "].name"));
+        Assert.assertEquals(code, jsonPath.getString("lists[" + dataIndex + "].code"));
+        Assert.assertEquals(class_name, jsonPath.getString("lists[" + dataIndex + "].class_name"));
+        Assert.assertEquals(section_name, jsonPath.getString("lists[" + dataIndex + "].section_name"));
+    }
+    @Given("The api user prepares a POST request to send to the api questionDetailsById endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_question_details_by_ıd_endpoint_containing_the_information(Integer id) {
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("id", id);
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+
+    }
+    @Given("The api user verifies that the data in the response body includes {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string},  {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}.")
+    public void the_api_user_verifies_that_the_data_in_the_response_body_includes(String id, String staff_id, String subject_id, String question_type, String level, String class_id, String section_id, String class_section_id, String question, String opt_a, String opt_b, String opt_c, String opt_d, String opt_e, String correct, String descriptive_word_limit, String created_at, String updated_at, String name, String code, String class_name, String section_name) {
+        response.then()
+                .assertThat()
+                .body("lists.id", Matchers.equalTo(id),
+                        "lists.staff_id", Matchers.equalTo(staff_id),
+                        "lists.subject_id", Matchers.equalTo(subject_id),
+                        "lists.question_type", Matchers.equalTo(question_type),
+                        "lists.level", Matchers.equalTo(level),
+                        "lists.class_id", Matchers.equalTo(class_id),
+                        "lists.section_id", Matchers.equalTo(section_id),
+                        "lists.class_section_id", Matchers.nullValue(),
+                        "lists.question", Matchers.equalTo(question),
+                        "lists.opt_a", Matchers.equalTo(opt_a),
+                        "lists.opt_b", Matchers.equalTo(opt_b),
+                        "lists.opt_c", Matchers.equalTo(opt_c),
+                        "lists.opt_d", Matchers.equalTo(opt_d),
+                        "lists.opt_e", Matchers.equalTo(opt_e),
+                        "lists.correct", Matchers.equalTo(correct),
+                        "lists.descriptive_word_limit", Matchers.equalTo(descriptive_word_limit),
+                        "lists.created_at", Matchers.equalTo(created_at),
+                        "lists.updated_at", Matchers.nullValue(),
+                        "lists.name", Matchers.equalTo(name),
+                        "lists.code", Matchers.equalTo(code),
+                        "lists.class_name", Matchers.equalTo(class_name),
+                        "lists.section_name", Matchers.equalTo(section_name)
+                );
+    }
+    @Given("The api user prepares a post request that does not contain data to the api questionDetailsById endpoint.")
+    public void the_api_user_prepares_a_post_request_that_does_not_contain_data_to_the_api_question_details_by_ıd_endpoint() {
+        jsonObjectRequestBody = new JSONObject();
+    }
+
     @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string}, {string}, {string}, {string} and {string}.")
     public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including_and(int dataIndex, String staff_id , String student_session_id, String source, String purpose, String name, String email) {
 
