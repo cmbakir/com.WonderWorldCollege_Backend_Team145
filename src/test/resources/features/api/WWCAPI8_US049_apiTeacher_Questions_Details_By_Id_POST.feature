@@ -20,8 +20,9 @@ Feature: As a teacher (teacher), I want to be able to access the Questions infor
     # Api kullanicisi response bodydeki data "<id>", "<staff_id>", "<subject_id>", "<question_type>", "<level>", "<class_id>", "<section_id>", "<class_section_id>", "<question>", "<opt_a>",  "<opt_b>", "<opt_c>", "<opt_d>", "<opt_e>", "<correct>", "<descriptive_word_limit>", "<created_at>", "<updated_at>", "<name, code>", "<class_name>", "<section_name>" içeriklerini doğrular.
 
     Examples:
-      |id       |   staff_id | subject_id | question_type | level    | class_id | section_id | class_section_id | question                                       | opt_a   | opt_b   | opt_c   | opt_d   | opt_e     | correct | descriptive_word_limit | created_at          | updated_at | name    | code | class_name | section_name |
-      | 70      | 5          | 5          | singlechoice  | medium   | 3        | 1          |null              | Which one of the following is biotic resource? | Soil.   | Water.  | Plant.  | Land.   | Other .    | opt_c   | 0                      | 2023-08-02 18:28:43 |null       | Science | 111  | Class 3    | A            |
+      |id         |   staff_id | subject_id | question_type | level    | class_id | section_id | class_section_id | question  | opt_a   | opt_b   | opt_c   | opt_d   | opt_e     | correct | descriptive_word_limit | created_at          | updated_at | name    | code | class_name | section_name |
+      | 221       | 366          | 4          | true_false  | low      | 11        | 1          |null              | 1+1=2    |          |        |         |         |           |     true    | 0                      | 2025-01-06 09:53:32 |null       | Mathematics | 110  | Class 11    | A            |
+
 
 
   Scenario: Verify that a POST request to `/apiteacher/questionDetailsById` without `id` and valid authorization returns a 203 status
@@ -59,7 +60,7 @@ Feature: As a teacher (teacher), I want to be able to access the Questions infor
 
     Examples:
       | id    |
-      | 220 |
+      | 12345 |
 
   Scenario Outline: Verify that a POST request to `/apiteacher/questionDetailsById` with invalid authorization returns a 403
   status code and a "You do not have authorization or token error" message in the response body.
@@ -79,4 +80,4 @@ Feature: As a teacher (teacher), I want to be able to access the Questions infor
 
     Examples:
       | id   |
-      | 70 |
+      | 1111 |
