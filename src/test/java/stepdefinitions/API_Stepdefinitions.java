@@ -506,6 +506,29 @@ public class API_Stepdefinitions {
     }
 
 
+
+    @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string},{string},{string},{string}, {string} , {string} , {string}, {string}   ,  {string}, {string}  , {string} ,{string} {string} , {string}")
+    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including(Integer dataIndex, String student_session_id, String id, String clagits, String section_id, String section, String admission_no, String roll_no, String admission_date, String firstname, String middlename, String lastname, String image, String mobileno, String email) {
+
+        jsonPath = response.jsonPath();
+
+        Assert.assertEquals(student_session_id, jsonPath.getString("lists[" + dataIndex + "].student_session_id"));
+        Assert.assertEquals(id, jsonPath.getString("lists[" + dataIndex + "].id"));
+       // Assert.assertEquals(class, jsonPath.getString("lists[" + dataIndex + "].class"));
+        Assert.assertEquals(section_id, jsonPath.getString("lists[" + dataIndex + "].section_id"));
+        Assert.assertEquals(section, jsonPath.getString("lists[" + dataIndex + "].section"));
+        Assert.assertEquals(admission_no, jsonPath.getString("lists[" + dataIndex + "].admission_no"));
+        Assert.assertEquals(roll_no, jsonPath.getString("lists[" + dataIndex + "].roll_no"));
+        Assert.assertEquals(admission_date, jsonPath.getString("lists[" + dataIndex + "].admission_date"));
+        Assert.assertEquals(firstname, jsonPath.getString("lists[" + dataIndex + "].firstname"));
+        Assert.assertEquals(lastname, jsonPath.getString("lists[" + dataIndex + "].lastname"));
+      // Assert.assertEquals(image, jsonPath.getString("lists[" + dataIndex + "].image"));
+        Assert.assertEquals(mobileno, jsonPath.getString("lists[" + dataIndex + "].mobileno"));
+        Assert.assertEquals(email, jsonPath.getString("lists[" + dataIndex + "].email"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].middlename"));
+
+
+    
     @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string} {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
     public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including_and(int dataIndex, String type, String slug, String url, String title, String date, String event_start, String event_end, String event_venue, String description, String is_active, String created_at) {
 
@@ -558,6 +581,7 @@ public class API_Stepdefinitions {
     public void the_api_user_prepares_a_post_request_that_does_not_contain_data_to_the_api_get_notice_by_ıd_endpoint() {
         jsonObjectRequestBody = new JSONObject();
     }
+
 
 }
 
