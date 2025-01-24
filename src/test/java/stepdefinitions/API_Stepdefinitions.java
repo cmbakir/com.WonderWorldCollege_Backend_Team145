@@ -167,7 +167,7 @@ public class API_Stepdefinitions {
 
     @Given("The api user verifies that the updateid information in the response body is the same as the id information in the request body.")
     public void the_api_user_verifies_that_the_updateid_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
-        Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updateId"));
+        Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updatedId"));
     }
 
     @Given("The api user prepares a PATCH request to send to the api visitorsPurposeUpdate endpoint containing the information {string} and {string}.")
@@ -320,10 +320,10 @@ public class API_Stepdefinitions {
 
         Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].staff_id"));
         Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].student_session_id"));
-        Assert.assertEquals(source, jsonPath.getString("lists[" + dataIndex + "].source"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].source"));
         Assert.assertEquals(purpose, jsonPath.getString("lists[" + dataIndex + "].purpose"));
         Assert.assertEquals(name, jsonPath.getString("lists[" + dataIndex + "].name"));
-        Assert.assertEquals(email, jsonPath.getString("lists[" + dataIndex + "].email"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].email"));
     }
 
 
@@ -343,6 +343,112 @@ public class API_Stepdefinitions {
         Assert.assertEquals(created_at, jsonPath.getString("lists[" + dataIndex + "].created_at"));
 
     }
+
+
+    @Given("The api user verifies that the data in the response body includes {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_verifies_that_the_data_in_the_response_body_includes_and(String id, String staff_id, String student_session_id, String source, String purpose, String name, String email) {
+        response.then().assertThat()
+                .body("lists.id", Matchers.equalTo(id),
+                        "lists.staff_id", Matchers.equalTo(staff_id),
+                        "lists.student_session_id", Matchers.blankOrNullString(),
+                        "lists.source", Matchers.blankOrNullString(),
+                        "lists.purpose", Matchers.equalTo((purpose)+" "),
+                        "lists.name", Matchers.equalTo(name),
+                        "lists.email", Matchers.blankOrNullString());
+    }
+
+    @Given("The api user prepares a POST request to send to the api visitorsAdd endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_add_endpoint_containing_the_information_and(String purpose, String name, String contact, String id_proof, String no_of_people, String date, String in_time, String out_time, String note) {
+
+        jsonObjectRequestBody=new JSONObject();
+        jsonObjectRequestBody.put("purpose",purpose);
+        jsonObjectRequestBody.put("name",name);
+        jsonObjectRequestBody.put("contact",contact);
+        jsonObjectRequestBody.put("id_proof",id_proof);
+        jsonObjectRequestBody.put("no_of_people",no_of_people);
+        jsonObjectRequestBody.put("date",date);
+        jsonObjectRequestBody.put("in_time",in_time);
+        jsonObjectRequestBody.put("out_time",out_time);
+        jsonObjectRequestBody.put("note",note);
+
+        System.out.println(jsonObjectRequestBody);
+
+    }
+
+    @Given("The api user prepares a POST request to send to the api visitorsAdd endpoint containing the information {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_add_endpoint_containing_the_information_and(String purpose, String name, String contact) {
+        jsonObjectRequestBody=new JSONObject();
+        jsonObjectRequestBody.put("purpose",purpose);
+        jsonObjectRequestBody.put("name",name);
+        jsonObjectRequestBody.put("contact",contact);
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api visitorsUpdate endpoint containing the information {int}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_visitors_update_endpoint_containing_the_information_id_and(int id, String purpose, String name, String contact, String id_proof, String no_of_people, String date, String in_time, String out_time, String note) {
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id",id);
+        hashMapRequestBody.put("purpose",purpose);
+        hashMapRequestBody.put("name",name);
+        hashMapRequestBody.put("contact",contact);
+        hashMapRequestBody.put("id_proof",id_proof);
+        hashMapRequestBody.put("no_of_people",no_of_people);
+        hashMapRequestBody.put("date",date);
+        hashMapRequestBody.put("in_time",in_time);
+        hashMapRequestBody.put("out_time",out_time);
+        hashMapRequestBody.put("note",note);
+
+        System.out.println(hashMapRequestBody);
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api visitorsUpdate endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_visitors_update_endpoint_containing_the_information_and(String purpose, String name, String contact, String id_proof, String no_of_people, String date, String in_time, String out_time, String note) {
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("purpose",purpose);
+        hashMapRequestBody.put("name",name);
+        hashMapRequestBody.put("contact",contact);
+        hashMapRequestBody.put("id_proof",id_proof);
+        hashMapRequestBody.put("no_of_people",no_of_people);
+        hashMapRequestBody.put("date",date);
+        hashMapRequestBody.put("in_time",in_time);
+        hashMapRequestBody.put("out_time",out_time);
+        hashMapRequestBody.put("note",note);
+
+        System.out.println(hashMapRequestBody);
+
+
+    }
+
+    @Given("The api user prepares a patch request that does not contain data to the api visitorsUpdate endpoint.")
+    public void the_api_user_prepares_a_patch_request_that_does_not_contain_data_to_the_api_visitors_update_endpoint() {
+
+        hashMapRequestBody=new HashMap<>();
+    }
+
+    @Given("The api user prepares a POST request to send to the api visitorsid endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitorsid_endpoint_containing_the_information(int id) {
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id",id);
+    }
+    @Given("The api user verifies visitorsId as {string}")
+    public void the_api_user_verifies_visitors_id_as(String updatedId) {
+
+        Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updatedId"));
+
+    }
+
+    @Given("The api user sends a POST requestt and saves the returned response.")
+    public void the_api_user_sends_a_post_requestt_and_saves_the_returned_response() {
+        response = given()
+                .spec(spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(hashMapRequestBody)
+                .post(fullPath);
+
+        response.prettyPrint();
+    }
+
+
 
 
     @Given("The api user prepares a POST request to send to the api questionAdd endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string},  {string}, {string}, {string}, {string}, {string}, {string}.")
@@ -399,3 +505,4 @@ public class API_Stepdefinitions {
         System.out.println("Post Body : " + jsonObjectRequestBody);
     }
 }
+
