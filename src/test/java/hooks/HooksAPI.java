@@ -10,7 +10,10 @@ public class HooksAPI {
 
     public static void setUpApi(String userType) {
         String token;
-        if (userType.equals("admin") || userType.equals("teacher") || userType.equals("student") || userType.equals("teacher2")) {
+
+        if (userType.equals("admin") || userType.equals("teacher") || userType.equals("student") || userType.equals("adminAhmetEmail") || userType.equals("teacher2")) {
+
+
             token = Authentication.generateToken(userType);
         } else {
             token = ConfigReader.getProperty("invalidToken", "api");
