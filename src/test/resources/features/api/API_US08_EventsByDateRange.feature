@@ -63,5 +63,5 @@
         | 01-01-2021       |    |
 
 
-      * The api user verifies the information in the response body for the entry with the specified <dataIndex> index, including "<title>", "<event_for>" , "<session_id>" , "<class_id>","<section>","<from_date>","<to_date>","<note>","<photo>","<is_active>","<event_notification_message>","<show_onwebsite>","<created_at>" .
+     # * The api user verifies the information in the response body for the entry with the specified <dataIndex> index, including "<title>", "<event_for>" , "<session_id>" , "<class_id>","<section>","<from_date>","<to_date>","<note>","<photo>","<is_active>","<event_notification_message>","<show_onwebsite>","<created_at>" .
     # Api kullanıcısı response body icindeki <dataIndex> indexe sahip olanin "<title>", "<event_for>" , "<session_id>" , "<class_id>","<section>","<from_date>","<to_date>","<note>","<photo>","<is_active>","<event_notification_message>","<show_onwebsite>","<created_at>"  bilgilerini doğrular.
