@@ -1,6 +1,6 @@
 Feature: API_US33 As an administrator (admin), I want to be able to access the Visitor List via API connection.
 
-
+  @US
   Scenario Outline: TC_01 -> API_US33 Verify that a GET request to `/api/visitorsList` with valid authorization returns a 200 status code and a "Success" message and the staff_id, student_session_id, source, purpose, name and email fields for id (x) in the response body.
 
     * The api user constructs the base url with the "admin" token.
@@ -18,11 +18,11 @@ Feature: API_US33 As an administrator (admin), I want to be able to access the V
 
     Examples:
 
-      | dataIndex | staff_id | student_session_id | source  | purpose         | name  | email          |
-      |0          |  null    |        null        | Online  |Kayıt            |ozlem  | ozlem@gmail.com|
+      | dataIndex | staff_id | student_session_id | source  | purpose         | name     | email|
+      | 0         |  null    | null               | null    | Update Meeting  |Pinar Cay | null |
 
 
-  @US
+
   Scenario: TC_02 -> API_US33 Verify that a GET request to /api/visitorsList with invalid authorization returns a 403 status code and a
   "failed" message.
 
