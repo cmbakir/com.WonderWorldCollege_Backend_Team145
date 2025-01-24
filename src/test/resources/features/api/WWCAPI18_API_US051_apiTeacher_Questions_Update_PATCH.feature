@@ -111,6 +111,7 @@ Feature: As a teacher (teacher), I want to be able to update the question inform
        | 4          | true_false   | low     | 11       | 1          |null              | 1+1=2     |         |         |         |         |           |   true  | 0                      |
 
 
+
     # * The api user sends a PATCH request, saves the returned response, and verifies that the status code is '403' with the reason phrase Forbidden.
     # Api kullanicisi PATCH request gonderir, donen responsei kaydeder, status codeun '403' ve reason phrase bilgisinin Forbidden oldugunu dogrular
 
