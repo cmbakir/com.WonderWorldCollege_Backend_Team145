@@ -1,5 +1,6 @@
 Feature: API_US35 As an administrator (admin) I want to be able to create a new visitor record via API connection.
 
+
   Scenario Outline: TC_01 -> API_US35 Verify that a POST request to `/api/visitorsAdd` with valid authorization and correct data
   (purpose, name, contact, id_proof, no_of_people, date, in_time, out_time, note) returns a 200 status code and a "Success" message in the response body.
 
@@ -17,8 +18,8 @@ Feature: API_US35 As an administrator (admin) I want to be able to create a new 
     # Api kullanicisi response bodydeki message bilgisinin "Success" oldugunu dogrular
 
     Examples:
-      | visitors_purpose | description                |
-      | Veli Ziyareti    | Veli Ziyareti Icin Gelindi |
+      | purpose| name    | contact| id_proof| no_of_people| date     | in_time| out_time| note  |
+      | Meeting|Pinar Cay| 5555555|10010    |3            |2025-01-24|03:00 PM|04:30 PM |Visitor|
 
 
   Scenario: TC_02 -> API_US35 Verify that a POST request to `/api/visitorsAdd` without data and valid authorization returns a 203
@@ -28,7 +29,7 @@ Feature: API_US35 As an administrator (admin) I want to be able to create a new 
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsAdd" path parameters.
     # Api kullanicisi "api/visitorsAdd" path parametrelerini olusturur
-    * The api user prepares a post request that does not contain data to the api visitorsAdd endpoint.
+    * The api user prepares a post request that does not contain data to the api visitorsPurposeAdd endpoint.
     # Api kullanicisi api visitorsPurposeAdd endpointine data icermeyen bir post request hazirlar
     * The api user sends a POST request and saves the returned response.
     # Api kullanicisi POST request gonderir ve donen responsei kaydeder
@@ -56,8 +57,8 @@ Feature: API_US35 As an administrator (admin) I want to be able to create a new 
     # Api kullanicisi response bodydeki message bilgisinin "No information or missing information. Please check your input data." oldugunu dogrular
 
     Examples:
-      | description                |
-      | Veli Ziyareti Icin Gelindi |
+      | purpose| name    | contact|
+      | Meeting|Pinar Cay| 5555555|
 
 
   Scenario Outline: TC_04 -> API_US35 Verify that a POST request to `/api/visitorsAdd` with invalid authorization and data
@@ -66,9 +67,9 @@ Feature: API_US35 As an administrator (admin) I want to be able to create a new 
 
     * The api user constructs the base url with the "invalid" token.
     # Api kullanicisi "invalid" token ile base urli olusturur
-    * The api user sets "api/visitorsPurposeAdd" path parameters.
+    * The api user sets "api/visitorsAdd" path parameters.
     # Api kullanicisi "api/visitorsPurposeAdd" path parametrelerini olusturur
-    * The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information "<purpose>", "<name>", "<contact>", "<id_proof>", "<no_of_people>", "<date>", "<in_time>", "<out_time>" and "<note>".
+    * The api user prepares a POST request to send to the api visitorsAdd endpoint containing the information "<purpose>", "<name>", "<contact>", "<id_proof>", "<no_of_people>", "<date>", "<in_time>", "<out_time>" and "<note>".
     # Api kullanicisi api visitorsPurposeAdd endpointine gondermek icin "<visitors_purpose>" ve "<description>" bilgilerini iceren bir post request hazirlar
     * The api user sends a POST request and saves the returned response.
     # Api kullanicisi POST request gonderir ve donen responsei kaydeder
@@ -78,8 +79,8 @@ Feature: API_US35 As an administrator (admin) I want to be able to create a new 
     # Api kullanicisi response bodydeki message bilgisinin "You do not have authorization or token error" oldugunu dogrular
 
     Examples:
-      | visitors_purpose | description                |
-      | Veli Ziyareti    | Veli Ziyareti Icin Gelindi |
+      | purpose| name    | contact| id_proof| no_of_people| date     | in_time| out_time| note  |
+      | Meeting|Pinar Cay| 5555555|10010    |3            |2025-01-24|03:00 PM|04:30 PM |Visitor|
 
 
   Scenario Outline: TC_05 -> API_US35 Verify the creation of a new visitor purpose record by sending a POST request to `/api/visitorsId`
@@ -89,7 +90,7 @@ Feature: API_US35 As an administrator (admin) I want to be able to create a new 
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsId" path parameters.
     # Api kullanicisi "api/visitorsPurposeId" path parametrelerini olusturur
-    * The api user prepares a POST request to send to the api visitorsid endpoint containing the information <id>.
+    * The api user prepares a POST request to send to the api visitorsPurposeid endpoint containing the information <id>.
     # Api kullanicisi api visitorsPurposeId endpointine gondermek icin <id> bilgisini iceren bir post request hazirlar
     * The api user sends a POST request and saves the returned response.
     # Api kullanicisi POST request gonderir ve donen responsei kaydeder
@@ -98,4 +99,4 @@ Feature: API_US35 As an administrator (admin) I want to be able to create a new 
 
     Examples:
       | id   |
-      | 1266 |
+      | 288 |
