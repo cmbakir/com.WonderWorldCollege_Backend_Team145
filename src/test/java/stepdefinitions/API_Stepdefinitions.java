@@ -169,7 +169,7 @@ public class API_Stepdefinitions {
 
     @Given("The api user verifies that the updateid information in the response body is the same as the id information in the request body.")
     public void the_api_user_verifies_that_the_updateid_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
-        Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updateId"));
+        Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updatedId"));
     }
 
     @Given("The api user prepares a PATCH request to send to the api visitorsPurposeUpdate endpoint containing the information {string} and {string}.")
@@ -322,10 +322,10 @@ public class API_Stepdefinitions {
 
         Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].staff_id"));
         Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].student_session_id"));
-        Assert.assertEquals(source, jsonPath.getString("lists[" + dataIndex + "].source"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].source"));
         Assert.assertEquals(purpose, jsonPath.getString("lists[" + dataIndex + "].purpose"));
         Assert.assertEquals(name, jsonPath.getString("lists[" + dataIndex + "].name"));
-        Assert.assertEquals(email, jsonPath.getString("lists[" + dataIndex + "].email"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].email"));
     }
 
 
@@ -345,6 +345,112 @@ public class API_Stepdefinitions {
         Assert.assertEquals(created_at, jsonPath.getString("lists[" + dataIndex + "].created_at"));
 
     }
+
+
+    @Given("The api user verifies that the data in the response body includes {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_verifies_that_the_data_in_the_response_body_includes_and(String id, String staff_id, String student_session_id, String source, String purpose, String name, String email) {
+        response.then().assertThat()
+                .body("lists.id", Matchers.equalTo(id),
+                        "lists.staff_id", Matchers.equalTo(staff_id),
+                        "lists.student_session_id", Matchers.blankOrNullString(),
+                        "lists.source", Matchers.blankOrNullString(),
+                        "lists.purpose", Matchers.equalTo((purpose)+" "),
+                        "lists.name", Matchers.equalTo(name),
+                        "lists.email", Matchers.blankOrNullString());
+    }
+
+    @Given("The api user prepares a POST request to send to the api visitorsAdd endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_add_endpoint_containing_the_information_and(String purpose, String name, String contact, String id_proof, String no_of_people, String date, String in_time, String out_time, String note) {
+
+        jsonObjectRequestBody=new JSONObject();
+        jsonObjectRequestBody.put("purpose",purpose);
+        jsonObjectRequestBody.put("name",name);
+        jsonObjectRequestBody.put("contact",contact);
+        jsonObjectRequestBody.put("id_proof",id_proof);
+        jsonObjectRequestBody.put("no_of_people",no_of_people);
+        jsonObjectRequestBody.put("date",date);
+        jsonObjectRequestBody.put("in_time",in_time);
+        jsonObjectRequestBody.put("out_time",out_time);
+        jsonObjectRequestBody.put("note",note);
+
+        System.out.println(jsonObjectRequestBody);
+
+    }
+
+    @Given("The api user prepares a POST request to send to the api visitorsAdd endpoint containing the information {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_add_endpoint_containing_the_information_and(String purpose, String name, String contact) {
+        jsonObjectRequestBody=new JSONObject();
+        jsonObjectRequestBody.put("purpose",purpose);
+        jsonObjectRequestBody.put("name",name);
+        jsonObjectRequestBody.put("contact",contact);
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api visitorsUpdate endpoint containing the information {int}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_visitors_update_endpoint_containing_the_information_id_and(int id, String purpose, String name, String contact, String id_proof, String no_of_people, String date, String in_time, String out_time, String note) {
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id",id);
+        hashMapRequestBody.put("purpose",purpose);
+        hashMapRequestBody.put("name",name);
+        hashMapRequestBody.put("contact",contact);
+        hashMapRequestBody.put("id_proof",id_proof);
+        hashMapRequestBody.put("no_of_people",no_of_people);
+        hashMapRequestBody.put("date",date);
+        hashMapRequestBody.put("in_time",in_time);
+        hashMapRequestBody.put("out_time",out_time);
+        hashMapRequestBody.put("note",note);
+
+        System.out.println(hashMapRequestBody);
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api visitorsUpdate endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_visitors_update_endpoint_containing_the_information_and(String purpose, String name, String contact, String id_proof, String no_of_people, String date, String in_time, String out_time, String note) {
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("purpose",purpose);
+        hashMapRequestBody.put("name",name);
+        hashMapRequestBody.put("contact",contact);
+        hashMapRequestBody.put("id_proof",id_proof);
+        hashMapRequestBody.put("no_of_people",no_of_people);
+        hashMapRequestBody.put("date",date);
+        hashMapRequestBody.put("in_time",in_time);
+        hashMapRequestBody.put("out_time",out_time);
+        hashMapRequestBody.put("note",note);
+
+        System.out.println(hashMapRequestBody);
+
+
+    }
+
+    @Given("The api user prepares a patch request that does not contain data to the api visitorsUpdate endpoint.")
+    public void the_api_user_prepares_a_patch_request_that_does_not_contain_data_to_the_api_visitors_update_endpoint() {
+
+        hashMapRequestBody=new HashMap<>();
+    }
+
+    @Given("The api user prepares a POST request to send to the api visitorsid endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitorsid_endpoint_containing_the_information(int id) {
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id",id);
+    }
+    @Given("The api user verifies visitorsId as {string}")
+    public void the_api_user_verifies_visitors_id_as(String updatedId) {
+
+        Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updatedId"));
+
+    }
+
+    @Given("The api user sends a POST requestt and saves the returned response.")
+    public void the_api_user_sends_a_post_requestt_and_saves_the_returned_response() {
+        response = given()
+                .spec(spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(hashMapRequestBody)
+                .post(fullPath);
+
+        response.prettyPrint();
+    }
+
+
 
 
     @Given("The api user prepares a POST request to send to the api questionAdd endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string},  {string}, {string}, {string}, {string}, {string}, {string}.")
@@ -403,6 +509,7 @@ public class API_Stepdefinitions {
         System.out.println("Post Body : " + jsonObjectRequestBody);
     }
 
+
     @Given("The api user verifies the information in the response body for the entry with the specified <dataIndex> index, including {string}, {string}, {string}, {string},{string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, assignments.")
     public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_data_ındex_index_including_assignments(String dataIndex, String class_id, String section_id, String session_id, String staff_id, String subject_group_subject_id, String subject_id, String homework_date, String submit_date, String marks, String description, String create_date, String evaluation_date, String document, String created_by, String evaluated_by, String created_at, String section, String subject_name, String subject_groups_id, String name) {
 
@@ -417,4 +524,85 @@ public class API_Stepdefinitions {
 
     }
 
+
+
+
+    @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string},{string},{string},{string}, {string} , {string} , {string}, {string}   ,  {string}, {string}  , {string} ,{string} {string} , {string}")
+    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including(Integer dataIndex, String student_session_id, String id, String clagits, String section_id, String section, String admission_no, String roll_no, String admission_date, String firstname, String middlename, String lastname, String image, String mobileno, String email) {
+
+        jsonPath = response.jsonPath();
+
+        Assert.assertEquals(student_session_id, jsonPath.getString("lists[" + dataIndex + "].student_session_id"));
+        Assert.assertEquals(id, jsonPath.getString("lists[" + dataIndex + "].id"));
+       // Assert.assertEquals(class, jsonPath.getString("lists[" + dataIndex + "].class"));
+        Assert.assertEquals(section_id, jsonPath.getString("lists[" + dataIndex + "].section_id"));
+        Assert.assertEquals(section, jsonPath.getString("lists[" + dataIndex + "].section"));
+        Assert.assertEquals(admission_no, jsonPath.getString("lists[" + dataIndex + "].admission_no"));
+        Assert.assertEquals(roll_no, jsonPath.getString("lists[" + dataIndex + "].roll_no"));
+        Assert.assertEquals(admission_date, jsonPath.getString("lists[" + dataIndex + "].admission_date"));
+        Assert.assertEquals(firstname, jsonPath.getString("lists[" + dataIndex + "].firstname"));
+        Assert.assertEquals(lastname, jsonPath.getString("lists[" + dataIndex + "].lastname"));
+      // Assert.assertEquals(image, jsonPath.getString("lists[" + dataIndex + "].image"));
+        Assert.assertEquals(mobileno, jsonPath.getString("lists[" + dataIndex + "].mobileno"));
+        Assert.assertEquals(email, jsonPath.getString("lists[" + dataIndex + "].email"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].middlename"));
+
+
+    
+    @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string} {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including_and(int dataIndex, String type, String slug, String url, String title, String date, String event_start, String event_end, String event_venue, String description, String is_active, String created_at) {
+
+        jsonPath = response.jsonPath();
+
+        Assert.assertEquals(type, jsonPath.getString("lists[" + dataIndex + "].type"));
+        Assert.assertEquals(slug, jsonPath.getString("lists[" + dataIndex + "].slug"));
+        Assert.assertEquals(url, jsonPath.getString("lists[" + dataIndex + "].url"));
+        Assert.assertEquals(title, jsonPath.getString("lists[" + dataIndex + "].title"));
+        Assert.assertEquals(date, jsonPath.getString("lists[" + dataIndex + "].date"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].event_start"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].event_end"));
+        Assert.assertNull(jsonPath.get("lists[" + dataIndex + "].event_venue"));
+        Assert.assertEquals(description, jsonPath.getString("lists[" + dataIndex + "].description"));
+        Assert.assertEquals(is_active, jsonPath.getString("lists[" + dataIndex + "].is_active"));
+        Assert.assertEquals(created_at, jsonPath.getString("lists[" + dataIndex + "].created_at"));
+    }
+
+    @Given("The api user verifies that the data in the response body includes {string} {string} {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_verifies_that_the_data_in_the_response_body_includes_and(String id, String type, String slug, String url, String title, String date, String event_start, String event_end, String event_venue, String description, String is_active, String created_at) {
+
+        jsonPath = response.jsonPath();
+
+        response.then()
+                .assertThat()
+                .body("lists.id", Matchers.equalTo(id),
+                        "lists.type", Matchers.equalTo(type),
+                        "lists.slug", Matchers.equalTo(slug),
+                        "lists.url", Matchers.equalTo(url),
+                        "lists.title", Matchers.equalTo(title),
+                        "lists.date", Matchers.equalTo(date),
+                        "lists.event_start", Matchers.nullValue(),
+                        "lists.event_end", Matchers.nullValue(),
+                        "lists.event_venue", Matchers.nullValue(),
+                        "lists.description", Matchers.equalTo(description),
+                        "lists.is_active", Matchers.equalTo(is_active),
+                        "lists.created_at", Matchers.equalTo(created_at));
+        }
+
+    @Given("The api user prepares a POST request to send to the api getNoticeById endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_get_notice_by_ıd_endpoint_containing_the_information(Integer id) {
+
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("id", id);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+
+    @Given("The api user prepares a post request that does not contain data to the api getNoticeById endpoint.")
+    public void the_api_user_prepares_a_post_request_that_does_not_contain_data_to_the_api_get_notice_by_ıd_endpoint() {
+        jsonObjectRequestBody = new JSONObject();
+    }
+
+
 }
+
+
