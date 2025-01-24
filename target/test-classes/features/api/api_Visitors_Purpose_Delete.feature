@@ -60,7 +60,7 @@ Feature: As an administrator I should be able to delete the visitor puspose reco
       | id    |
       | 86594 |
 
-  @US
+
   Scenario Outline: Verify that a DELETE request to `/api/visitorsPurposeDelete` with invalid authorization and `id` returns a
   403 status code and a "You do not have authorization or token error" message in the response body.
 
@@ -76,7 +76,6 @@ Feature: As an administrator I should be able to delete the visitor puspose reco
     Examples:
       | id   |
       | 1278 |
-
 
 
 
@@ -96,5 +95,5 @@ Feature: As an administrator I should be able to delete the visitor puspose reco
 
     Examples:
       | id   |
-      | 1267 |
+      | 1277 |
 
