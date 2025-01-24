@@ -30,6 +30,12 @@ public class Authentication{
                 reqBody.put("email", ConfigReader.getProperty("teacherEmail","api"));
                 reqBody.put("password", ConfigReader.getProperty("teacherPassword","api"));
                 break;
+            case "teacher2":
+                spec.pathParams("pp1", "api", "pp2", "getToken");
+                reqBody = new JSONObject();
+                reqBody.put("email", ConfigReader.getProperty("teacher2Email","api"));
+                reqBody.put("password", ConfigReader.getProperty("teacherPassword","api"));
+                break;
             case "student":
                 spec.pathParams("pp1", "apistudent", "pp2", "getToken");
                 reqBody = new JSONObject();
