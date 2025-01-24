@@ -29,12 +29,14 @@ public class API_Stepdefinitions {
     VisitorsPurposeDeletePojo requestBody;
 
     @Given("The api user constructs the base url with the {string} token.")
-    public void the_api_user_constructs_the_base_url_with_the_token(String userType) {
+    public void the_api_user_constructs_the_base_url_with_the_token(String userType)
+    {
         HooksAPI.setUpApi(userType);
     }
 
     @Given("The api user sets {string} path parameters.")
     public void the_api_user_sets_path_parameters(String pathParam) {
+
         API_Methods.pathParam(pathParam);
     }
 
@@ -497,6 +499,8 @@ public class API_Stepdefinitions {
 
         System.out.println("Post Body : " + jsonObjectRequestBody);
     }
+
+
     @Given("The api user prepares a POST request to send to the api questionAdd endpoint containing the information {int}.")
     public void the_api_user_prepares_a_post_request_to_send_to_the_api_question_add_endpoint_containing_the_information(Integer id) {
         jsonObjectRequestBody = new JSONObject();
@@ -504,6 +508,22 @@ public class API_Stepdefinitions {
 
         System.out.println("Post Body : " + jsonObjectRequestBody);
     }
+
+
+    @Given("The api user verifies the information in the response body for the entry with the specified <dataIndex> index, including {string}, {string}, {string}, {string},{string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, assignments.")
+    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_data_ındex_index_including_assignments(String dataIndex, String class_id, String section_id, String session_id, String staff_id, String subject_group_subject_id, String subject_id, String homework_date, String submit_date, String marks, String description, String create_date, String evaluation_date, String document, String created_by, String evaluated_by, String created_at, String section, String subject_name, String subject_groups_id, String name) {
+
+        jsonPath = response.jsonPath();
+        Assert.assertEquals(dataIndex, jsonPath.getString("lists[" + dataIndex + "].dataIndex"));
+        Assert.assertEquals(class_id, jsonPath.getString("lists[" + dataIndex + "].class_id"));
+        Assert.assertEquals(section_id, jsonPath.getString("lists[" + dataIndex + "].section_id"));
+
+
+
+
+
+    }
+
 
 
 
@@ -584,4 +604,5 @@ public class API_Stepdefinitions {
 
 
 }
+
 
