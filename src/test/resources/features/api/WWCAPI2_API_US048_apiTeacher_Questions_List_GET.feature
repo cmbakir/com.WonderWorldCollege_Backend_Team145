@@ -19,8 +19,8 @@ Feature: As a teacher I should be able to delete the question record in the syst
     # Api kullanıcısı response body icindeki <dataIndex> indexe sahip olanin "<staff_id>", "<subject_id>", "<question_type>", "<level>", "<class_id>", "<section_id>", "<class_section_id>", "<question>", "<opt_a>", "<opt_b>", "<opt_c>", "<opt_d>", "<opt_e>", "<correct>", "<descriptive_word_limit>", "<created_at>", "<updated_at>", "<name, code>", "<class_name>", "<section_name>" bilgilerini doğrular.
 
   Examples:
-    |dataIndex|   staff_id | subject_id | question_type | level    | class_id | section_id | class_section_id | question                                       | opt_a   | opt_b   | opt_c   | opt_d   | opt_e     | correct | descriptive_word_limit | created_at          | updated_at | name    | code | class_name | section_name |
-    | 0       | 5          | 5          | singlechoice  | medium   | 3        | 1          |null              | Which one of the following is biotic resource? | Soil.   | Water.  | Plant.  | Land.   | Other .    | opt_c   | 0                      | 2023-08-02 18:28:43 |null       | Science | 111  | Class 3    | A            |
+    |dataIndex|   staff_id | subject_id | question_type | level    | class_id | section_id | class_section_id | question  | opt_a   | opt_b   | opt_c   | opt_d   | opt_e     | correct | descriptive_word_limit | created_at          | updated_at | name        | code | class_name | section_name |
+    | 0       | 366          | 4          | true_false  | low      | 11       | 1          |null              | 1+1=2     |          |        |         |         |           |   true  | 0                      | 2025-01-06 09:53:32 |null        | Mathematics | 110  | Class 11    | A           |
 
 
   Scenario: Verify that a GET request to /apiteacher/questionList with invalid authorization returns a 403 status code and a

@@ -18,11 +18,11 @@ Feature: As a teacher (teacher) I want to be able to create a new question recor
     # Api kullanicisi response bodydeki message bilgisinin "Success" oldugunu dogrular
 
   Examples:
-    | subject_id | question_type  | level   | class_id | section_id | class_section_id | question                                       | opt_a  | opt_b   | opt_c  | opt_d | opt_e | correct | descriptive_word_limit |
-    | 5          | singlechoice   | medium  | 3        | 1          | null             | Which one of the following is biotic resource? | Soil. | Water. | Plant. | Land. | Other . | opt_c   | 0                      |
+    | subject_id | question_type | level    | class_id | section_id | class_section_id | question  | opt_a   | opt_b   | opt_c   | opt_d   | opt_e     | correct | descriptive_word_limit | created_at          | updated_at | name    | code | class_name | section_name |
+    | 4          | true_false  | low      | 11         | 1           |null              | 1+4=5    |          |        |         |         |           |     true    | 0                      | 2025-01-06 09:53:32 |null       | Mathematics | 110  | Class 11    | A            |
 
 
-    Scenario: Verify that a POST request to `/apiteacher/questionAdd` without data and valid authorization returns a 203
+  Scenario: Verify that a POST request to `/apiteacher/questionAdd` without data and valid authorization returns a 203
     status code and a "No information or missing information. Please check your input data." message in the response body.
 
     * The api user constructs the base url with the "teacher" token.
@@ -57,8 +57,9 @@ Feature: As a teacher (teacher) I want to be able to create a new question recor
     # Api kullanicisi response bodydeki message bilgisinin "No information or missing information. Please check your input data." oldugunu dogrular
 
     Examples:
-      | class_id | section_id | class_section_id | question                                       | opt_a  | opt_b   | opt_c  | opt_d | opt_e | correct | descriptive_word_limit |
-      | 3        | 1          | null             | Which one of the following is biotic resource? | Soil. | Water. | Plant. | Land. | Other . | opt_c   | 0                      |
+      | class_id | section_id | class_section_id | question  | opt_a   | opt_b   | opt_c   | opt_d   | opt_e     | correct | descriptive_word_limit | created_at          | updated_at | name    | code | class_name | section_name |
+      | 11        | 1          |null              | 1+1=2    |          |        |         |         |           |     true    | 0                      | 2025-01-06 09:53:32 |null       | Mathematics | 110  | Class 11    | A            |
+
 
 
   Scenario Outline: Verify that a POST request to `/apiteacher/questionAdd` with invalid authorization and data
@@ -81,8 +82,9 @@ Feature: As a teacher (teacher) I want to be able to create a new question recor
 
 
     Examples:
-      | subject_id | question_type  | level   | class_id | section_id | class_section_id | question                                       | opt_a  | opt_b   | opt_c  | opt_d | opt_e | correct | descriptive_word_limit |
-      | 5          | singlechoice   | medium  | 3        | 1          | null             | Which one of the following is biotic resource? | Soil. | Water. | Plant. | Land. | Other . | opt_c   | 0                      |
+      | subject_id | question_type | level    | class_id | section_id | class_section_id | question  | opt_a   | opt_b   | opt_c   | opt_d   | opt_e     | correct | descriptive_word_limit | created_at          | updated_at | name    | code | class_name | section_name |
+      | 4          | true_false  | low      | 11        | 1          |null              | 1+1=2    |          |        |         |         |           |     true    | 0                      | 2025-01-06 09:53:32 |null       | Mathematics | 110  | Class 11    | A            |
+
 
 
   Scenario Outline: Verify the creation of a new question record by sending a POST request to `/apiteacher/questionDetailsById`
@@ -101,5 +103,5 @@ Feature: As a teacher (teacher) I want to be able to create a new question recor
 
     Examples:
       | id   |
-      | 70 |
+      | 1 |
 
