@@ -14,13 +14,13 @@ Feature: As An Administrator (Admin) I Want To Be Able To Access The Books List 
     # Api kullanicisi status codeun 200 oldugunu dogrular
     * The api user verifies that the "message" information in the response body is "Success".
     # Api kullanicisi response bodydeki message bilgisinin "Success" oldugunu dogrular
-    * The Api User Verifies The İnformation İn The Response Body For The Entry With The Specified <Dataındex> İndex, İncluding "<Book_Title>", "<Book_No>", "<İsbn_No>",<Subject>,<Rack_No>,<Publish>,<Author>,<Qty>,<Perunitcost>,<Postdate>,<Description>,<Available>, <İs_Active>,<Created_At> And <Updated_At>.
-    # Api Kullanıcısı Response Body İcindeki <Dataındex> İndexe Sahip Olanin "<Visitors_Purpose>", "<Description>" Ve "<Created_At>" Bilgilerini Doğrular.,<Visitors_Purpose>,<Visitors_Purpose>
+    * The Api User Verifies The İnformation İn The Response Body For The Entry With The Specified <dataIndex> İndex, İncluding "<book_title>", "<book_no>", "<isbn_no>", "<subject>", "<rack_no>", "<publish>", "<author>", "<qty>", "<perunitcost>", "<postdate>", "<description>", "<available>", "<is_active>", "<created_at>" And "<updated_at>".
 
 
-    Examples:
-      | Dataındex | Book_Title     | Book_No                | İsbn_No             | Subject | Rack_No | Publish | Author | Qty | Dataındex | Perunitcost | Postdate | Dataındex | Description | Available | İs_Active      | Created_At | Updated_At     |
-      | 0         | purpose update | came for student visit | 2025-01-06 18:12:16 | 0       | 0       | 0       | 0      | 0   | 0         | 0           | 0        | 0         | 0           | 0         | purpose update | 0          | purpose update |
+
+     Examples:
+       | dataIndex | book_title    | book_no | isbn_no | subject | rack_no | publish       | author        | qty | perunitcost | postdate   | description                                                                                                                                 | available | is_active | created_at          | updated_at |
+       | 0         | The geography | 788789  |         |         | 119     | Barbara Bando | Barbara Bando | 75  | 12.00       | 2022-05-04 | The duo dump her in a nearby river after a failed attempt to hang her. Tonya survives, and the two men are arrested by Sheriff Ozzie Walls. | yes       | no        | 2023-10-03 01:42:32 | null       |
 
 
   Scenario: Wwcapı-208 [Tc_02 -> Apı_Us028]  Verify That A Get Request To `/Api/Bookslist ` With İnvalid Authorization Returns A 403 Status Code And A "Failed" Message.
