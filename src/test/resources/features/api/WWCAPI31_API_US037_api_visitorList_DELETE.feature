@@ -1,6 +1,6 @@
 Feature: WWCAPI31 API_US037 As an administrator I should be able to unregister visitors in the system via API connection.
 
-  Scenario Outline: WWCAPI96 TC_01 -> API_US033 Verify that a DELETE request to `/api/visitorsDelete` with valid authorization and correct `id`
+  Scenario Outline: WWCAPI268 TC_01 -> API_US037 Verify that a DELETE request to `/api/visitorsDelete` with valid authorization and correct `id`
   returns a 200 status code, a "Success" message, and that the `DeletedId` in the response matches the `id` in the request body.
 
     * The api user constructs the base url with the "adminPinar" token.
@@ -23,7 +23,7 @@ Feature: WWCAPI31 API_US037 As an administrator I should be able to unregister v
       | 1267 |
 
 
-  Scenario: TC_02 -> API_US37 Verify that a DELETE request to `/api/visitorsDelete` without `id` and with valid authorization returns a
+  Scenario: WWCAPI269 TC_02 -> API_US037 Verify that a DELETE request to `/api/visitorsDelete` without `id` and with valid authorization returns a
   203 status code and a "No id or wrong id. Please check your id number." message in the response body.
 
     * The api user constructs the base url with the "adminPinar" token.
@@ -40,7 +40,7 @@ Feature: WWCAPI31 API_US037 As an administrator I should be able to unregister v
     # Api kullanicisi response bodydeki message bilgisinin "No id or wrong id. Please check your id number." oldugunu dogrular
 
 
-  Scenario Outline: TC_03 -> API_US37 Verify that a DELETE request to `/api/visitorsDelete` with valid authorization and invalid `id`
+  Scenario Outline: WWCAPI271 TC_03 -> API_US037 Verify that a DELETE request to `/api/visitorsDelete` with valid authorization and invalid `id`
   returns a 203 status code and a "No id or wrong id. Please check your id number." message in the response body.
 
     * The api user constructs the base url with the "adminPinar" token.
@@ -61,7 +61,7 @@ Feature: WWCAPI31 API_US037 As an administrator I should be able to unregister v
       | 86594 |
 
 
-  Scenario Outline: TC_04 -> API_US37 Verify that a DELETE request to `/api/visitorsDelete` with invalid authorization and `id` returns a
+  Scenario Outline: WWCAPI273 TC_04 -> API_US037 Verify that a DELETE request to `/api/visitorsDelete` with invalid authorization and `id` returns a
   403 status code and a "You do not have authorization or token error" message in the response body.
 
     * The api user constructs the base url with the "invalid" token.
@@ -86,7 +86,7 @@ Feature: WWCAPI31 API_US037 As an administrator I should be able to unregister v
 
 
 
-  Scenario Outline: TC_05 -> API_US37 Verify that the visitor record is successfully deleted by sending a POST request to
+  Scenario Outline: WWCAPI274 TC_05 -> API_US037 Verify that the visitor record is successfully deleted by sending a POST request to
   `/api/visitorsId` with the `DeletedId` returned in the response body to confirm the deletion.
 
     * The api user constructs the base url with the "adminPinar" token.
