@@ -1,9 +1,9 @@
-Feature: API_US33 As an administrator (admin), I want to be able to access the Visitor List via API connection.
+Feature: WWCAPI25 API_US033 As an administrator (admin), I want to be able to access the Visitor List via API connection.
 
-  @US
-  Scenario Outline: TC_01 -> API_US33 Verify that a GET request to `/api/visitorsList` with valid authorization returns a 200 status code and a "Success" message and the staff_id, student_session_id, source, purpose, name and email fields for id (x) in the response body.
 
-    * The api user constructs the base url with the "admin" token.
+  Scenario Outline: WWCAPI96 TC_01 -> API_US033 Verify that a GET request to `/api/visitorsList` with valid authorization returns a 200 status code and a "Success" message and the staff_id, student_session_id, source, purpose, name and email fields for id (x) in the response body.
+
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsList" path parameters.
     # Api kullanicisi "/api/visitorsList" path parametrelerini olusturur
@@ -19,11 +19,11 @@ Feature: API_US33 As an administrator (admin), I want to be able to access the V
     Examples:
 
       | dataIndex | staff_id | student_session_id | source  | purpose         | name     | email|
-      | 0         |  null    | null               | null    | Update Meeting  |Pinar Cay | null |
+      | 0         |  null    | null               | null    | Meeting         |Pinar     | null |
 
 
 
-  Scenario: TC_02 -> API_US33 Verify that a GET request to /api/visitorsList with invalid authorization returns a 403 status code and a
+  Scenario: WWCAPI98 TC_02 -> API_US033 Verify that a GET request to /api/visitorsList with invalid authorization returns a 403 status code and a
   "failed" message.
 
     * The api user constructs the base url with the "invalid" token.
