@@ -598,7 +598,120 @@ public class API_Stepdefinitions {
 
     }
 
-    //888888
 
+    @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information_and(String student_id, String current_email, String current_phone, String occupation, String address, String photo) {
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("student_id", student_id);
+        jsonObjectRequestBody.put("current_email", current_email);
+        jsonObjectRequestBody.put("current_phone", current_phone);
+        jsonObjectRequestBody.put("occupation", occupation);
+        jsonObjectRequestBody.put("address", address);
+        jsonObjectRequestBody.put("photo", photo);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+
+    }
+
+
+    @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information_and(String occupation, String address, String photo) {
+
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("occupation", occupation);
+        jsonObjectRequestBody.put("address", address);
+        jsonObjectRequestBody.put("photo", photo);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+
+    @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string} , {string},{string}, {string}, {string}, {string} .")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information(String student_id, String current_email, String current_phone, String occupation, String address, String photo) {
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("student_id", student_id);
+        jsonObjectRequestBody.put("current_email", current_email);
+        jsonObjectRequestBody.put("current_phone", current_phone);
+        jsonObjectRequestBody.put("occupation", occupation);
+        jsonObjectRequestBody.put("address", address);
+        jsonObjectRequestBody.put("photo", photo);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+
+
+    @Given("The api user prepares a POST request to send to the api alumniId endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_api_alumni_id_endpoint_containing_the_information(Integer id) {
+
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("id", id);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api visitorsPurposeUpdate endpoint containing the information {int}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_visitors_purpose_update_endpoint_containing_the_information_and(Integer id, String student_id, String current_email, String current_phone, String occupation, String address, String photo) {
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id", id);
+        hashMapRequestBody.put("student_id", student_id);
+        hashMapRequestBody.put("current_email", current_email);
+        hashMapRequestBody.put("current_phone", current_phone);
+        hashMapRequestBody.put("occupation", occupation);
+        hashMapRequestBody.put("address", address);
+        hashMapRequestBody.put("photo", photo);
+
+        System.out.println("Patch Body : " + hashMapRequestBody);
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api alumniUpdate endpoint containing the information {int}, {string}, {string},  {string}, {string}, {string}  and {string}.")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_alumni_update_endpoint_containing_the_information_and(Integer id, String student_id, String current_email, String current_phone, String occupation, String address, String photo) {
+
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id", id);
+        hashMapRequestBody.put("student_id", student_id);
+        hashMapRequestBody.put("current_email", current_email);
+        hashMapRequestBody.put("current_phone", current_phone);
+        hashMapRequestBody.put("occupation", occupation);
+        hashMapRequestBody.put("address", address);
+        hashMapRequestBody.put("photo", photo);
+
+        System.out.println("Patch Body : " + hashMapRequestBody);
+
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api alumniUpdate endpoint containing the information {string}, {string}, {string} , {string} , {string}  and {string}.")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_alumniUpdate_endpoint_containing_the_information_and(String student_id, String current_email, String current_phone, String occupation, String address, String photo) {
+
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("student_id", student_id);
+        hashMapRequestBody.put("current_email", current_email);
+        hashMapRequestBody.put("current_phone", current_phone);
+        hashMapRequestBody.put("occupation", occupation);
+        hashMapRequestBody.put("address", address);
+        hashMapRequestBody.put("photo", photo);
+
+        System.out.println("Patch Body : " + hashMapRequestBody);
+
+
+    }
+
+
+    @Given("The api user prepares a patch request that does not contain data to the alumniUpdate endpoint.")
+    public void the_api_user_prepares_a_patch_request_that_does_not_contain_data_to_the_alumni_update_endpoint() {
+        hashMapRequestBody = new HashMap<>();
+    }
+
+    @Given("The api user sends a PATCH request, saves the returned response, and verifies that the status code is {string} with You do not have authorization or token error.")
+    public void the_api_user_sends_a_patch_request_saves_the_returned_response_and_verifies_that_the_status_code_is_with_you_do_not_have_authorization_or_token_error(String string) {
+        hashMapRequestBody = new HashMap<>();
+    }
+
+
+
+    @Given("The api user verifies alumni as {string}")
+    public void the_api_user_verifies_alumni_as(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        response.then()
+                .assertThat()
+                .body("lists.Token_remaining_time", Matchers.equalTo(596));
+    }
 }
-
