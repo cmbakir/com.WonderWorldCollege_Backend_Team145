@@ -598,6 +598,38 @@ public class API_Stepdefinitions {
 
     }
 
+    @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string}, {string},  {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information_and(String type, String title, String description, String slug) {
+
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("type", type);
+        jsonObjectRequestBody.put("title", title);
+        jsonObjectRequestBody.put("description", description);
+        jsonObjectRequestBody.put("slug", slug);
+    }
+
+    @Given("The api user prepares a post request that does not contain data to the api api/addNotice endpoint.")
+    public void the_api_user_prepares_a_post_request_that_does_not_contain_data_to_the_api_api_add_notice_endpoint() {
+        jsonObjectRequestBody = new JSONObject();
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api updateNotice endpoint containing the information {int}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_update_notice_update_endpoint_containing_the_information_and(Integer id, String type, String title, String description, String slug) {
+
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id", id);
+        hashMapRequestBody.put("type", type);
+        hashMapRequestBody.put("description", description);
+        hashMapRequestBody.put("title", title);
+        hashMapRequestBody.put("slug", slug);
+    }
+
+    @Given("The api user prepares a patch request that does not contain data to the api updateNotice endpoint.")
+    public void the_api_user_prepares_a_patch_request_that_does_not_contain_data_to_the_api_update_notice_update_endpoint() {
+        hashMapRequestBody = new HashMap<>();
+    }
+
+
     //888888
 
 }
