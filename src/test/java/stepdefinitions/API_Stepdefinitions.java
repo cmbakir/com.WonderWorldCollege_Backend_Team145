@@ -431,12 +431,16 @@ public class API_Stepdefinitions {
 
     }
 
-    @Given("The api user prepares a POST request to send to the api visitorsAdd endpoint containing the information {string}, {string} and {string}.")
-    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_add_endpoint_containing_the_information_and(String purpose, String name, String contact) {
+
+    @Given("The api user prepares a POST request to send to the api visitorsAdd endpoint containing the information {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_add_endpoint_containing_the_information_and(String id_proof, String no_of_people, String date, String in_time, String out_time, String note) {
         jsonObjectRequestBody = new JSONObject();
-        jsonObjectRequestBody.put("purpose", purpose);
-        jsonObjectRequestBody.put("name", name);
-        jsonObjectRequestBody.put("contact", contact);
+        jsonObjectRequestBody.put("id_proof", id_proof);
+        jsonObjectRequestBody.put("no_of_people", no_of_people);
+        jsonObjectRequestBody.put("date", date);
+        jsonObjectRequestBody.put("in_time", in_time);
+        jsonObjectRequestBody.put("out_time", out_time);
+        jsonObjectRequestBody.put("note", note);
     }
 
     @Given("The api user prepares a PATCH request to send to the api visitorsUpdate endpoint containing the information {int}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}")
@@ -599,6 +603,12 @@ public class API_Stepdefinitions {
     }
 
     //888888
+    @Given("The api user verifies purpose as {string}")
+    public void the_api_user_verifies_visitors_as(String purpose) {
+        response.then()
+                .assertThat()
+                .body("lists.purpose", Matchers.equalTo(purpose));
+    }
 
 }
 
