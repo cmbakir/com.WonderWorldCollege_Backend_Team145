@@ -1,11 +1,11 @@
-Feature: API_US36 As an administrator (admin), I want to be able to update the visitors information registered in the system via API connection.
+Feature: WWCAPI30 API_US036 As an administrator (admin), I want to be able to update the visitors information registered in the system via API connection.
 
 
-  Scenario Outline: TC_01 -> API_US36 Verify that a PATCH request to `/api/visitorsUpdate` with valid authorization and correct data
+  Scenario Outline: WWCAPI188 TC_01 -> API_US036 Verify that a PATCH request to `/api/visitorsUpdate` with valid authorization and correct data
   (id, purpose, name, contact, id_proof, no_of_people, date, in_time, out_time, note) returns a 200 status code, a "Success" message, and that the `updateId` in the
   response matches the `id` in the request body.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsUpdate" path parameters.
     # Api kullanicisi "api/visitorsUpdate" path parametrelerini olusturur
@@ -22,14 +22,14 @@ Feature: API_US36 As an administrator (admin), I want to be able to update the v
 
     Examples:
       |id | purpose       | name    | contact| id_proof| no_of_people| date     | in_time| out_time| note  |
-      |288| Update Meeting|Pinar Cay| 5555555|10010    |3            |2025-01-24|03:00 PM|04:30 PM |Visitor|
+      |300| Update Meeting|Pinar Cay| 5555555|10010    |3            |2025-01-24|03:00 PM|04:30 PM |Visitor|
 
 
-  Scenario Outline: TC_02 -> API_US36 Verify that a PATCH request to `/api/visitorsUpdate` with valid authorization and invalid `id`
+  Scenario Outline: WWCAPI189 TC_02 -> API_US036 Verify that a PATCH request to `/api/visitorsUpdate` with valid authorization and invalid `id`
   returns a 203 status code and a "Wrong information or missing information. Please check your input data and id number."
   message in the response body.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsUpdate" path parameters.
     # Api kullanicisi "api/visitorsUpdate" path parametrelerini olusturur
@@ -47,11 +47,11 @@ Feature: API_US36 As an administrator (admin), I want to be able to update the v
       |28888| Update Meeting|Pinar Cay| 5555555|10010    |3            |2025-01-24|03:00 PM|04:30 PM |Visitor|
 
 
-  Scenario Outline: TC_03 -> API_US36 Verify that a PATCH request to `/api/visitorsUpdate` without `id` and with valid authorization
+  Scenario Outline: WWCAPI190 TC_03 -> API_US036 Verify that a PATCH request to `/api/visitorsUpdate` without `id` and with valid authorization
   returns a 203 status code and a "Wrong information or missing information. Please check your input data and id number."
   message in the response body.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsUpdate" path parameters.
     # Api kullanicisi "api/visitorsUpdate" path parametrelerini olusturur
@@ -70,11 +70,11 @@ Feature: API_US36 As an administrator (admin), I want to be able to update the v
 
 
 
-  Scenario: TC_04 -> API_US36 Verify that a PATCH request to `/api/visitorsUpdate` without valid authorization and data returns a
+  Scenario: WWCAPI192 TC_04 -> API_US036 Verify that a PATCH request to `/api/visitorsUpdate` without valid authorization and data returns a
   203 status code and a "Wrong information or missing information. Please check your input data and id number." message
   in the response body.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsUpdate" path parameters.
     # Api kullanicisi "api/visitorsPurposeUpdate" path parametrelerini olusturur
@@ -88,7 +88,7 @@ Feature: API_US36 As an administrator (admin), I want to be able to update the v
     # Api kullanicisi response bodydeki message bilgisinin "Wrong information or missing information. Please check your input data and id number." oldugunu dogrular
 
 
-  Scenario Outline:TC_05 -> API_US36 Verify that a PATCH request to `/api/visitorsUpdate` with invalid authorization and data
+  Scenario Outline:WWCAPI195 TC_05 -> API_US036 Verify that a PATCH request to `/api/visitorsUpdate` with invalid authorization and data
   (id, purpose, name, contact, id_proof, no_of_people, date, in_time, out_time, note) returns a 403 status code and a "You do not have authorization or token error" message
   in the response body.
 
@@ -110,21 +110,21 @@ Feature: API_US36 As an administrator (admin), I want to be able to update the v
       |288  | Update Meeting|Pinar Cay| 5555555|10010    |3            |2025-01-24|03:00 PM|04:30 PM |Visitor|
 
 
-
-  Scenario Outline: TC_06 -> API_US36 Verify that the visitor record updated via API is successfully updated by sending a POST request to
+  @pin
+  Scenario Outline: WWCAPI199 TC_06 -> API_US036 Verify that the visitor record updated via API is successfully updated by sending a POST request to
   `/api/visitorsId` with the `updatedId` returned in the response body.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsId" path parameters.
-    # Api kullanicisi "api/visitorsPurposeId" path parametrelerini olusturur
+    # Api kullanicisi "api/visitorsId" path parametrelerini olusturur
     * The api user prepares a POST request to send to the api visitorsid endpoint containing the information <id>.
     # Api kullanicisi api visitorsId endpointine gondermek icin <id> bilgisini iceren bir post request hazirlar
     * The api user sends a POST requestt and saves the returned response.
     # Api kullanicisi POST request gonderir ve donen responsei kaydeder
-    * The api user verifies visitorsId as "updatedId"
-    # Api kullanicisi visitorsId bilgisinin "updatedId" oldugunu dogrular
+    * The api user verifies purpose as "Update Meeting"
+    # Api kullanicisi purpose bilgisinin "Update Meeting" oldugunu dogrular
 
     Examples:
       | id   |
-      | 288  |
+      | 300  |
