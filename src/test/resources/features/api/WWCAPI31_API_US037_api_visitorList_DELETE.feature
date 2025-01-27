@@ -1,9 +1,9 @@
-Feature: API_US37 As an administrator I should be able to unregister visitors in the system via API connection.
+Feature: WWCAPI31 API_US037 As an administrator I should be able to unregister visitors in the system via API connection.
 
-  Scenario Outline: TC_01 -> API_US37 Verify that a DELETE request to `/api/visitorsDelete` with valid authorization and correct `id`
+  Scenario Outline: WWCAPI96 TC_01 -> API_US033 Verify that a DELETE request to `/api/visitorsDelete` with valid authorization and correct `id`
   returns a 200 status code, a "Success" message, and that the `DeletedId` in the response matches the `id` in the request body.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsDelete" path parameters.
     # Api kullanicisi "api/visitorsPurposeDelete" path parametrelerini olusturur
@@ -26,7 +26,7 @@ Feature: API_US37 As an administrator I should be able to unregister visitors in
   Scenario: TC_02 -> API_US37 Verify that a DELETE request to `/api/visitorsDelete` without `id` and with valid authorization returns a
   203 status code and a "No id or wrong id. Please check your id number." message in the response body.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsDelete" path parameters.
     # Api kullanicisi "api/visitorsPurposeDelete" path parametrelerini olusturur
@@ -43,7 +43,7 @@ Feature: API_US37 As an administrator I should be able to unregister visitors in
   Scenario Outline: TC_03 -> API_US37 Verify that a DELETE request to `/api/visitorsDelete` with valid authorization and invalid `id`
   returns a 203 status code and a "No id or wrong id. Please check your id number." message in the response body.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsDelete" path parameters.
     # Api kullanicisi "api/visitorsPurposeDelete" path parametrelerini olusturur
@@ -89,7 +89,7 @@ Feature: API_US37 As an administrator I should be able to unregister visitors in
   Scenario Outline: TC_05 -> API_US37 Verify that the visitor record is successfully deleted by sending a POST request to
   `/api/visitorsId` with the `DeletedId` returned in the response body to confirm the deletion.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsId" path parameters.
     # Api kullanicisi "api/visitorsPurposeId" path parametrelerini olusturur
@@ -103,3 +103,4 @@ Feature: API_US37 As an administrator I should be able to unregister visitors in
     Examples:
       | id   |
       | 1267 |
+
