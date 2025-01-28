@@ -809,7 +809,7 @@ public class API_Stepdefinitions {
 
     }
 
-    @Then("The api user sends a PATCH request and saves the returned response.")
+    @Then("The api user sends a PATCH request and saves the returned response..")
     public void theApiUserSendsAPATCHRequestAndSavesTheReturnedResponse() {
         response=given()
                 .spec(spec)
