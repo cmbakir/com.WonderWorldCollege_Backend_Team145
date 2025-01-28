@@ -897,6 +897,8 @@ public class API_Stepdefinitions {
          //suleyman US016 son
     }
 
+
+
     @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string}, {string},  {string} and {string}.")
     public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information_and(String type, String title, String description, String slug) {
 
@@ -936,6 +938,27 @@ public class API_Stepdefinitions {
                 .assertThat()
                 .body("lists.purpose", Matchers.equalTo(purpose));
     }
+
+    @Given("The api user prepares a DELETE request to send to the api visitorsDelete endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_delete_request_to_send_to_the_api_visitors_delete_endpoint_containing_the_information(int id) {
+
+        requestBody = new VisitorsPurposeDeletePojo(id);
+
+        System.out.println("Delete Body : " + requestBody);
+    }
+
+    @Given("The api user verifies that the deletedid information in the response body is the same as the id information in the request body.")
+    public void the_api_user_verifies_that_the_deletedId_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
+        jsonPath = response.jsonPath();
+
+        Assert.assertEquals(requestBody.getId(), jsonPath.getInt("deletedId"));
+    }
+    @Given("The api user prepares a DELETE request that does not contain data to the api visitorsDelete endpoint.")
+    public void the_api_user_prepares_a_delete_request_that_does_not_contain_data_to_the_api_visitors_delete_endpoint() {
+        requestBody = new VisitorsPurposeDeletePojo();
+
+    }
+
 
 }
 
