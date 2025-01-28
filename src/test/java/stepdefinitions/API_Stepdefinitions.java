@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.junit.Assert;
+import pojos.QuestionDeletePojo;
 import pojos.VisitorsPurposeDeletePojo;
 import utilities.API_Utilities.API_Methods;
 
@@ -599,6 +600,79 @@ public class API_Stepdefinitions {
     }
 
     //888888
+
+
+
+    @Given("The api user prepares a PATCH request to send to the api questionUpdate endpoint containing the information {int}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string},  {string}, {string}, {string}, {string}, {string}, {string}")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_question_update_endpoint_containing_the_information(int id, String subject_id, String question_type, String level, String class_id, String section_id, String class_section_id, String question, String opt_a, String opt_b, String opt_c, String opt_d, String opt_e, String correct, String descriptive_word_limit) {
+
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id",id);
+        hashMapRequestBody.put("subject_id",subject_id);
+        hashMapRequestBody.put("question_type",question_type);
+        hashMapRequestBody.put("level",level);
+        hashMapRequestBody.put("class_id",class_id);
+        hashMapRequestBody.put("section_id",section_id);
+        hashMapRequestBody.put("class_section_id",class_section_id);
+        hashMapRequestBody.put("question",question);
+        hashMapRequestBody.put("opt_a",opt_a);
+        hashMapRequestBody.put("opt_b",opt_b);
+        hashMapRequestBody.put("opt_c",opt_c);
+        hashMapRequestBody.put("opt_d",opt_d);
+        hashMapRequestBody.put("opt_e",opt_e);
+        hashMapRequestBody.put("correct",correct);
+        hashMapRequestBody.put("descriptive_word_limit",descriptive_word_limit);
+
+        System.out.println(hashMapRequestBody);
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api questionUpdate endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string},  {string}, {string}, {string}, {string}, {string}, {string}")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_question_update_endpoint_containing_the_information(String subject_id, String question_type, String level, String class_id, String section_id, String class_section_id, String question, String opt_a, String opt_b, String opt_c, String opt_d, String opt_e, String correct, String descriptive_word_limit) {
+
+        hashMapRequestBody = new HashMap<>();
+
+        hashMapRequestBody.put("subject_id",subject_id);
+        hashMapRequestBody.put("question_type",question_type);
+        hashMapRequestBody.put("level",level);
+        hashMapRequestBody.put("class_id",class_id);
+        hashMapRequestBody.put("section_id",section_id);
+        hashMapRequestBody.put("class_section_id",class_section_id);
+        hashMapRequestBody.put("question",question);
+        hashMapRequestBody.put("opt_a",opt_a);
+        hashMapRequestBody.put("opt_b",opt_b);
+        hashMapRequestBody.put("opt_c",opt_c);
+        hashMapRequestBody.put("opt_d",opt_d);
+        hashMapRequestBody.put("opt_e",opt_e);
+        hashMapRequestBody.put("correct",correct);
+        hashMapRequestBody.put("descriptive_word_limit",descriptive_word_limit);
+
+        System.out.println("Patch Body : " + hashMapRequestBody);
+    }
+
+    @Given("The api user prepares a patch request that does not contain data to the api questionUpdate endpoint.")
+    public void the_api_user_prepares_a_patch_request_that_does_not_contain_data_to_the_api_question_update_endpoint() {
+        hashMapRequestBody=new HashMap<>();
+    }
+
+    @Given("The api user verifies level  as {string}")
+    public void the_api_user_verifies_level_as(String level) {
+        response.then()
+                .assertThat()
+                .body("lists.level", Matchers.equalTo(level));
+    }
+
+    @Given("The api user prepares a DELETE request to send to the api questionDelete endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_delete_request_to_send_to_the_api_question_delete_endpoint_containing_the_information(Integer id) {
+
+        QuestionDeletePojo requestBody;
+        requestBody = new QuestionDeletePojo(id);
+        System.out.println("Delete Body : " + requestBody);
+    }
+
+    @Given("The api user prepares a DELETE request that does not contain data to the api questionDelete endpoint.")
+    public void the_api_user_prepares_a_delete_request_that_does_not_contain_data_to_the_api_question_delete_endpoint() {
+        jsonObjectRequestBody = new JSONObject();
+    }
 
 }
 
