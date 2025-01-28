@@ -1,6 +1,6 @@
-Feature: As a teacher (teacher) I want to be able to create a new question record via API connection.
+Feature: WWCAPI12 API_US050 As a teacher (teacher) I want to be able to create a new question record via API connection.
 
-  Scenario Outline: Verify that a POST request to `/apiteacher/questionAdd` with valid authorization and correct data
+  Scenario Outline: WWCAPI... TC_01 -> API_US050 Verify that a POST request to `/apiteacher/questionAdd` with valid authorization and correct data
   (subject_id, question_type, level, class_id, section_id, class_section_id, question, opt_a, opt_b, opt_c, opt_d, opt_e, correct, descriptive_word_limit)
   returns a 200 status code and a "Success" message in the response body.
 
@@ -17,13 +17,13 @@ Feature: As a teacher (teacher) I want to be able to create a new question recor
     * The api user verifies that the "message" information in the response body is "Success".
     # Api kullanicisi response bodydeki message bilgisinin "Success" oldugunu dogrular
 
-  Examples:
-    | subject_id | question_type | level    | class_id | section_id | class_section_id | question  | opt_a   | opt_b   | opt_c   | opt_d   | opt_e     | correct | descriptive_word_limit | created_at          | updated_at | name    | code | class_name | section_name |
-    | 4          | true_false  | low      | 11         | 1           |null              | 1+4=5    |          |        |         |         |           |     true    | 0                      | 2025-01-06 09:53:32 |null       | Mathematics | 110  | Class 11    | A            |
+    Examples:
+      | subject_id | question_type | level    | class_id | section_id | class_section_id | question  | opt_a   | opt_b   | opt_c   | opt_d   | opt_e     | correct | descriptive_word_limit | created_at          | updated_at | name    | code | class_name | section_name |
+      | 4          | true_false  | low      | 11         | 1           |null              | 1+4=5    |          |        |         |         |           |     true    | 0                      | 2025-01-06 09:53:32 |null       | Mathematics | 110  | Class 11    | A            |
 
 
-  Scenario: Verify that a POST request to `/apiteacher/questionAdd` without data and valid authorization returns a 203
-    status code and a "No information or missing information. Please check your input data." message in the response body.
+  Scenario: WWCAPI... TC_02 -> API_US050 Verify that a POST request to `/apiteacher/questionAdd` without data and valid authorization returns a 203
+  status code and a "No information or missing information. Please check your input data." message in the response body.
 
     * The api user constructs the base url with the "teacher" token.
     # Api kullanicisi "teacher" token ile base urli olusturur
@@ -39,7 +39,7 @@ Feature: As a teacher (teacher) I want to be able to create a new question recor
     # Api kullanicisi response bodydeki message bilgisinin "No information or missing information. Please check your input data." oldugunu dogrular
 
 
-  Scenario Outline: Verify that a POST request to `/apiteacher/questionAdd` with valid authorization and incomplete data
+  Scenario Outline: WWCAPI... TC_03 -> API_US050 Verify that a POST request to `/apiteacher/questionAdd` with valid authorization and incomplete data
   (class_id, section_id, class_section_id, question, opt_a, opt_b, opt_c, opt_d, opt_e, correct, descriptive_word_limit) returns a 203 status code and a "No information or missing information. Please check your input data."
   message in the response body.
 
@@ -62,7 +62,7 @@ Feature: As a teacher (teacher) I want to be able to create a new question recor
 
 
 
-  Scenario Outline: Verify that a POST request to `/apiteacher/questionAdd` with invalid authorization and data
+  Scenario Outline: WWCAPI... TC_04 -> API_US050 Verify that a POST request to `/apiteacher/questionAdd` with invalid authorization and data
   (subject_id, question_type, level, class_id, section_id, class_section_id, question, opt_a, opt_b, opt_c, opt_d, opt_e, correct, descriptive_word_limit)
   returns a 403 status code and a "You do not have authorization or token error"
   message in the response body.
@@ -87,7 +87,7 @@ Feature: As a teacher (teacher) I want to be able to create a new question recor
 
 
 
-  Scenario Outline: Verify the creation of a new question record by sending a POST request to `/apiteacher/questionDetailsById`
+  Scenario Outline: WWCAPI... TC_05 -> API_US050 Verify the creation of a new question record by sending a POST request to `/apiteacher/questionDetailsById`
   with the `addId` returned in the response body of the creation API.
 
     * The api user constructs the base url with the "teacher" token.
@@ -103,5 +103,5 @@ Feature: As a teacher (teacher) I want to be able to create a new question recor
 
     Examples:
       | id   |
-      | 1 |
+      | 238 |
 

@@ -11,7 +11,9 @@ public class HooksAPI {
     public static void setUpApi(String userType) {
         String token;
 
-        if (userType.equals("admin") || userType.equals("teacher") || userType.equals("student") || userType.equals("adminAhmetEmail") || userType.equals("teacher2")||userType.equals("adminSuleyman")) {
+
+        if (userType.equals("admin") || userType.equals("teacher") || userType.equals("student") || userType.equals("adminAhmetEmail") || userType.equals("teacher2")||userType.equals("adminSuleyman") || userType.equals("adminPinar")){
+
 
 
             token = Authentication.generateToken(userType);

@@ -12,6 +12,7 @@ import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.junit.Assert;
+import pojos.QuestionDeletePojo;
 import pojos.VisitorsPurposeDeletePojo;
 import utilities.API_Utilities.API_Methods;
 
@@ -436,12 +437,16 @@ public class API_Stepdefinitions {
 
     }
 
-    @Given("The api user prepares a POST request to send to the api visitorsAdd endpoint containing the information {string}, {string} and {string}.")
-    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_add_endpoint_containing_the_information_and(String purpose, String name, String contact) {
+
+    @Given("The api user prepares a POST request to send to the api visitorsAdd endpoint containing the information {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_add_endpoint_containing_the_information_and(String id_proof, String no_of_people, String date, String in_time, String out_time, String note) {
         jsonObjectRequestBody = new JSONObject();
-        jsonObjectRequestBody.put("purpose", purpose);
-        jsonObjectRequestBody.put("name", name);
-        jsonObjectRequestBody.put("contact", contact);
+        jsonObjectRequestBody.put("id_proof", id_proof);
+        jsonObjectRequestBody.put("no_of_people", no_of_people);
+        jsonObjectRequestBody.put("date", date);
+        jsonObjectRequestBody.put("in_time", in_time);
+        jsonObjectRequestBody.put("out_time", out_time);
+        jsonObjectRequestBody.put("note", note);
     }
 
     @Given("The api user prepares a PATCH request to send to the api visitorsUpdate endpoint containing the information {int}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}")
@@ -608,6 +613,82 @@ public class API_Stepdefinitions {
 
         HooksAPI.setUpApi(userType);
     }
+
+
+
+
+    @Given("The api user prepares a PATCH request to send to the api questionUpdate endpoint containing the information {int}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string},  {string}, {string}, {string}, {string}, {string}, {string}")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_question_update_endpoint_containing_the_information(int id, String subject_id, String question_type, String level, String class_id, String section_id, String class_section_id, String question, String opt_a, String opt_b, String opt_c, String opt_d, String opt_e, String correct, String descriptive_word_limit) {
+
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id",id);
+        hashMapRequestBody.put("subject_id",subject_id);
+        hashMapRequestBody.put("question_type",question_type);
+        hashMapRequestBody.put("level",level);
+        hashMapRequestBody.put("class_id",class_id);
+        hashMapRequestBody.put("section_id",section_id);
+        hashMapRequestBody.put("class_section_id",class_section_id);
+        hashMapRequestBody.put("question",question);
+        hashMapRequestBody.put("opt_a",opt_a);
+        hashMapRequestBody.put("opt_b",opt_b);
+        hashMapRequestBody.put("opt_c",opt_c);
+        hashMapRequestBody.put("opt_d",opt_d);
+        hashMapRequestBody.put("opt_e",opt_e);
+        hashMapRequestBody.put("correct",correct);
+        hashMapRequestBody.put("descriptive_word_limit",descriptive_word_limit);
+
+        System.out.println(hashMapRequestBody);
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api questionUpdate endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string},  {string}, {string}, {string}, {string}, {string}, {string}")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_question_update_endpoint_containing_the_information(String subject_id, String question_type, String level, String class_id, String section_id, String class_section_id, String question, String opt_a, String opt_b, String opt_c, String opt_d, String opt_e, String correct, String descriptive_word_limit) {
+
+        hashMapRequestBody = new HashMap<>();
+
+        hashMapRequestBody.put("subject_id",subject_id);
+        hashMapRequestBody.put("question_type",question_type);
+        hashMapRequestBody.put("level",level);
+        hashMapRequestBody.put("class_id",class_id);
+        hashMapRequestBody.put("section_id",section_id);
+        hashMapRequestBody.put("class_section_id",class_section_id);
+        hashMapRequestBody.put("question",question);
+        hashMapRequestBody.put("opt_a",opt_a);
+        hashMapRequestBody.put("opt_b",opt_b);
+        hashMapRequestBody.put("opt_c",opt_c);
+        hashMapRequestBody.put("opt_d",opt_d);
+        hashMapRequestBody.put("opt_e",opt_e);
+        hashMapRequestBody.put("correct",correct);
+        hashMapRequestBody.put("descriptive_word_limit",descriptive_word_limit);
+
+        System.out.println("Patch Body : " + hashMapRequestBody);
+    }
+
+    @Given("The api user prepares a patch request that does not contain data to the api questionUpdate endpoint.")
+    public void the_api_user_prepares_a_patch_request_that_does_not_contain_data_to_the_api_question_update_endpoint() {
+        hashMapRequestBody=new HashMap<>();
+    }
+
+    @Given("The api user verifies level  as {string}")
+    public void the_api_user_verifies_level_as(String level) {
+        response.then()
+                .assertThat()
+                .body("lists.level", Matchers.equalTo(level));
+    }
+
+    @Given("The api user prepares a DELETE request to send to the api questionDelete endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_delete_request_to_send_to_the_api_question_delete_endpoint_containing_the_information(Integer id) {
+
+        QuestionDeletePojo requestBody;
+        requestBody = new QuestionDeletePojo(id);
+        System.out.println("Delete Body : " + requestBody);
+    }
+
+    @Given("The api user prepares a DELETE request that does not contain data to the api questionDelete endpoint.")
+    public void the_api_user_prepares_a_delete_request_that_does_not_contain_data_to_the_api_question_delete_endpoint() {
+        jsonObjectRequestBody = new JSONObject();
+    }
+
+
 
 
     @Then("The user verifies that the status code is {int}.")
@@ -893,7 +974,161 @@ public class API_Stepdefinitions {
          //suleyman US016 son
     }
 
-    //888888
+    @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string}, {string},  {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information_and(String type, String title, String description, String slug) {
 
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("type", type);
+        jsonObjectRequestBody.put("title", title);
+        jsonObjectRequestBody.put("description", description);
+        jsonObjectRequestBody.put("slug", slug);
+    }
+
+    @Given("The api user prepares a post request that does not contain data to the api api/addNotice endpoint.")
+    public void the_api_user_prepares_a_post_request_that_does_not_contain_data_to_the_api_api_add_notice_endpoint() {
+        jsonObjectRequestBody = new JSONObject();
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api updateNotice endpoint containing the information {int}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_update_notice_update_endpoint_containing_the_information_and(Integer id, String type, String title, String description, String slug) {
+
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id", id);
+        hashMapRequestBody.put("type", type);
+        hashMapRequestBody.put("description", description);
+        hashMapRequestBody.put("title", title);
+        hashMapRequestBody.put("slug", slug);
+    }
+
+    @Given("The api user prepares a patch request that does not contain data to the api updateNotice endpoint.")
+    public void the_api_user_prepares_a_patch_request_that_does_not_contain_data_to_the_api_update_notice_update_endpoint() {
+        hashMapRequestBody = new HashMap<>();
+    }
+
+
+
+  
+    @Given("The api user verifies purpose as {string}")
+    public void the_api_user_verifies_visitors_as(String purpose) {
+        response.then()
+                .assertThat()
+                .body("lists.purpose", Matchers.equalTo(purpose));
+    }
+
+
+    @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information_and(String student_id, String current_email, String current_phone, String occupation, String address, String photo) {
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("student_id", student_id);
+        jsonObjectRequestBody.put("current_email", current_email);
+        jsonObjectRequestBody.put("current_phone", current_phone);
+        jsonObjectRequestBody.put("occupation", occupation);
+        jsonObjectRequestBody.put("address", address);
+        jsonObjectRequestBody.put("photo", photo);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+
+    }
+
+
+    @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information_and(String occupation, String address, String photo) {
+
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("occupation", occupation);
+        jsonObjectRequestBody.put("address", address);
+        jsonObjectRequestBody.put("photo", photo);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+
+    @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string} , {string},{string}, {string}, {string}, {string} .")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information(String student_id, String current_email, String current_phone, String occupation, String address, String photo) {
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("student_id", student_id);
+        jsonObjectRequestBody.put("current_email", current_email);
+        jsonObjectRequestBody.put("current_phone", current_phone);
+        jsonObjectRequestBody.put("occupation", occupation);
+        jsonObjectRequestBody.put("address", address);
+        jsonObjectRequestBody.put("photo", photo);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+
+
+    @Given("The api user prepares a POST request to send to the api alumniId endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_api_alumni_id_endpoint_containing_the_information(Integer id) {
+
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("id", id);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api visitorsPurposeUpdate endpoint containing the information {int}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_visitors_purpose_update_endpoint_containing_the_information_and(Integer id, String student_id, String current_email, String current_phone, String occupation, String address, String photo) {
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id", id);
+        hashMapRequestBody.put("student_id", student_id);
+        hashMapRequestBody.put("current_email", current_email);
+        hashMapRequestBody.put("current_phone", current_phone);
+        hashMapRequestBody.put("occupation", occupation);
+        hashMapRequestBody.put("address", address);
+        hashMapRequestBody.put("photo", photo);
+
+        System.out.println("Patch Body : " + hashMapRequestBody);
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api alumniUpdate endpoint containing the information {int}, {string}, {string},  {string}, {string}, {string}  and {string}.")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_alumni_update_endpoint_containing_the_information_and(Integer id, String student_id, String current_email, String current_phone, String occupation, String address, String photo) {
+
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id", id);
+        hashMapRequestBody.put("student_id", student_id);
+        hashMapRequestBody.put("current_email", current_email);
+        hashMapRequestBody.put("current_phone", current_phone);
+        hashMapRequestBody.put("occupation", occupation);
+        hashMapRequestBody.put("address", address);
+        hashMapRequestBody.put("photo", photo);
+
+        System.out.println("Patch Body : " + hashMapRequestBody);
+
+    }
+
+    @Given("The api user prepares a PATCH request to send to the api alumniUpdate endpoint containing the information {string}, {string}, {string} , {string} , {string}  and {string}.")
+    public void the_api_user_prepares_a_patch_request_to_send_to_the_api_alumniUpdate_endpoint_containing_the_information_and(String student_id, String current_email, String current_phone, String occupation, String address, String photo) {
+
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("student_id", student_id);
+        hashMapRequestBody.put("current_email", current_email);
+        hashMapRequestBody.put("current_phone", current_phone);
+        hashMapRequestBody.put("occupation", occupation);
+        hashMapRequestBody.put("address", address);
+        hashMapRequestBody.put("photo", photo);
+
+        System.out.println("Patch Body : " + hashMapRequestBody);
+
+
+    }
+
+
+    @Given("The api user prepares a patch request that does not contain data to the alumniUpdate endpoint.")
+    public void the_api_user_prepares_a_patch_request_that_does_not_contain_data_to_the_alumni_update_endpoint() {
+        hashMapRequestBody = new HashMap<>();
+    }
+
+    @Given("The api user sends a PATCH request, saves the returned response, and verifies that the status code is {string} with You do not have authorization or token error.")
+    public void the_api_user_sends_a_patch_request_saves_the_returned_response_and_verifies_that_the_status_code_is_with_you_do_not_have_authorization_or_token_error(String string) {
+        hashMapRequestBody = new HashMap<>();
+    }
+
+
+
+    @Given("The api user verifies alumni as {string}")
+    public void the_api_user_verifies_alumni_as(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        response.then()
+                .assertThat()
+                .body("lists.Token_remaining_time", Matchers.equalTo(596));
+    }
 }
-
