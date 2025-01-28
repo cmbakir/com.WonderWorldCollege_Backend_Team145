@@ -20,8 +20,8 @@ Feature: WWCAPI19 API_US026 As an administrator (admin), I would like to be able
     # Api kullanıcısı response body icindeki updateId bilgisinin request body icindeki id bilgisi ile ayni oldugunu dogrular.
 
     Examples:
-      | id   | student_id  | current_email     |current_phone |occupation|address|photo|
-      | 469  | 29          | deneme@deneme.com |9809967867    |          |       |     |
+      | id   | student_id  | current_email     |current_phone |occupation   |address|photo|
+      | 469  | 29          | deneme@deneme.com |9809967867    |    cem      |       |     |
 
 
   Scenario Outline: Verify that a PATCH request to `/api/alumniUpdate` with valid authorization and invalid `id`
@@ -85,7 +85,7 @@ Feature: WWCAPI19 API_US026 As an administrator (admin), I would like to be able
     * The api user verifies that the "message" information in the response body is "Wrong information or missing information. Please check your input data and id number.".
     # Api kullanicisi response bodydeki message bilgisinin "Wrong information or missing information. Please check your input data and id number." oldugunu dogrular
 
-  @burdayım
+
   Scenario Outline: Verify that a PATCH request to `api/alumniUpdate` with invalid authorization and data (`id`,
   `student_id`, `current_email`, current_phone, occupation, address, photo) returns a 403 status code and a "You do not have authorization or token error" message
   in the response body.
@@ -95,12 +95,13 @@ Feature: WWCAPI19 API_US026 As an administrator (admin), I would like to be able
     * The api user sets "api/alumniUpdate" path parameters.
     # Api kullanicisi "api/alumniUpdate" path parametrelerini olusturur
     * The api user prepares a PATCH request to send to the api alumniUpdate endpoint containing the information <id>, "<student_id>", "<current_email>",  "<current_phone>", "<occupation>", "<address>"  and "<photo>".
-    # Api kullanicisi api visitorsPurposeUpdate endpointine gondermek icin <id>, "<student_id>", "<current_email>",  "<current_phone>", "<occupation>", "<address>"  ve "<photo>" bilgilerini iceren bir post request hazirlar
-   # * The api user sends a PATCH request, saves the returned response, and verifies that the status code is '403' with You do not have authorization or token error.
+    # Api kullanicisi api alumniUpdate  endpointine gondermek icin <id>, "<student_id>", "<current_email>",  "<current_phone>", "<occupation>", "<address>"  ve "<photo>" bilgilerini iceren bir post request hazirlar
+    * The api user sends a PATCH request, saves the returned response, and verifies that the status code is '403' with You do not have authorization or token error.
+   # * The api user sends a PATCH request, saves the returned response, and verifies that the status code is '403' with the reason phrase Forbidden.
     # Api kullanicisi PATCH request gonderir, donen responsei kaydeder, status codeun '403' ve reason phrase bilgisinin Forbidden oldugunu dogrular
-    * The api user verifies that the status code is 403.
+   # * The api user verifies that the status code is 403.
     # Api kullanicisi status codeun 200 oldugunu dogrular
-    * The api user verifies that the "message" information in the response body is "failed".
+   #* The api user verifies that the "message" information in the response body is "failed".
       # Api kullanicisi response bodydeki message bilgisinin "failed" oldugunu dogrular
 
 
@@ -109,21 +110,21 @@ Feature: WWCAPI19 API_US026 As an administrator (admin), I would like to be able
       | 469  | 29          | deneme@deneme.com |9809967867    |          |       |     |
 
 
-
-  Scenario Outline: Verify that the visitor purpose record updated via API is successfully updated by sending a POST request to
-  `/api/visitorsPurposeId` with the `updateId` returned in the response body.
+  @burdayım
+  Scenario Outline: Verify that the alumnı record updated via API is successfully updated by sending a POST request to
+  `api/alumniId` with the `updateId` returned in the response body.
 
     * The api user constructs the base url with the "admin" token.
     # Api kullanicisi "admin" token ile base urli olusturur
-    * The api user sets "api/visitorsPurposeId" path parameters.
-    # Api kullanicisi "api/visitorsPurposeId" path parametrelerini olusturur
+    * The api user sets "api/alumniId" path parameters.
+    # Api kullanicisi "api/alumniId" path parametrelerini olusturur
     * The api user prepares a POST request to send to the api visitorsPurposeid endpoint containing the information <id>.
     # Api kullanicisi api visitorsPurposeId endpointine gondermek icin <id> bilgisini iceren bir post request hazirlar
     * The api user sends a POST request and saves the returned response.
     # Api kullanicisi POST request gonderir ve donen responsei kaydeder
-    * The api user verifies visitors_purpose as "purpose update"
-    # Api kullanicisi visitors_purpose bilgisinin "purpose update" oldugunu dogrular
+    * The api user verifies alumni as "alumni update"
+    # Api kullanicisi message bilgisinin "Success" oldugunu dogrular
 
     Examples:
-      | id   |
-      | 1277 |
+      | id  |
+      | 469 |
