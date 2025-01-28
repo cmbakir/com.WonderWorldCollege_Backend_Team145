@@ -1,7 +1,7 @@
 
 Feature: WWCAPI10 API_US023 As an administrator (admin) I want to be able to access Alumni List via API connection.
 
-@cem
+  @cem
   Scenario Outline: WWCAPI152 TC_01 -> API_US023 Verify that a GET request to the `/api/studentList` endpoint with valid authorization returns
   a 200 status code, a "Success" message, and the `student_id`, `current_email`, `current_phone`, `occupation`, `occupation`, `address`, `photo` and `created_at` fields for ID (x)
   in the response body.
