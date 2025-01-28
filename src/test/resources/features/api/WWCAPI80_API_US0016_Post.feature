@@ -48,7 +48,7 @@ Feature: WWCAPI80  API US016 As an administrator (admin), I want to be able to u
     Given The api user constructs the baseUrl wit the "adminSuleyman" token.
     Then The api user sets "api/vehicleUpdate" path parameters.
     Then The api user prepares a patch request that does not contain data to the api visitorsPurposeUpdate endpoint.
-    Then The api user sends a PATCH request and saves the returned response.
+    Then The api user sends a PATCH request and saves the returned response..
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "message" information in the response body is "Wrong information or missing information. Please check your input data and id number.".
 
@@ -75,7 +75,7 @@ Feature: WWCAPI80  API US016 As an administrator (admin), I want to be able to u
     Given The api user constructs the baseUrl wit the "adminSuleyman" token.
     Then The api user sets "api/vehicleUpdate" path parameters.
     Then The api user prepares a PATCH request to send to the api visitorsPurposeAdd endpoint containing the information,"<id>", "<vehicle_no>", "<vehicle_model>".
-    Then The api user sends a PATCH request and saves the returned response.
+    Then The api user sends a PATCH request and saves the returned response..
     And API user verifies that updateId in response body is the same as "<id>" in request body
 
 
@@ -89,7 +89,7 @@ Feature: WWCAPI80  API US016 As an administrator (admin), I want to be able to u
     Given The api user constructs the baseUrl wit the "adminSuleyman" token.
     Then The api user sets "api/vehicleUpdate" path parameters.
     Then The api user prepares a PATCH request to send to the api visitorsPurposeAdd endpoint containing the information,"<id>", "<vehicle_no>", "<vehicle_model>", "<vehicle_photo>", "<manufacture_year>", "<registration_number>", "<chasis_number>", "<max_seating_capacity>", "<driver_name>", "<driver_licence>", "<driver_contact>", "<note>".
-    Then The api user sends a PATCH request and saves the returned response.
+    Then The api user sends a PATCH request and saves the returned response..
     Given The api user constructs the baseUrl wit the "adminSuleyman" token.
     Then The api user sets "api/vehicleId" path parameters.
     Then The api user gets the updateId in the response body
