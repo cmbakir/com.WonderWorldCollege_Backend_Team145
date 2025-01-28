@@ -173,7 +173,7 @@ public class API_Stepdefinitions {
 
     @Given("The api user verifies that the updateid information in the response body is the same as the id information in the request body.")
     public void the_api_user_verifies_that_the_updateid_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
-        Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updatedId"));
+        Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updateId"));
     }
 
     @Given("The api user prepares a PATCH request to send to the api visitorsPurposeUpdate endpoint containing the information {string} and {string}.")
@@ -1048,10 +1048,41 @@ public class API_Stepdefinitions {
 
 
     @Given("The api user verifies alumni as {string}")
-    public void the_api_user_verifies_alumni_as(String string) {
+    public void the_api_user_verifies_alumni_as(String occupation) {
         // Write code here that turns the phrase above into concrete actions
         response.then()
                 .assertThat()
-                .body("lists.Token_remaining_time", Matchers.equalTo(596));
+                .body("lists.occupation", Matchers.equalTo("cem"));
+    }
+
+    @Given("The api user prepares a DELETE request that does not contain data to the api alumniDelete endpoint.")
+    public void the_api_user_prepares_a_delete_request_that_does_not_contain_data_to_the_api_alumni_delete_endpoint() {
+
+        response = given()
+                .spec(spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(requestBody)
+                .delete(fullPath);
+
+        response.prettyPrint();
+    }
+
+    @Given("The api user prepares a DELETE request to send to the api alumniDelete endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_delete_request_to_send_to_the_api_alumni_delete_endpoint_containing_the_information(Integer id) {
+        requestBody = new VisitorsPurposeDeletePojo(id);
+       // jsonObjectRequestBody = new JSONObject(id);
+
+
+        System.out.println("Delete Body : " + requestBody);
+    }
+
+    @Given("The api user prepares a POST request to send to the api alumniDeleteid endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_alumni_deleteid_endpoint_containing_the_information(Integer id) {
+
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("id", id);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
     }
 }
