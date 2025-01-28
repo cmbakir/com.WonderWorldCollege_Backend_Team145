@@ -1,7 +1,7 @@
-Feature: As a teacher (teacher), I want to be able to access the Questions information of the user whose id is
+Feature: WWCAPI8 API_US049 As a teacher (teacher), I want to be able to access the Questions information of the user whose id is
   given via API connection.
 
-  Scenario Outline: Verify that a POST request to `/apiteacher/questionDetailsById` with valid authorization and correct data returns a
+  Scenario Outline: WWCAPI... TC_01 -> API_US049 Verify that a POST request to `/apiteacher/questionDetailsById` with valid authorization and correct data returns a
   200 status code, a "Success" message, and validates the response body contents (id, staff_id, subject_id, question_type, level, class_id, section_id, class_section_id, question, opt_a, opt_b, opt_c, opt_d, opt_e, correct, descriptive_word_limit, created_at, updated_at, name, code, class_name, section_name).
 
     * The api user constructs the base url with the "teacher" token.
@@ -25,7 +25,7 @@ Feature: As a teacher (teacher), I want to be able to access the Questions infor
 
 
 
-  Scenario: Verify that a POST request to `/apiteacher/questionDetailsById` without `id` and valid authorization returns a 203 status
+  Scenario: WWCAPI... TC_02 -> API_US049 Verify that a POST request to `/apiteacher/questionDetailsById` without `id` and valid authorization returns a 203 status
   code and a "No id or wrong id." message in the response body.
 
     * The api user constructs the base url with the "teacher" token.
@@ -42,7 +42,7 @@ Feature: As a teacher (teacher), I want to be able to access the Questions infor
     # Api kullanicisi response bodydeki message bilgisinin "No id or wrong id." oldugunu dogrular
 
 
-  Scenario Outline: Verify that a POST request to `/apiteacher/questionDetailsById` with invalid `id` and valid authorization returns a
+  Scenario Outline: WWCAPI... TC_03 -> API_US049 Verify that a POST request to `/apiteacher/questionDetailsById` with invalid `id` and valid authorization returns a
   203 status code and a "No id or wrong id." message in the response body.
 
     * The api user constructs the base url with the "teacher" token.
@@ -62,7 +62,7 @@ Feature: As a teacher (teacher), I want to be able to access the Questions infor
       | id    |
       | 12345 |
 
-  Scenario Outline: Verify that a POST request to `/apiteacher/questionDetailsById` with invalid authorization returns a 403
+  Scenario Outline: WWCAPI... TC_04 -> API_US049 Verify that a POST request to `/apiteacher/questionDetailsById` with invalid authorization returns a 403
   status code and a "You do not have authorization or token error" message in the response body.
 
     * The api user constructs the base url with the "invalid" token.
