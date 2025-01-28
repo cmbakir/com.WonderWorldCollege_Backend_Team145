@@ -1,10 +1,10 @@
-Feature: API_US34 As an administrator (admin), I want to be able to access the visitor information given id via API connection.
+Feature: WWCAPI27 API_US034 As an administrator (admin), I want to be able to access the visitor information given id via API connection.
 
 
-  Scenario Outline: TC_01 -> API_US34 Verify that a POST request to `/api/visitorsId` with valid authorization and correct data
+  Scenario Outline: WWCAPI105 TC_01 -> API_US034 Verify that a POST request to `/api/visitorsId` with valid authorization and correct data
   (id, staff_id, student_session_id, source, purpose, name and email) returns a 200 status code and a "Success" message in the response body.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsId" path parameters.
     # Api kullanicisi "api/visitorsAdd" path parametrelerini olusturur
@@ -20,14 +20,14 @@ Feature: API_US34 As an administrator (admin), I want to be able to access the v
     # Api kullanicisi response bodydeki data "<id>", "<staff_id>", "<student_session_id>", "<source>", "<purpose>", "<name>" and "<email>" içeriklerini doğrular.
 
     Examples:
-      | id  |  staff_id | student_session_id |  source|  purpose |  name | email|
-      | 175 | 2      | null               | null | Marketing      | Rozer Henry | null|
+      | id  |  staff_id | student_session_id |  source|  purpose |  name       | email|
+      | 175 | 2         | null               | null   | Marketing| Rozer Henry | null|
 
 
-  Scenario: TC_02 -> API_US34 Verify that a POST request to `/api/visitorsId` without `id` and valid authorization returns a 203 status
+  Scenario: WWCAPI117 TC_02 -> API_US034 Verify that a POST request to `/api/visitorsId` without `id` and valid authorization returns a 203 status
   code and a "No id or wrong id." message in the response body.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsId" path parameters.
     # Api kullanicisi "api/visitorsPurposeId" path parametrelerini olusturur
@@ -41,10 +41,10 @@ Feature: API_US34 As an administrator (admin), I want to be able to access the v
     # Api kullanicisi response bodydeki message bilgisinin "No id or wrong id." oldugunu dogrular
 
 
-  Scenario Outline: TC_03 -> API_US34 Verify that a POST request to `/api/visitorsId` with invalid `id` and valid authorization returns a
+  Scenario Outline: WWCAPI118 TC_03 -> API_US034 Verify that a POST request to `/api/visitorsId` with invalid `id` and valid authorization returns a
   203 status code and a "No id or wrong id." message in the response body.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "adminPinar" token.
     # Api kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/visitorsId" path parameters.
     # Api kullanicisi "api/visitorsPurposeId" path parametrelerini olusturur
@@ -61,8 +61,8 @@ Feature: API_US34 As an administrator (admin), I want to be able to access the v
       | id    |
       | 98564 |
 
-  @US
-  Scenario Outline: TC_04 -> API_US34 Verify that a POST request to `/api/visitorsId` with invalid authorization returns a 403
+
+  Scenario Outline: WWCAPI120 TC_04 -> API_US034 Verify that a POST request to `/api/visitorsId` with invalid authorization returns a 403
   status code and a "You do not have authorization or token error" message in the response body.
 
     * The api user constructs the base url with the "invalid" token.
@@ -81,3 +81,4 @@ Feature: API_US34 As an administrator (admin), I want to be able to access the v
     Examples:
       | id   |
       | 1259 |
+
