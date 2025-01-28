@@ -19,7 +19,7 @@ Feature: WWCAPI28 API_US035 As an administrator (admin) I want to be able to cre
 
     Examples:
       | purpose| name    | contact| id_proof| no_of_people| date     | in_time| out_time| note  |
-      | Meeting|Pinar Cay| 5555555|10010    |3            |2025-01-24|03:00 PM|04:30 PM |Visitor|
+      | Meeting|Pınar    | 5555555|10010    |3            |2025-01-24|03:00 PM|04:30 PM |Visitor|
 
 
   Scenario: WWCAPI146 TC_02 -> API_US035 Verify that a POST request to `/api/visitorsAdd` without data and valid authorization returns a 203
