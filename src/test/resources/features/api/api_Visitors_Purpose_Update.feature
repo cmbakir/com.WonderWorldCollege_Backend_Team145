@@ -117,7 +117,7 @@ Feature: As an administrator (admin), I want to be able to update the visitor pu
     # Api kullanicisi api visitorsPurposeId endpointine gondermek icin <id> bilgisini iceren bir post request hazirlar
     * The api user sends a POST request and saves the returned response.
     # Api kullanicisi POST request gonderir ve donen responsei kaydeder
-    * The api user verifies visitors_purpose as "purpose update"
+    * The api user verifies bookstitle as "purpose update"
     # Api kullanicisi visitors_purpose bilgisinin "purpose update" oldugunu dogrular
 
     Examples:

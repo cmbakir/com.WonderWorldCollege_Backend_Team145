@@ -5,7 +5,9 @@ import config_Requirements.ConfigReader;
 import hooks.HooksAPI;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+
 import io.cucumber.java.en.Then;
+
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -52,7 +54,7 @@ public class API_Stepdefinitions {
                 .when()
                 .get(fullPath);
 
-        response.prettyPrint();
+        //response.prettyPrint();
     }
 
     @Given("The api user verifies that the status code is {int}.")
@@ -174,7 +176,7 @@ public class API_Stepdefinitions {
 
     @Given("The api user verifies that the updateid information in the response body is the same as the id information in the request body.")
     public void the_api_user_verifies_that_the_updateid_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
-        Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updatedId"));
+        Assert.assertEquals(hashMapRequestBody.get("id"), response.as(HashMap.class).get("updateId"));
     }
 
     @Given("The api user prepares a PATCH request to send to the api visitorsPurposeUpdate endpoint containing the information {string} and {string}.")
@@ -613,6 +615,206 @@ public class API_Stepdefinitions {
 
         HooksAPI.setUpApi(userType);
     }
+
+
+
+    @When("The api user prepares a POST request to send to the api booksid endpoint containing the information {int}.")
+    public void theApiUserPreparesAPOSTRequestToSendToTheApiBooksidEndpointContainingTheInformation(int id) {
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("id", id);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+
+
+    }
+
+
+    @When("The api user prepares a post request that does not contain data to the api booksId endpoint.")
+    public void theApiUserPreparesAPostRequestThatDoesNotContainDataToTheApiBooksIdEndpoint() {
+        jsonObjectRequestBody = new JSONObject();
+    }
+
+    @When("The api user prepares a POST request to send to the api booksId endpoint containing the information {int}.")
+    public void theApiUserPreparesAPOSTRequestToSendToTheApiBooksIdEndpointContainingTheInformation(int id) {
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("id", id);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+
+
+    @Given("The api user prepares a POST request to send to the api booksAdd endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_books_add_endpoint_containing_the_information(String book_title, String book_no, String isbn_no, String subject, String rack_no, String publish, String author, String qty, String perunitcost, String postdate, String description) {
+
+        jsonObjectRequestBody = new JSONObject();
+
+        jsonObjectRequestBody.put("book_title", book_title);
+        jsonObjectRequestBody.put("book_no", book_no);
+        jsonObjectRequestBody.put("isbn_no", isbn_no);
+        jsonObjectRequestBody.put("subject", subject);
+        jsonObjectRequestBody.put("rack_no", rack_no);
+        jsonObjectRequestBody.put("publish", publish);
+        jsonObjectRequestBody.put("author", author);
+        jsonObjectRequestBody.put("qty", qty);
+        jsonObjectRequestBody.put("opt_e", perunitcost);
+        jsonObjectRequestBody.put("correct", postdate);
+        jsonObjectRequestBody.put("description", description);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+
+
+    @When("The api user prepares a post request that does not contain data to the api booksAdd endpoint.")
+    public void theApiUserPreparesAPostRequestThatDoesNotContainDataToTheApiBooksAddEndpoint() {
+        jsonObjectRequestBody = new JSONObject();
+    }
+
+    @When("The api user prepares a POST request to send to the api booksAdd endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}.")
+    public void theApiUserPreparesAPOSTRequestToSendToTheApiBooksAddEndpointContainingTheInformation(String book_title, String book_no, String isbn_no, String subject, String rack_no, String publish) {
+
+        jsonObjectRequestBody = new JSONObject();
+
+        jsonObjectRequestBody.put("book_title", book_title);
+        jsonObjectRequestBody.put("book_no", book_no);
+        jsonObjectRequestBody.put("isbn_no", isbn_no);
+        jsonObjectRequestBody.put("subject", subject);
+        jsonObjectRequestBody.put("rack_no", rack_no);
+        jsonObjectRequestBody.put("publish", publish);
+
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+
+    }
+
+
+    @When("The api user prepares a PATCH request to send to the api booksUpdate endpoint containing the information {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void theApiUserPreparesAPATCHRequestToSendToTheApiBooksUpdateEndpointContainingTheInformationAnd(String id, String book_title, String book_no, String isbn_no, String subject, String rack_no, String publish, String author, String qty, String perunitcost, String postdate, String description, String available, String is_active) {
+
+        hashMapRequestBody = new HashMap<>();
+        hashMapRequestBody.put("id", id);
+        hashMapRequestBody.put("book_title", book_title);
+        hashMapRequestBody.put("book_no", book_no);
+        hashMapRequestBody.put("isbn_no", isbn_no);
+        hashMapRequestBody.put("subject", subject);
+        hashMapRequestBody.put("rack_no", rack_no);
+        hashMapRequestBody.put("publish", publish);
+        hashMapRequestBody.put("author", author);
+        hashMapRequestBody.put("qty", qty);
+        hashMapRequestBody.put("perunitcost", perunitcost);
+        hashMapRequestBody.put("postdate", postdate);
+        hashMapRequestBody.put("description", description);
+        hashMapRequestBody.put("available", available);
+        hashMapRequestBody.put("is_active", is_active);
+
+        System.out.println("Patch Body : " + hashMapRequestBody);
+
+
+    }
+
+    @When("The Api User Verifies The İnformation İn The Response Body For booklist The Entry With The Specified {int} İndex, İncluding {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {} And {}.")
+    public void theApiUserVerifiesTheInformationInTheResponseBodyForBooklistTheEntryWithTheSpecifiedIndexIncludingAnd(int dataIndex, String book_title, String book_no, String isbn_no, String subject, String rack_no, String publish, String author, String qty, String perunitcost, String postdate, String description, String available, String is_active, String created_at, String updated_at) {
+
+        jsonPath = response.jsonPath();
+
+        Assert.assertEquals(dataIndex, jsonPath.getInt("lists[" + dataIndex + "].id"));
+        //Assert.assertEquals(dataIndex, Integer.parseInt(jsonPath.getString("id")));
+        //Assert.assertEquals(dataIndex, jsonPath.getString("lists[" + dataIndex + "].dataIndex"));
+        Assert.assertEquals(book_title, jsonPath.getString("lists[" + dataIndex + "].book_title"));
+        Assert.assertEquals(book_no, jsonPath.getString("lists[" + dataIndex + "].book_no"));
+        Assert.assertEquals(isbn_no, jsonPath.getString("lists[" + dataIndex + "].isbn_no"));
+        Assert.assertEquals(subject, jsonPath.getString("lists[" + dataIndex + "].subject"));
+        Assert.assertEquals(rack_no, jsonPath.getString("lists[" + dataIndex + "].rack_no"));
+        Assert.assertEquals(publish, jsonPath.getString("lists[" + dataIndex + "].publish"));
+        Assert.assertEquals(author, jsonPath.getString("lists[" + dataIndex + "].author"));
+        Assert.assertEquals(qty, jsonPath.getString("lists[" + dataIndex + "].qty"));
+        Assert.assertEquals(perunitcost, jsonPath.getString("lists[" + dataIndex + "].perunitcost"));
+        Assert.assertEquals(postdate, jsonPath.getString("lists[" + dataIndex + "].postdate"));
+        Assert.assertEquals(description, jsonPath.getString("lists[" + dataIndex + "].description"));
+        Assert.assertEquals(available, jsonPath.getString("lists[" + dataIndex + "].available"));
+        Assert.assertEquals(is_active, jsonPath.getString("lists[" + dataIndex + "].is_active"));
+        Assert.assertEquals(created_at, jsonPath.getString("lists[" + dataIndex + "].created_at"));
+        Assert.assertEquals(updated_at, jsonPath.getString("lists[" + dataIndex + "].updated_at"));
+
+    }
+
+    @When("The book api user verifies that the updateid information in the response body is the same as the id information in the request body.")
+    public void theBookApiUserVerifiesThatTheUpdateidInformationInTheResponseBodyIsTheSameAsTheIdInformationInTheRequestBody() {
+        // Yanıt gövdesindeki 'updateId' değerini alıyoruz ve virgülle ayırarak ilk kısmı alıyoruz
+        String responseId = response.as(HashMap.class).get("updateId").toString().split(",")[0].trim(); // Sadece ID kısmını alıyoruz
+        Assert.assertEquals(hashMapRequestBody.get("id"), responseId); // İstek gövdesindeki "id" ile karşılaştırıyoruz
+    }
+
+
+    @When("The api user prepares a patch request that does not contain data to the api booksUpdate endpoint.")
+    public void theApiUserPreparesAPatchRequestThatDoesNotContainDataToTheApiBooksUpdateEndpoint() {
+        hashMapRequestBody = new HashMap<>();
+    }
+
+
+
+
+
+    @Given("The api user verifies that the data in the books response body includes {string}, {string}, {string} and {string}.")
+    public void the_api_user_verifies_that_the_data_in_the_books_response_body_includes_and(String id, String book_title, String book_no, String isbn_no, String subject, String rack_no, String publish, String author, String qty, String perunitcost, String postdate, String description, String available, String is_active, String created_at, String updated_at) {
+        response.then()
+                .assertThat()
+                .body("lists.id", Matchers.equalTo(id),
+                        "lists.book_title", Matchers.equalTo(book_title),
+                        "lists.book_no", Matchers.equalTo(book_no),
+                        "lists.isbn_no", Matchers.equalTo(isbn_no),
+                        "lists.subject", Matchers.equalTo(subject),
+                        "lists.rack_no", Matchers.equalTo(rack_no),
+                        "lists.publish", Matchers.equalTo(publish),
+                        "lists.isbn_no", Matchers.equalTo(isbn_no),
+                        "lists.author", Matchers.equalTo(author),
+                        "lists.qty", Matchers.equalTo(qty),
+                        "lists.perunitcost", Matchers.equalTo(perunitcost),
+                        "lists.postdate", Matchers.equalTo(postdate),
+                        "lists.description", Matchers.equalTo(description),
+                        "lists.available", Matchers.equalTo(available),
+                        "lists.is_active", Matchers.equalTo(is_active),
+                        "lists.created_at", Matchers.equalTo(created_at),
+                        "lists.updated_at", Matchers.equalTo(updated_at));
+
+
+    }
+
+
+
+
+    @When("The api user prepares a DELETE request to send to the api booksDelete endpoint containing the information {int}.")
+    public void theApiUserPreparesADELETERequestToSendToTheApiBooksDeleteEndpointContainingTheInformation(int id) {
+
+        requestBody = new VisitorsPurposeDeletePojo(id);
+
+        System.out.println("Delete Body : " + requestBody);
+
+
+    }
+
+
+    @When("The api user prepares a DELETE request that does not contain data to the api booksDelete endpoint.")
+    public void theApiUserPreparesADELETERequestThatDoesNotContainDataToTheApiBooksDeleteEndpoint() {
+        hashMapRequestBody = new HashMap<>();
+    }
+
+
+
+    @When("The api user verifies books_title as {string}")
+    public void theApiUserVerifiesBooks_titleAs(String book_title) {
+        response.then()
+                .assertThat()
+                .body("lists.book_title", Matchers.equalTo(book_title));
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
