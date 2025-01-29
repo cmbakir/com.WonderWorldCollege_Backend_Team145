@@ -36,7 +36,7 @@ public class API_Stepdefinitions {
     VisitorsPurposeDeletePojo requestBody;
     int addId;
     int updateId;
-
+    int DeletedId;
     @Given("The api user constructs the base url with the {string} token.")
     public void the_api_user_constructs_the_base_url_with_the_token(String userType) {
         HooksAPI.setUpApi(userType);
@@ -1334,4 +1334,80 @@ public class API_Stepdefinitions {
                 .assertThat()
                 .body("lists.Token_remaining_time", Matchers.equalTo(596));
     }
+
+    // suleyman WWCAPI81_API_US0017_Get.feature
+    @Then("The api user prepares a Delete request to send to the api visitorsPurposeid endpoint containing the information id {int}.")
+    public void theApiUserPreparesADeleteRequestToSendToTheApiVisitorsPurposeidEndpointContainingTheInformationId(int id) {
+        jsonObjectRequestBody=new JSONObject();
+        jsonObjectRequestBody.put("id",id);
+        System.out.println("Delete Body: " + jsonObjectRequestBody.toString());
+
+    }
+
+
+    @Then("The api user sends a DELETE request and saves the returned response")
+    public void theApiUserSendsADELETERequestAndSavesTheReturnedResponse() {
+        response=given()
+                .spec(spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequestBody.toString())
+                .delete(API_Methods.fullPath);
+        response.prettyPrint();
+
+    }
+
+
+    @Then("The API user prepares to send a Delete request without id to the api visitorsPurposeid endpoint.")
+    public void theAPIUserPreparesToSendADeleteRequestWithoutIdToTheApiVisitorsPurposeidEndpoint() {
+        jsonObjectRequestBody=new JSONObject();
+        System.out.println("Delete Body: " + jsonObjectRequestBody.toString());
+        response=given()
+                .spec(spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequestBody.toString())
+                .delete(API_Methods.fullPath);
+        response.prettyPrint();
+    }
+
+
+    @Then("Verifies that the DeletedId in the user response body is the same as the id {int} in the delete request body.")
+    public void verifiesThatTheDeletedIdInTheUserResponseBodyIsTheSameAsTheIdInTheDeleteRequestBody(int id) {
+        jsonPath=response.jsonPath();
+        Assert.assertEquals(id,jsonPath.getInt("DeletedId"));
+    }
+
+    @Then("The api user gets the DeletedId in the response body")
+    public void theApiUserGetsTheDeletedIdInTheResponseBody() {
+        DeletedId=response.jsonPath().getInt("DeletedId");
+        System.out.println(DeletedId);
+    }
+
+    @Then("The api user prepares a POST request to send to the api visitorsPurposeid endpoint containing the information id DeletedId.")
+    public void theApiUserPreparesAPOSTRequestToSendToTheApiVisitorsPurposeidEndpointContainingTheInformationIdDeletedId() {
+        jsonObjectRequestBody=new JSONObject();
+        jsonObjectRequestBody.put("id",DeletedId);
+        System.out.println("post body :"+jsonObjectRequestBody);
+        response=given()
+                .spec(spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequestBody.toString())
+                .post(API_Methods.fullPath);
+        response.prettyPrint();
+    }
+
+    @Then("Verifies the user deletion process from the status {int} and {string} information of the response returned by the request post boy created with Deleted Id.")
+    public void verifiesTheUserDeletionProcessFromTheStatusAndInformationOfTheResponseReturnedByTheRequestPostBoyCreatedWithDeletedId(int code, String message) {
+
+        response.then().assertThat().statusCode(code);
+        jsonPath=response.jsonPath();
+        System.out.println("Actual Response Message: " + jsonPath.getString("message"));
+
+        Assert.assertEquals(message,jsonPath.getString("message"));
+
+        // suleyman
+    }
+
 }
