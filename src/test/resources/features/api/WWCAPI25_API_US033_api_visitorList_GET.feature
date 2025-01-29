@@ -19,7 +19,7 @@ Feature: WWCAPI25 API_US033 As an administrator (admin), I want to be able to ac
     Examples:
 
       | dataIndex | staff_id | student_session_id | source  | purpose         | name     | email|
-      | 0         |  null    | null               | null    | Meeting         |Pinar     | null |
+      | 0         |  null    | null               | null    | Meeting         |Pınar     | null |
 
 
 

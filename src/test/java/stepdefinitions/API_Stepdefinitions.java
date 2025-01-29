@@ -7,15 +7,17 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
 
 import io.cucumber.java.en.*;
+
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.junit.Assert;
-import pojos.QuestionDeletePojo;
 import pojos.VisitorsPurposeDeletePojo;
 import utilities.API_Utilities.API_Methods;
 
@@ -34,6 +36,7 @@ public class API_Stepdefinitions {
     JSONObject jsonObjectRequestBody;
     HashMap<String, Object> hashMapRequestBody;
     VisitorsPurposeDeletePojo requestBody;
+
     int addId;
     int updateId;
     int DeletedId;
@@ -881,14 +884,14 @@ public class API_Stepdefinitions {
     @Given("The api user prepares a DELETE request to send to the api questionDelete endpoint containing the information {int}.")
     public void the_api_user_prepares_a_delete_request_to_send_to_the_api_question_delete_endpoint_containing_the_information(Integer id) {
 
-        QuestionDeletePojo requestBody;
-        requestBody = new QuestionDeletePojo(id);
+        requestBody = new VisitorsPurposeDeletePojo(id);
+
         System.out.println("Delete Body : " + requestBody);
     }
 
     @Given("The api user prepares a DELETE request that does not contain data to the api questionDelete endpoint.")
     public void the_api_user_prepares_a_delete_request_that_does_not_contain_data_to_the_api_question_delete_endpoint() {
-        jsonObjectRequestBody = new JSONObject();
+        requestBody =new VisitorsPurposeDeletePojo();
     }
 
 
@@ -1177,6 +1180,8 @@ public class API_Stepdefinitions {
          //suleyman US016 son
     }
 
+
+
     @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string}, {string},  {string} and {string}.")
     public void the_api_user_prepares_a_post_request_to_send_to_the_api_visitors_purpose_add_endpoint_containing_the_information_and(String type, String title, String description, String slug) {
 
@@ -1217,6 +1222,30 @@ public class API_Stepdefinitions {
                 .assertThat()
                 .body("lists.purpose", Matchers.equalTo(purpose));
     }
+
+
+    @Given("The api user prepares a DELETE request to send to the api visitorsDelete endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_delete_request_to_send_to_the_api_visitors_delete_endpoint_containing_the_information(int id) {
+
+        requestBody = new VisitorsPurposeDeletePojo(id);
+
+        System.out.println("Delete Body : " + requestBody);
+    }
+
+    @Given("The api user verifies that the deletedid information in the response body is the same as the id information in the request body.")
+    public void the_api_user_verifies_that_the_deletedId_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
+        jsonPath = response.jsonPath();
+
+        Assert.assertEquals(requestBody.getId(), jsonPath.getInt("deletedId"));
+    }
+    @Given("The api user prepares a DELETE request that does not contain data to the api visitorsDelete endpoint.")
+    public void the_api_user_prepares_a_delete_request_that_does_not_contain_data_to_the_api_visitors_delete_endpoint() {
+        requestBody = new VisitorsPurposeDeletePojo();
+
+    }
+
+
+
 
 
     @Given("The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information {string}, {string}, {string}, {string}, {string} and {string}.")
@@ -1328,12 +1357,48 @@ public class API_Stepdefinitions {
 
 
     @Given("The api user verifies alumni as {string}")
-    public void the_api_user_verifies_alumni_as(String string) {
+    public void the_api_user_verifies_alumni_as(String occupation) {
         // Write code here that turns the phrase above into concrete actions
         response.then()
                 .assertThat()
-                .body("lists.Token_remaining_time", Matchers.equalTo(596));
+                .body("lists.occupation", Matchers.equalTo("cem"));
     }
+
+    @Given("The api user prepares a DELETE request that does not contain data to the api alumniDelete endpoint.")
+    public void the_api_user_prepares_a_delete_request_that_does_not_contain_data_to_the_api_alumni_delete_endpoint() {
+
+        response = given()
+                .spec(spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(requestBody)
+                .delete(fullPath);
+
+        response.prettyPrint();
+    }
+
+    @Given("The api user prepares a DELETE request to send to the api alumniDelete endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_delete_request_to_send_to_the_api_alumni_delete_endpoint_containing_the_information(Integer id) {
+        requestBody = new VisitorsPurposeDeletePojo(id);
+       // jsonObjectRequestBody = new JSONObject(id);
+
+
+        System.out.println("Delete Body : " + requestBody);
+    }
+
+    @Given("The api user prepares a POST request to send to the api alumniDeleteid endpoint containing the information {int}.")
+    public void the_api_user_prepares_a_post_request_to_send_to_the_api_alumni_deleteid_endpoint_containing_the_information(Integer id) {
+        jsonObjectRequestBody = new JSONObject();
+        jsonObjectRequestBody.put("id", id);
+        System.out.println("Post Body : " + jsonObjectRequestBody);
+    }
+
+    @Given("The api user prepares a DELETE request to send to the aip alumnıID endpoint does not containing any id")
+    public void the_api_user_prepares_a_delete_request_to_send_to_the_aip_alumnı_id_endpoint_does_not_containing_any_id() {
+     requestBody = new VisitorsPurposeDeletePojo();
+
+    }
+
 
     // suleyman WWCAPI81_API_US0017_Get.feature
     @Then("The api user prepares a Delete request to send to the api visitorsPurposeid endpoint containing the information id {int}.")
@@ -1408,6 +1473,26 @@ public class API_Stepdefinitions {
         Assert.assertEquals(message,jsonPath.getString("message"));
 
         // suleyman
+    }
+
+
+
+    @Given("The api user verifies that the DeletedId information in the response body is the same as the id information in the request body.")
+    public void the_api_user_verifies_that_the_deleted_ıd_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
+        jsonPath = response.jsonPath();
+        Assert.assertEquals(requestBody.getId(), jsonPath.getInt("DeletedId"));
+    }
+
+    @Given("The api user sends a DELETE request and save the returned response.")
+    public void the_api_user_sends_a_delete_request_and_save_the_returned_response() {
+        response = given()
+                .spec(spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequestBody)
+                .delete(fullPath);
+
+        response.prettyPrint();
     }
 
 }

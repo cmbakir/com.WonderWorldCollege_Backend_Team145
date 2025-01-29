@@ -107,7 +107,7 @@ Feature: WWCAPI30 API_US036 As an administrator (admin), I want to be able to up
 
     Examples:
       |id   | purpose       | name    | contact| id_proof| no_of_people| date     | in_time| out_time| note  |
-      |288  | Update Meeting|Pinar Cay| 5555555|10010    |3            |2025-01-24|03:00 PM|04:30 PM |Visitor|
+      |300  | Update Meeting|Pinar Cay| 5555555|10010    |3            |2025-01-24|03:00 PM|04:30 PM |Visitor|
 
 
   @pin
