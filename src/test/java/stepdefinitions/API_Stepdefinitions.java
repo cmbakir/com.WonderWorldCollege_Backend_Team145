@@ -1391,4 +1391,11 @@ public class API_Stepdefinitions {
 
         System.out.println("Post Body : " + jsonObjectRequestBody);
     }
+    @Given("The api user prepares a DELETE request to send to the aip alumnıID endpoint does not containing any id")
+    public void the_api_user_prepares_a_delete_request_to_send_to_the_aip_alumnı_id_endpoint_does_not_containing_any_id() {
+     requestBody = new VisitorsPurposeDeletePojo();
+
+    }
+
+
 }
