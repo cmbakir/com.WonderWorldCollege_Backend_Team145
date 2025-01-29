@@ -22,7 +22,7 @@ Feature: WWCAPI18 API_US051 As a teacher (teacher), I want to be able to update 
     Examples:
 
       | id  | subject_id | question_type  | level  | class_id | section_id | class_section_id | question                                   | opt_a   | opt_b  | opt_c  | opt_d  | opt_e     | correct | descriptive_word_limit |
-      | 240 | 5          | singlechoice   | medium | 3        | 1          | null             | Which one of the following is biotic resource? | Soil.   | Water. | Plant. | Land. | Other .   | opt_c  | 0                    |
+      | 241 | 5          | singlechoice   | high | 3        | 1          | null             | Which one of the following is biotic resource? | Soil.   | Water. | Plant. | Land. | Other .   | opt_c  | 0                    |
 
   Scenario Outline: WWCAPI... TC_02 -> API_US051 Verify that a PATCH request to `/apiteacher/questionUpdate` with valid authorization and invalid `id`
   returns a 203 status code and a "Wrong information or missing information. Please check your input data and id number."
@@ -42,7 +42,7 @@ Feature: WWCAPI18 API_US051 As a teacher (teacher), I want to be able to update 
 
     Examples:
       | id      | subject_id | question_type  | level  | class_id | section_id | class_section_id | question                                   | opt_a   | opt_b  | opt_c  | opt_d  | opt_e     | correct | descriptive_word_limit |
-      | 1234578 | 5          | singlechoice   | medium | 3        | 1          | null             | Which one of the following is biotic resource? | Soil.   | Water. | Plant. | Land. | Other .   | opt_c  | 0                    |
+      | 1234578 | 5          | singlechoice   | high | 3        | 1          | null             | Which one of the following is biotic resource? | Soil.   | Water. | Plant. | Land. | Other .   | opt_c  | 0                    |
 
   Scenario Outline: WWCAPI... TC_03 -> API_US051 Verify that a PATCH request to `/apiteacher/questionUpdate` without `id` and with valid authorization
   returns a 203 status code and a "Wrong information or missing information. Please check your input data and id number."
@@ -100,7 +100,7 @@ Feature: WWCAPI18 API_US051 As a teacher (teacher), I want to be able to update 
 
     Examples:
       | id  | subject_id | question_type  | level  | class_id | section_id | class_section_id | question                                   | opt_a   | opt_b  | opt_c  | opt_d  | opt_e     | correct | descriptive_word_limit |
-      | 240 | 5          | singlechoice   | medium | 3        | 1          | null             | Which one of the following is biotic resource? | Soil.   | Water. | Plant. | Land. | Other .   | opt_c  | 0                    |
+      | 241 | 5          | singlechoice   | medium | 3        | 1          | null             | Which one of the following is biotic resource? | Soil.   | Water. | Plant. | Land. | Other .   | opt_c  | 0                    |
 
 
   Scenario Outline: WWCAPI... TC_06 -> API_US051 Verify that the questions record updated via API is successfully updated by sending a POST request to
@@ -114,10 +114,10 @@ Feature: WWCAPI18 API_US051 As a teacher (teacher), I want to be able to update 
     # Api kullanicisi api questionDetailsById endpointine gondermek icin <id> bilgisini iceren bir post request hazirlar
     * The api user sends a POST request and saves the returned response.
     # Api kullanicisi POST request gonderir ve donen responsei kaydeder
-    * The api user verifies level  as "medium"
-    # Api kullanicisi question bilgisinin "question update" oldugunu dogrular
+    * The api user verifies level  as "high"
+    # Api kullanicisi level bilgisinin "high" oldugunu dogrular
 
 
     Examples:
       | id   |
-      | 240 |
+      | 241 |
