@@ -9,7 +9,7 @@ Feature: WWCAPI20 API_US052 As a teacher I should be able to delete the question
     # Api kullanicisi "apiteacher/questionDelete" path parametrelerini olusturur
     * The api user prepares a DELETE request to send to the api questionDelete endpoint containing the information <id>.
     # Api kullanicisi api questionDelete endpointine gondermek icin <id> bilgisini iceren bir delete request hazirlar
-    * The api user sends a DELETE request and save the returned response.
+    * The api user sends a DELETE request and saves the returned response.
     # Api kullanicisi DELETE request gonderir ve donen responsei kaydeder
     * The api user verifies that the status code is 200.
     # Api kullanicisi status codeun 200 oldugunu dogrular
@@ -20,7 +20,7 @@ Feature: WWCAPI20 API_US052 As a teacher I should be able to delete the question
 
     Examples:
       | id   |
-      | 290 |
+      | 293  |
 
 
   Scenario: WWCAPI... TC_02 -> API_US052 Verify that a DELETE request to `/apiteacher/questionDelete` without `id` and with valid authorization returns a
@@ -32,7 +32,7 @@ Feature: WWCAPI20 API_US052 As a teacher I should be able to delete the question
     # Api kullanicisi "apiteacher/questionDelete" path parametrelerini olusturur
     * The api user prepares a DELETE request that does not contain data to the api questionDelete endpoint.
     # Api kullanicisi api questionDelete endpointine data icermeyen bir delete request hazirlar
-    * The api user sends a DELETE request and save the returned response.
+    * The api user sends a DELETE request and saves the returned response.
     # Api kullanicisi DELETE request gonderir ve donen responsei kaydeder
     * The api user verifies that the status code is 203.
     # Api kullanicisi status codeun 203 oldugunu dogrular
@@ -49,7 +49,7 @@ Feature: WWCAPI20 API_US052 As a teacher I should be able to delete the question
     # Api kullanicisi "apiteacher/questionDelete" path parametrelerini olusturur
     * The api user prepares a DELETE request to send to the api questionDelete endpoint containing the information <id>.
     # Api kullanicisi api questionDelete endpointine gondermek icin <id> bilgisini iceren bir delete request hazirlar
-    * The api user sends a DELETE request and save the returned response.
+    * The api user sends a DELETE request and saves the returned response.
     # Api kullanicisi DELETE request gonderir ve donen responsei kaydeder
     * The api user verifies that the status code is 203.
     # Api kullanicisi status codeun 203 oldugunu dogrular
@@ -69,19 +69,20 @@ Feature: WWCAPI20 API_US052 As a teacher I should be able to delete the question
     # Api kullanicisi "apiteacher/questionDelete" path parametrelerini olusturur
     * The api user prepares a DELETE request to send to the api questionDelete endpoint containing the information <id>.
     # Api kullanicisi api questionDelete endpointine gondermek icin <id> bilgisini iceren bir delete request hazirlar
-    * The api user sends a DELETE request and save the returned response.
+    #* The api user sends a DELETE request and saves the returned response.
     # Api kullanicisi DELETE request gonderir ve donen responsei kaydeder
-    * The api user verifies that the status code is 403.
+    #* The api user verifies that the status code is 403.
     # Api kullanicisi status codeun 403 oldugunu dogrular
-    * The api user verifies that the "message" information in the response body is "You do not have authorization or token error".
+    #* The api user verifies that the "message" information in the response body is "You do not have authorization or token error".
     # Api kullanicisi response bodydeki message bilgisinin "You do not have authorization or token error" oldugunu dogrular
+
+    * The api user sends a DELETE request, saves the returned response, and verifies that the status code is '403' with the reason phrase Forbidden.
+        # Api kullanicisi DELETE request gonderir, donen responsei kaydeder, status codeun '403' ve reason phrase bilgisinin Forbidden oldugunu dogrular
 
     Examples:
       | id   |
-      | 290 |
+      | 293 |
 
-    # * The api user sends a DELETE request, saves the returned response, and verifies that the status code is '403' with the reason phrase Forbidden.
-    # Api kullanicisi DELETE request gonderir, donen responsei kaydeder, status codeun '403' ve reason phrase bilgisinin Forbidden oldugunu dogrular
 
 
 
@@ -101,4 +102,4 @@ Feature: WWCAPI20 API_US052 As a teacher I should be able to delete the question
 
     Examples:
       | id   |
-      | 290 |
+      | 293  |
