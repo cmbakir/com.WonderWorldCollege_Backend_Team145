@@ -15,7 +15,6 @@ import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.json.JSONObject;
 import org.junit.Assert;
-import pojos.QuestionDeletePojo;
 import pojos.VisitorsPurposeDeletePojo;
 import utilities.API_Utilities.API_Methods;
 
@@ -34,7 +33,6 @@ public class API_Stepdefinitions {
     JSONObject jsonObjectRequestBody;
     HashMap<String, Object> hashMapRequestBody;
     VisitorsPurposeDeletePojo requestBody;
-    QuestionDeletePojo RequestBody;
 
     int addId;
     int updateId;
@@ -883,14 +881,14 @@ public class API_Stepdefinitions {
     @Given("The api user prepares a DELETE request to send to the api questionDelete endpoint containing the information {int}.")
     public void the_api_user_prepares_a_delete_request_to_send_to_the_api_question_delete_endpoint_containing_the_information(Integer id) {
 
-        QuestionDeletePojo RequestBody;
-        RequestBody = new QuestionDeletePojo(id);
-        System.out.println("Delete Body : " + RequestBody);
+        requestBody = new VisitorsPurposeDeletePojo(id);
+
+        System.out.println("Delete Body : " + requestBody);
     }
 
     @Given("The api user prepares a DELETE request that does not contain data to the api questionDelete endpoint.")
     public void the_api_user_prepares_a_delete_request_that_does_not_contain_data_to_the_api_question_delete_endpoint() {
-        jsonObjectRequestBody = new JSONObject();
+        requestBody =new VisitorsPurposeDeletePojo();
     }
 
 
@@ -1392,25 +1390,24 @@ public class API_Stepdefinitions {
         System.out.println("Post Body : " + jsonObjectRequestBody);
     }
 
-    @Given("The api user sends a DELETE request and save the returned response.")
-    public void the_api_user_sends_a_delete_request_and_save_the_returned_response() {
-        RequestBody = new QuestionDeletePojo();
-        RequestBody.setId(290);
-        response = given()
-                .spec(spec)
-                .contentType(ContentType.JSON)
-                .when()
-                .body(RequestBody)
-                .delete(fullPath);
-        response.prettyPrint();
-    }
+
 
     @Given("The api user verifies that the DeletedId information in the response body is the same as the id information in the request body.")
     public void the_api_user_verifies_that_the_deleted_ıd_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
         jsonPath = response.jsonPath();
-        Assert.assertEquals(RequestBody.getId(), jsonPath.getInt("DeletedId"));
+        Assert.assertEquals(requestBody.getId(), jsonPath.getInt("DeletedId"));
     }
 
+    @Given("The api user sends a DELETE request and save the returned response.")
+    public void the_api_user_sends_a_delete_request_and_save_the_returned_response() {
+        response = given()
+                .spec(spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequestBody)
+                .delete(fullPath);
 
+        response.prettyPrint();
+    }
 
 }
