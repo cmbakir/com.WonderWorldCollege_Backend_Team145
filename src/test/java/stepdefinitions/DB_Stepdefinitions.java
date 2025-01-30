@@ -2,8 +2,10 @@ package stepdefinitions;
 
 import com.mysql.cj.protocol.Resultset;
 import helperDB.CommonData;
+import helperDB.JDBC_Structure_Methods;
 import helperDB.subjects;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import manage.Manage;
 
 import java.sql.Date;
@@ -22,6 +24,10 @@ import static org.junit.Assert.*;
 public class DB_Stepdefinitions extends Manage {
     // DB
     CommonData data = new CommonData();
+
+    int InsertID = faker.number().numberBetween(1, 201);
+    String updatename = faker.book().genre();
+    int intResult;
 
     @Given("Database connection established")
     public void database_connection_established() {
@@ -252,6 +258,98 @@ public class DB_Stepdefinitions extends Manage {
         System.out.println(bulkResult.length+"record is successfully added to the table");
         assertEquals(rowCount,bulkResult.length);
 
+    }
+
+
+    @When("Query is prepared where role equal to parent in users table.")
+    public void queryIsPreparedWhereRoleEqualToParentInUsersTable() throws SQLException {
+        query=getUS07_usersuserid();
+        resultSet=getStatement().executeQuery(query);
+
+    }
+
+    @When("Query results validated according to the user id in descending order.")
+    public void queryResultsValidatedAccordingToTheUserIdInDescendingOrder() throws SQLException {
+
+        int count = 0;
+        while (resultSet.next()) {
+            count++;
+            System.out.println(count + ". id:  " + resultSet.getInt(1));
+            System.out.println(count + ".username:  " + resultSet.getString(3));
+            System.out.println(count + ".password:  " + resultSet.getString(4));
+            System.out.println(count + ".role:  " + resultSet.getString(6));
+
+
+        }
+
+
+    }
+
+    @When("Query results validated according to the  work experience in descending order.")
+    public void queryResultsValidatedAccordingToTheWorkExperienceInDescendingOrder() throws SQLException {
+
+        int count = 0;
+        while (resultSet.next()) {
+            count++;
+            System.out.println(count + ". id:  " + resultSet.getInt(1));
+            System.out.println(count + ".employee_id:  " + resultSet.getString(2));
+            System.out.println(count + ".work_exp:  " + resultSet.getString(8));
+            System.out.println(count + ".name:  " + resultSet.getString(9));
+            System.out.println(count + ".surname:  " + resultSet.getString(10));
+        }
+
+
+    }
+
+    @When("Query is prepared for the first five employees in the staff table.")
+    public void queryIsPreparedForTheFirstFiveEmployeesInTheStaffTable() throws SQLException {
+        query=getUS12_staff5emp();
+        resultSet=getStatement().executeQuery(query);
+
+    }
+
+    @When("Prepare and run UpdateQuery that returns the name information of the specified id in the topic table.")
+    public void prepareAndRunUpdateQueryThatReturnsTheNameInformationOfTheSpecifiedIdInTheTopicTable() throws SQLException {
+
+        query=getUS08topicidUpdateQuery();
+
+        preparedStatement = JDBC_Structure_Methods.getConnection().prepareStatement(query);
+        //update topic set name = '?' where id = ?;
+        // UPDATE users SET email = ? WHERE id = ?;
+        preparedStatement.setString(1, updatename);
+        preparedStatement.setInt(2, InsertID);
+
+        intResult = preparedStatement.executeUpdate();
+
+    }
+
+
+
+    @When("Verifies that the data returning the name of the requested id in the topic table has been updated.")
+    public void verifiesThatTheDataReturningTheNameOfTheRequestedIdInTheTopicTableHasBeenUpdated() throws SQLException {
+
+        assertEquals(1, intResult);
+
+        //*******SAGLAMASI***********
+
+        query=getUS08topicidUpdateVerify();
+
+        preparedStatement = JDBC_Structure_Methods.getConnection().prepareStatement(query);
+
+
+        //SELECT email FROM users WHERE id = ?;
+        preparedStatement.setInt(1,InsertID);
+
+        resultSet = preparedStatement.executeQuery();
+
+        boolean nameUpdate = false;
+        while(resultSet.next()){
+            nameUpdate= true;
+            assertEquals(updatename, resultSet.getString(1));
+
+        }
+
+        assertTrue(nameUpdate);
     }
 
 }
