@@ -20,9 +20,11 @@ public class Manage {
 
 
     private String US19_Students_LongestEmails = "SELECT email FROM students ORDER BY LENGTH(email) DESC LIMIT 5;";
-    public String getUS19_Students_LongestEmails() {
-        return US19_Students_LongestEmails;
-    }
+
+    private String US20_HighestExpenseName = "SELECT name FROM expenses ORDER BY amount DESC LIMIT 1;";
+
+    private String US21_InsertGeneralCall = "INSERT INTO general_calls (name, contact, date, description, follow_up_date, call_duration, note, call_type, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private String US21_GetLatestCall = "SELECT * FROM general_calls WHERE name = 'John Doe' ORDER BY call_duration DESC LIMIT 1;";
 
 
     private String US22_listIncomeTable="SELECT name, id FROM income ORDER BY amount DESC LIMIT 10;";
