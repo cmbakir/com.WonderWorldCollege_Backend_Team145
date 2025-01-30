@@ -45,8 +45,26 @@ Feature: DB Testing
     * query prepared for email addresses where firstname contains 'al'
     * should be see the list of email addresses with 'al' in the firstname
     * Database connection is closed
+
   @US29
   Scenario: inserted bulk data from subjects table
     * insert 5 random subjects into the database
     * 5 Enter the data in bulk.Check that is added to the table
     * Database connection is closed
+
+
+  @US25
+  Scenario: List the student IDs and entry dates (entrydt) from the staff_rating table where the comments column contains 'good'.
+  * query prepared for student IDs and entrydt where the column contains good.
+  * Verify the student IDs and entrydts are listed correctly
+
+
+  @US26
+  Scenario: List the admission_no, firstname, lastname of students from the online_admissions table who registered in January 2023.
+    * query prepared for student firstname, lastname and online_admissions where the column contains year and month
+    * Verify the firstname, lastname and online_admissions are listed correctly
+
+  @US27
+  Scenario: List students from the online_admissions table who share the same last name.
+    * query prepared for student firstname, lastname and online_admissions who share the same last name.
+    * Verify the firstname, lastname and online_admissions are listed correctly for listing the student
