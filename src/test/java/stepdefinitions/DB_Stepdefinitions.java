@@ -271,8 +271,8 @@ public class DB_Stepdefinitions extends Manage {
 
     }
 
-    @Given("Query is prepared for the name of the {int} income values with the longest employement in the income table according to their departments")
-    public void query_is_prepared_for_the_name_of_the_income_values_with_the_longest_employement_in_the_income_table_according_to_their_departments(Integer int1) throws SQLException {
+    @Given("Query is prepared for the name of the {int} income values with the longest employement in the staff table according to their departments")
+    public void query_is_prepared_for_the_name_of_the_income_values_with_the_longest_employement_in_the_staff_table_according_to_their_departments(Integer int1) throws SQLException {
         query=getUS23_listStaffTable();
         resultSet=getStatement().executeQuery(query);
     }
@@ -404,6 +404,43 @@ public class DB_Stepdefinitions extends Manage {
         }
     }
 
+
+    @Given("Query is prepared for the email, phone, and salary informations of the oldest staff member values in the staff table.")
+    public void query_is_prepared_for_the_email_phone_and_salary_informations_of_the_oldest_staff_member_values_in_the_staff_table() throws SQLException {
+        query=getUS24_listStaffTableOldestMember();
+        resultSet=getStatement().executeQuery(query);
+    }
+    @Given("Query results lists the email, phone, and salary informations are validated.")
+    public void query_results_lists_the_email_phone_and_salary_informations_are_validated() throws SQLException {
+        actStaffListOfOldestMember=new HashMap<>();
+
+            resultSet.next();
+            actStaffListOfOldestMember.put("email",resultSet.getString("email"));
+            actStaffListOfOldestMember.put("contact_no",resultSet.getString("contact_no"));
+            actStaffListOfOldestMember.put("basic_salary",resultSet.getString("basic_salary"));
+
+
+        assertEquals(expStaffListOfOldestMember,actStaffListOfOldestMember);
+    }
+
+    @Given("Query is prepared for updating the fine_amount value to {string} for the record in the transport_feemaster table where the month value is {string}.")
+    public void query_is_prepared_for_updating_the_fine_amount_value_to_for_the_record_in_the_transport_feemaster_table_where_the_month_value_is(String string, String string2) throws SQLException {
+        query=getUS11_updateTransportFeemaster();
+        preparedStatement=getPraperedStatementGeneratedKeys(query,true);
+
+
+
+
+    }
+    @Given("Query results lists the fine_amount value informations where month is october are validated as {string}.")
+    public void query_results_lists_the_fine_amount_value_informations_where_month_is_october_are_validated_as(String string) {
+
+
+    }
+
+
+
+
     @Given("Query is prepared to find the highest expense name in the expenses table")
     public void query_is_prepared_to_find_the_highest_expense_name_in_the_expenses_table() throws SQLException {
         query = getUS20_HighestExpenseName();
@@ -472,6 +509,7 @@ public class DB_Stepdefinitions extends Manage {
             System.out.println(("No record found in the database"));
         }
     }
+
 
 
 

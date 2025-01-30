@@ -60,14 +60,14 @@ Feature: DB Testing
 
 
   @US22
-  Scenario: List the name and ID of the top 10 income values from the income table based on the highest amount
+  Scenario:DB_US22 List the name and ID of the top 10 income values from the income table based on the highest amount
     * Query is prepared for the name and ID of the top 10 income values in the income table based on the highest amount
     * Query results lists the name and ID are validated.
     * Database connection is closed
 
   @US23
-  Scenario: List the first 3 staff members with the longest employment duration in the staff table according to their departments.
-    * Query is prepared for the name of the 3 income values with the longest employement in the income table according to their departments
+  Scenario: DB_US23 List the first 3 staff members with the longest employment duration in the staff table according to their departments.
+    * Query is prepared for the name of the 3 income values with the longest employement in the staff table according to their departments
     * Query results lists the name is validated.
     * Database connection is closed
 
@@ -90,6 +90,22 @@ Feature: DB Testing
     * should see the total number of students displayed
     * Database connection is closed
 
+
+  @US24
+  Scenario: DB_US24 List the email, phone, and salary information of the oldest staff member in the staff table.
+    * Query is prepared for the email, phone, and salary informations of the oldest staff member values in the staff table.
+    * Query results lists the email, phone, and salary informations are validated.
+    * Database connection is closed
+
+  @US11
+  Scenario: DB_US11 Update the fine_amount value to '200.00' for the record in the transport_feemaster table where the month value is 'October'.
+
+    * Query is prepared for updating the fine_amount value to '200.00' for the record in the transport_feemaster table where the month value is 'October'.
+    * Query results lists the fine_amount value informations where month is october are validated as '200.00'.
+    * Database connection is closed
+
+
+
   @US20
   Scenario: WWCAPI-15 DB_US20 Find and print the highest expense name from the expenses table
     * Query is prepared to find the highest expense name in the expenses table
@@ -102,4 +118,5 @@ Feature: DB Testing
     * A new call record is inserted into the general_calls table
     * The inserted call record is validated.
     * Database connection is closed
+
 
