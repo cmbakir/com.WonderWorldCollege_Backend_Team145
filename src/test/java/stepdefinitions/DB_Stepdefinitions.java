@@ -260,7 +260,7 @@ public class DB_Stepdefinitions extends Manage {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                records.add(resultSet.getString("id") + " - " + resultSet.getString("name")); // ID ve Name alanlarını alıyoruz
+                records.add(resultSet.getString("id") + " - " + resultSet.getString("firstname")+ " " + resultSet.getString("lastname") + " - "+ resultSet.getString("email"));
             }
         } catch (Exception e) {
             e.printStackTrace();
