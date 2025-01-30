@@ -53,9 +53,10 @@ Feature: DB Testing
 
 
   @US19
-  Scenario: List the top 5 longest email addresses from the students table
+  Scenario: WWCAPI-14 DB_US19 List the top 5 longest email addresses from the students table
     * Query is prepared to find the top 5 longest emails in the students table
     * Top 5 longest email addresses are validated.
+    * Database connection is closed
 
 
   @US22
@@ -87,5 +88,18 @@ Feature: DB Testing
   Scenario: DB_US18 Count distinct students in onlineexam_students table
     * execute the query to count distinct student_session_id
     * should see the total number of students displayed
+    * Database connection is closed
+
+  @US20
+  Scenario: WWCAPI-15 DB_US20 Find and print the highest expense name from the expenses table
+    * Query is prepared to find the highest expense name in the expenses table
+    * The highest expense name is printed
+    * The result should not be empty
+    * Database connection is closed
+
+  @US21
+  Scenario: WWCAPI-17 DB_US21 Insert a new call record into general_calls table
+    * A new call record is inserted into the general_calls table
+    * The inserted call record is validated.
     * Database connection is closed
 
