@@ -18,7 +18,9 @@ public class Manage {
 
     private String US04_studentsTableAdmissionNo="Select lastname,firstname From students Where admission_no>18001 And admission_no<18010;";
 
-
-
+    private String US19_Students_LongestEmails = "SELECT email FROM students ORDER BY LENGTH(email) DESC LIMIT 5;";
+    public String getUS19_Students_LongestEmails() {
+        return US19_Students_LongestEmails;
+    }
 
 }
