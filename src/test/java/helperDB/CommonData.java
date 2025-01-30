@@ -14,6 +14,7 @@ public class CommonData {
     public static HashMap<String,String> expstudentLast_FirstName;
     public static int [] bulkResult;
 
+    public static List<String> records = new ArrayList<>();
 
     public CommonData() {
         expstudentLast_FirstName=new HashMap<>();
