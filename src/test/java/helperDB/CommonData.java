@@ -26,6 +26,7 @@ public class CommonData {
     public static int totalUniqueStudents;
     public static int averagePassingPercentage;
 
+
     public static HashMap<String,String> actStaffListOfOldestMember;
     public static HashMap<String,String> expStaffListOfOldestMember;
 
@@ -33,6 +34,10 @@ public class CommonData {
     public static float expectedFineAmount=200;
     public static String actualMonth;
     public static String expMonth="October";
+
+    public static String expectedHighestExpense;
+
+
 
     public CommonData() {
         expstudentLast_FirstName=new HashMap<>();

@@ -53,9 +53,10 @@ Feature: DB Testing
 
 
   @US19
-  Scenario: List the top 5 longest email addresses from the students table
+  Scenario: WWCAPI-14 DB_US19 List the top 5 longest email addresses from the students table
     * Query is prepared to find the top 5 longest emails in the students table
     * Top 5 longest email addresses are validated.
+    * Database connection is closed
 
 
   @US22
@@ -89,6 +90,7 @@ Feature: DB Testing
     * should see the total number of students displayed
     * Database connection is closed
 
+
   @US24
   Scenario: DB_US24 List the email, phone, and salary information of the oldest staff member in the staff table.
     * Query is prepared for the email, phone, and salary informations of the oldest staff member values in the staff table.
@@ -100,6 +102,21 @@ Feature: DB Testing
 
     * Query is prepared for updating the fine_amount value to '200.00' for the record in the transport_feemaster table where the month value is 'October'.
     * Query results lists the fine_amount value informations where month is october are validated as '200.00'.
+    * Database connection is closed
+
+
+
+  @US20
+  Scenario: WWCAPI-15 DB_US20 Find and print the highest expense name from the expenses table
+    * Query is prepared to find the highest expense name in the expenses table
+    * The highest expense name is printed
+    * The result should not be empty
+    * Database connection is closed
+
+  @US21
+  Scenario: WWCAPI-17 DB_US21 Insert a new call record into general_calls table
+    * A new call record is inserted into the general_calls table
+    * The inserted call record is validated.
     * Database connection is closed
 
 

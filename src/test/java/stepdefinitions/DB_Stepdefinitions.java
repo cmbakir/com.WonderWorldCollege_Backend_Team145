@@ -404,6 +404,7 @@ public class DB_Stepdefinitions extends Manage {
         }
     }
 
+
     @Given("Query is prepared for the email, phone, and salary informations of the oldest staff member values in the staff table.")
     public void query_is_prepared_for_the_email_phone_and_salary_informations_of_the_oldest_staff_member_values_in_the_staff_table() throws SQLException {
         query=getUS24_listStaffTableOldestMember();
@@ -435,6 +436,78 @@ public class DB_Stepdefinitions extends Manage {
     public void query_results_lists_the_fine_amount_value_informations_where_month_is_october_are_validated_as(String string) {
 
 
+    }
+
+
+
+
+    @Given("Query is prepared to find the highest expense name in the expenses table")
+    public void query_is_prepared_to_find_the_highest_expense_name_in_the_expenses_table() throws SQLException {
+        query = getUS20_HighestExpenseName();
+        resultSet = getStatement().executeQuery(query);
+    }
+
+    @Given("The highest expense name is printed")
+    public void the_highest_expense_name_is_printed() throws SQLException {
+        if (resultSet.next()) {
+            CommonData.expectedHighestExpense = resultSet.getString("name");
+            System.out.println("Highest Expense Name: " + CommonData.expectedHighestExpense);
+        }
+    }
+
+    @Given("The result should not be empty")
+    public void the_result_should_not_be_empty() {
+        assertNotNull("Highest expense name is null!", CommonData.expectedHighestExpense);
+    }
+
+    @Given("A new call record is inserted into the general_calls table")
+    public void insert_new_call_into_general_calls_table() throws SQLException {
+        query = getUS21_InsertGeneralCall();
+        preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+        preparedStatement.setString(1, "John Doe");
+        preparedStatement.setString(2, "555-1234");
+        preparedStatement.setDate(3, Date.valueOf("2025-01-30"));
+        preparedStatement.setString(4, "Follow-up discussion");
+        preparedStatement.setDate(5, Date.valueOf("2025-02-05"));
+        preparedStatement.setInt(6, 30);
+        preparedStatement.setString(7, "Discussed project details");
+        preparedStatement.setString(8, "Business");
+        preparedStatement.setTimestamp(9, new Timestamp(System.currentTimeMillis()));
+
+        preparedStatement.executeUpdate();
+    }
+
+    @Given("The inserted call record is validated.")
+    public void validate_inserted_call_record() throws SQLException {
+
+        query = getUS21_GetLatestCall();
+        preparedStatement = connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+
+            String name = resultSet.getString("name");
+            String contact = resultSet.getString("contact");
+            Date date = resultSet.getDate("date");
+            String description = resultSet.getString("description");
+            Date followUpDate = resultSet.getDate("follow_up_date");
+            int callDuration = resultSet.getInt("call_duration");
+            String note = resultSet.getString("note");
+            String callType = resultSet.getString("call_type");
+            Timestamp createdAt = resultSet.getTimestamp("created_at");
+
+            assertNotNull(name);
+            assertNotNull(contact);
+            assertNotNull(date);
+            assertNotNull(description);
+            assertNotNull(followUpDate);
+            assertTrue(callDuration > 0);
+            assertNotNull(callType);
+            assertNotNull(createdAt);
+        } else {
+            System.out.println(("No record found in the database"));
+        }
     }
 
 
