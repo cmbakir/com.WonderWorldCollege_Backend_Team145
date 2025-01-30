@@ -18,6 +18,11 @@ public class Manage {
 
     private String US04_studentsTableAdmissionNo="Select lastname,firstname From students Where admission_no>18001 And admission_no<18010;";
 
+    private String US16_List_the_last_10_records_online_admissions="SELECT * FROM online_admissions ORDER BY id DESC LIMIT ?";
+
+    private String US17_calculateAveragePassingPercentage = "SELECT AVG(passing_percentage) AS average_passing_percentage FROM onlineexam";
+
+    private String US18_countDistinctStudentsOnlineExamStudentsTable = "SELECT COUNT(DISTINCT student_session_id) AS total_students FROM onlineexam_students";
 
 
 
