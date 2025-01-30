@@ -15,6 +15,8 @@ public class CommonData {
     public static int [] bulkResult;
 
     public static List<String> records = new ArrayList<>();
+    public static int totalUniqueStudents;
+    public static int averagePassingPercentage;
 
     public CommonData() {
         expstudentLast_FirstName=new HashMap<>();
