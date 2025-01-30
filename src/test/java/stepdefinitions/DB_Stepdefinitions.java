@@ -254,4 +254,28 @@ public class DB_Stepdefinitions extends Manage {
 
     }
 
+
+    @Given("Query is prepared to find the top 5 longest emails in the students table")
+    public void query_is_prepared_to_find_top_5_longest_emails() throws SQLException {
+        query = getUS19_Students_LongestEmails();
+        resultSet = getStatement().executeQuery(query);
+    }
+
+    @Given("Top 5 longest email addresses are validated.")
+    public void top_5_longest_email_addresses_are_validated() throws SQLException {
+        List<String> emailList = new ArrayList<>();
+        while (resultSet.next()) {
+            emailList.add(resultSet.getString("email"));
+        }
+        if (!emailList.isEmpty()) {
+            for (int i = 0; i < emailList.size(); i++) {
+                assertEquals(emailList.get(i), CommonData.expectedEmails.get(i));
+                System.out.println(emailList.get(i) + " ");
+            }
+        } else {
+            assertFalse("Result set is empty", resultSet.next());
+        }
+    }
+
+
 }
