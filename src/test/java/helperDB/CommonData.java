@@ -26,6 +26,9 @@ public class CommonData {
     public static int totalUniqueStudents;
     public static int averagePassingPercentage;
 
+    public static String expectedHighestExpense;
+
+
     public CommonData() {
         expstudentLast_FirstName=new HashMap<>();
         expstudentLast_FirstName.put("Fleming","Nicolas");
