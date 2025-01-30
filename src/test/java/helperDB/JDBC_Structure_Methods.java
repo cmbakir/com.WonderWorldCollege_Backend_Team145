@@ -16,7 +16,8 @@ public class JDBC_Structure_Methods extends BaseTest {
 
         if (configLoader == null) {
             configLoader = new ConfigLoader();  // Eğer null ise burada başlatılıyor
-        }
+
+}
 
         String url = configLoader.getDatabaseConfig("URL");
         String username = configLoader.getDatabaseConfig("USERNAME");
