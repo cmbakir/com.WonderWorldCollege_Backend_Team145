@@ -50,3 +50,73 @@ Feature: DB Testing
     * insert 5 random subjects into the database
     * 5 Enter the data in bulk.Check that is added to the table
     * Database connection is closed
+
+
+  @US19
+  Scenario: WWCAPI-14 DB_US19 List the top 5 longest email addresses from the students table
+    * Query is prepared to find the top 5 longest emails in the students table
+    * Top 5 longest email addresses are validated.
+    * Database connection is closed
+
+
+  @US22
+  Scenario:DB_US22 List the name and ID of the top 10 income values from the income table based on the highest amount
+    * Query is prepared for the name and ID of the top 10 income values in the income table based on the highest amount
+    * Query results lists the name and ID are validated.
+    * Database connection is closed
+
+  @US23
+  Scenario: DB_US23 List the first 3 staff members with the longest employment duration in the staff table according to their departments.
+    * Query is prepared for the name of the 3 income values with the longest employement in the staff table according to their departments
+    * Query results lists the name is validated.
+    * Database connection is closed
+
+
+  @US16
+  Scenario: DB_US16 Retrieve the last 10 records from online_admissions table
+    * execute the query to fetch the last 10 records from online_admissions
+    * should see the last 10 records displayed
+    * Database connection is closed
+
+  @US17
+  Scenario: DB_US17 Calculate the average passing percentage
+    * execute the query to calculate the average passing percentage
+    * should see the average passing percentage displayed
+    * Database connection is closed
+
+  @US18
+  Scenario: DB_US18 Count distinct students in onlineexam_students table
+    * execute the query to count distinct student_session_id
+    * should see the total number of students displayed
+    * Database connection is closed
+
+
+  @US24
+  Scenario: DB_US24 List the email, phone, and salary information of the oldest staff member in the staff table.
+    * Query is prepared for the email, phone, and salary informations of the oldest staff member values in the staff table.
+    * Query results lists the email, phone, and salary informations are validated.
+    * Database connection is closed
+
+  @US11
+  Scenario: DB_US11 Update the fine_amount value to '200.00' for the record in the transport_feemaster table where the month value is 'October'.
+
+    * Query is prepared for updating the fine_amount value to '200.00' for the record in the transport_feemaster table where the month value is 'October'.
+    * Query results lists the fine_amount value informations where month is october are validated as '200.00'.
+    * Database connection is closed
+
+
+
+  @US20
+  Scenario: WWCAPI-15 DB_US20 Find and print the highest expense name from the expenses table
+    * Query is prepared to find the highest expense name in the expenses table
+    * The highest expense name is printed
+    * The result should not be empty
+    * Database connection is closed
+
+  @US21
+  Scenario: WWCAPI-17 DB_US21 Insert a new call record into general_calls table
+    * A new call record is inserted into the general_calls table
+    * The inserted call record is validated.
+    * Database connection is closed
+
+

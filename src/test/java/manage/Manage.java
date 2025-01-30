@@ -26,6 +26,29 @@ public class Manage {
 
     private String US08topicidUpdateVerify = "select name from topic where id = ?";
 
+    private String US19_Students_LongestEmails = "SELECT email FROM students ORDER BY LENGTH(email) DESC LIMIT 5;";
+
+    private String US20_HighestExpenseName = "SELECT name FROM expenses ORDER BY amount DESC LIMIT 1;";
+
+    private String US21_InsertGeneralCall = "INSERT INTO general_calls (name, contact, date, description, follow_up_date, call_duration, note, call_type, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private String US21_GetLatestCall = "SELECT * FROM general_calls WHERE name = 'John Doe' ORDER BY call_duration DESC LIMIT 1;";
+
+
+    private String US22_listIncomeTable="SELECT name, id FROM income ORDER BY amount DESC LIMIT 10;";
+
+    private String US16_List_the_last_10_records_online_admissions="SELECT * FROM online_admissions ORDER BY id DESC LIMIT ?";
+
+    private String US17_calculateAveragePassingPercentage = "SELECT AVG(passing_percentage) AS average_passing_percentage FROM onlineexam";
+
+    private String US18_countDistinctStudentsOnlineExamStudentsTable = "SELECT COUNT(DISTINCT student_session_id) AS total_students FROM onlineexam_students";
+
+
+    private String US23_listStaffTable="SELECT name FROM staff ORDER BY work_exp DESC LIMIT 3;";
+
+    private String US24_listStaffTableOldestMember="SELECT email,contact_no,basic_salary FROM staff order by dob asc limit 1;";
+
+    private String US11_updateTransportFeemaster="update transport_feemaster set fine_amount='200.00' where month='October';";
+
 
 
 }
