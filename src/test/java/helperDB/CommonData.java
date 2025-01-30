@@ -26,6 +26,14 @@ public class CommonData {
     public static int totalUniqueStudents;
     public static int averagePassingPercentage;
 
+    public static HashMap<String,String> actStaffListOfOldestMember;
+    public static HashMap<String,String> expStaffListOfOldestMember;
+
+    public static float updatedFineAmount;
+    public static float expectedFineAmount=200;
+    public static String actualMonth;
+    public static String expMonth="October";
+
     public CommonData() {
         expstudentLast_FirstName=new HashMap<>();
         expstudentLast_FirstName.put("Fleming","Nicolas");
@@ -58,6 +66,10 @@ public class CommonData {
         expIncomeListOrderByAmount.put("Bridge Trust",9);
         expIncomeListOrderByAmount.put("NCERT- All Subject",24);
 
+        expStaffListOfOldestMember=new HashMap<>();
+        expStaffListOfOldestMember.put("email","admin@wonderworldcollege.com");
+        expStaffListOfOldestMember.put("contact_no","56465465");
+        expStaffListOfOldestMember.put("basic_salary","38000");
 
 
     }
@@ -80,5 +92,10 @@ public class CommonData {
     public static HashMap<String, Integer> getExpIncomeListOrderByAmount() {
         return expIncomeListOrderByAmount;
     }
+
+
+public static HashMap<String, String> getExpStaffListOfOldestMember() {
+    return expStaffListOfOldestMember;
+}
 
 }
