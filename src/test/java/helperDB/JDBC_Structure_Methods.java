@@ -1,6 +1,7 @@
 package helperDB;
 
 import base.BaseTest;
+import config_Requirements.ConfigLoader;
 
 import com.github.javafaker.Faker;
 
@@ -18,6 +19,7 @@ public class JDBC_Structure_Methods extends BaseTest {
 
     public static void createConnection() {
 
+
         ConfigLoader configLoader = new ConfigLoader();
 
 
@@ -25,6 +27,7 @@ public class JDBC_Structure_Methods extends BaseTest {
             configLoader = new ConfigLoader();  // Eğer null ise burada başlatılıyor
 
 }
+
 
 
         String url = configLoader.getDatabaseConfig("URL");

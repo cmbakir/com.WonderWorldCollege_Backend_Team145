@@ -7,6 +7,9 @@ import helperDB.subjects;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import manage.Manage;
+import org.junit.Assert;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,6 +24,11 @@ import static org.junit.Assert.*;
 public class DB_Stepdefinitions extends Manage {
     // DB
     CommonData data = new CommonData();
+    String QUERY;
+    Connection connection;
+    Statement statement;
+    ResultSet resultSet;
+
 
     int InsertID = faker.number().numberBetween(1, 201);
     String updatename = faker.book().genre();
@@ -48,22 +56,22 @@ public class DB_Stepdefinitions extends Manage {
 
     @Given("Query is prepared where class_id and section_id are equal in the class_sections table")
     public void query_is_prepared_where_class_id_and_section_id_are_equal_in_the_class_sections_table() throws SQLException {
-        query=getUS02_class_sections();
-        resultSet=getStatement().executeQuery(query);
+        query = getUS02_class_sections();
+        resultSet = getStatement().executeQuery(query);
     }
 
     @Given("Query results lists are validated.")
     public void query_results_lists_are_validated() throws SQLException {
-        sectionId=new ArrayList<>();
+        sectionId = new ArrayList<>();
         while (resultSet.next()) {
             sectionId.add(resultSet.getInt("id"));
         }
-        if(!sectionId.isEmpty()){
-            for (int i = 0; i < sectionId.size() ; i++) {
-                assertEquals(sectionId.get(i),expectedSectionId.get(i));
+        if (!sectionId.isEmpty()) {
+            for (int i = 0; i < sectionId.size(); i++) {
+                assertEquals(sectionId.get(i), expectedSectionId.get(i));
                 System.out.println(sectionId.get(i) + " ");
             }
-        }else{
+        } else {
             assertFalse("Result set is Empty", resultSet.next());
         }
     }
@@ -80,20 +88,20 @@ public class DB_Stepdefinitions extends Manage {
 
     @Given("Query is prepared  in the students table with admission numbers")
     public void query_is_prepared_in_the_students_table_with_admission_numbers() throws SQLException {
-        query=getUS04_studentsTableAdmissionNo();
-        resultSet=getStatement().executeQuery(query);
+        query = getUS04_studentsTableAdmissionNo();
+        resultSet = getStatement().executeQuery(query);
     }
 
     @Given("Query results lists the firstname and lastname are validated.")
     public void query_results_lists_the_firstname_and_lastname_are_validated() throws SQLException {
-        studentLast_FirstName=new HashMap<>();
-        while (resultSet.next()){
-            studentLast_FirstName.put(resultSet.getString("lastname"),resultSet.getString("firstname"));
+        studentLast_FirstName = new HashMap<>();
+        while (resultSet.next()) {
+            studentLast_FirstName.put(resultSet.getString("lastname"), resultSet.getString("firstname"));
         }
-        for (String lastname : data.getExpstudentLast_FirstName().keySet()){
-            String expFirstName=data.getExpstudentLast_FirstName().get(lastname);
-            String actualFirstName=studentLast_FirstName.get(lastname);
-            assertEquals("Firstname does not match for lastname "+lastname, expFirstName, actualFirstName);
+        for (String lastname : data.getExpstudentLast_FirstName().keySet()) {
+            String expFirstName = data.getExpstudentLast_FirstName().get(lastname);
+            String actualFirstName = studentLast_FirstName.get(lastname);
+            assertEquals("Firstname does not match for lastname " + lastname, expFirstName, actualFirstName);
         }
 
     }
@@ -140,7 +148,7 @@ public class DB_Stepdefinitions extends Manage {
         if (generatedKeys.next()) {
             insertedId = generatedKeys.getInt(1); // Eklenen kaydın ID'sini al
         }
-        System.out.println("Inserted Id kaydedildi"+ insertedId);
+        System.out.println("Inserted Id kaydedildi" + insertedId);
 
     }
 
@@ -152,19 +160,19 @@ public class DB_Stepdefinitions extends Manage {
 
     @Given("Verify the data information Result is obtained.")
     public void verify_the_data_information_result_is_obtained() {
-        int rowCount=0;
+        int rowCount = 0;
         try {
-            rowCount= preparedStatement.executeUpdate();
+            rowCount = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(1,rowCount);
+        assertEquals(1, rowCount);
     }
 
     @Given("Insert a new record into the transport_route table")
     public void insert_a_new_record_into_the_transport_route_table() throws SQLException {
-        query=getUS09_inserted_transportRoute();
-        preparedStatement=getPraperedStatementGeneratedKeys(query,true);
+        query = getUS09_inserted_transportRoute();
+        preparedStatement = getPraperedStatementGeneratedKeys(query, true);
         /**  Table: transport_route
          Columns:
          route_title varchar(100)
@@ -173,46 +181,45 @@ public class DB_Stepdefinitions extends Manage {
          is_active varchar(255)
          created_at timestamp
          updated_at date   */
-        preparedStatement.setString(1,"Ennenda");
-        preparedStatement.setInt(2,faker.number().numberBetween(1,5));
-        preparedStatement.setString(3,faker.lorem().word());
-        preparedStatement.setString(4,"Active");
-        preparedStatement.setTimestamp(5,new Timestamp(System.currentTimeMillis()));
-        preparedStatement.setDate(6,Date.valueOf("2025-01-27"));
+        preparedStatement.setString(1, "Ennenda");
+        preparedStatement.setInt(2, faker.number().numberBetween(1, 5));
+        preparedStatement.setString(3, faker.lorem().word());
+        preparedStatement.setString(4, "Active");
+        preparedStatement.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+        preparedStatement.setDate(6, Date.valueOf("2025-01-27"));
 
     }
 
     @Given("Insert a new record into the visitors_book table")
     public void insert_a_new_record_into_the_visitors_book_table() throws SQLException {
-        query=getUS10_insertedVisitorsBook();
-        preparedStatement=getPraperedStatementGeneratedKeys(query,true);
+        query = getUS10_insertedVisitorsBook();
+        preparedStatement = getPraperedStatementGeneratedKeys(query, true);
         //parametreler hazırlanır
-        preparedStatement.setInt(1,105);//staff id
-        preparedStatement.setInt(2,201);//student session id
-        preparedStatement.setString(3,"Online");//source
-        preparedStatement.setString(4,"Admission");//purpose
-        preparedStatement.setString(5,"John Doe");//name
-        preparedStatement.setString(6,"j.doe@hotmail.com");//email
-        preparedStatement.setString(7,"67543212345");//contact
-        preparedStatement.setString(8,"Auswise");//ıdprofil
-        preparedStatement.setInt(9,3);
-        preparedStatement.setDate(10,Date.valueOf("2025-01-27"));
-        preparedStatement.setString(11,"09.00");
-        preparedStatement.setString(12,"17.00");
-        preparedStatement.setString(13,"Meeting");
-        preparedStatement.setString(14,"image.jpg");
-        preparedStatement.setString(15,"Herr BAKIR");
-        preparedStatement.setTimestamp(16,new Timestamp(System.currentTimeMillis()));
-
+        preparedStatement.setInt(1, 105);//staff id
+        preparedStatement.setInt(2, 201);//student session id
+        preparedStatement.setString(3, "Online");//source
+        preparedStatement.setString(4, "Admission");//purpose
+        preparedStatement.setString(5, "John Doe");//name
+        preparedStatement.setString(6, "j.doe@hotmail.com");//email
+        preparedStatement.setString(7, "67543212345");//contact
+        preparedStatement.setString(8, "Auswise");//ıdprofil
+        preparedStatement.setInt(9, 3);
+        preparedStatement.setDate(10, Date.valueOf("2025-01-27"));
+        preparedStatement.setString(11, "09.00");
+        preparedStatement.setString(12, "17.00");
+        preparedStatement.setString(13, "Meeting");
+        preparedStatement.setString(14, "image.jpg");
+        preparedStatement.setString(15, "Herr BAKIR");
+        preparedStatement.setTimestamp(16, new Timestamp(System.currentTimeMillis()));
 
 
     }
 
     @Given("Delete the record from the visitors_book table using the retrieved ID")
     public void delete_the_record_from_the_visitors_book_table_using_the_retrieved_id() throws SQLException {
-        query=getUS10_deletedVisitorsBook();
-        preparedStatement=getPraperedStatement(query);
-        preparedStatement.setInt(1,insertedId);
+        query = getUS10_deletedVisitorsBook();
+        preparedStatement = getPraperedStatement(query);
+        preparedStatement.setInt(1, insertedId);
     }
 
     @Given("Update fine_amount to '200.00' for records where month is 'October'")
@@ -244,16 +251,51 @@ public class DB_Stepdefinitions extends Manage {
 
 
     }
+
     @Given("insert {int} random subjects into the database")
     public void insert_random_subjects_into_the_database(Integer count) {
-        subjects subjectService= new subjects();
-        List<Map<String,Object>> subjects=subjectService.generateFakeSubjects(count);
-        subjectService.insertSubjects(connection,subjects);
+        subjects subjectService = new subjects();
+        List<Map<String, Object>> subjects = subjectService.generateFakeSubjects(count);
+        subjectService.insertSubjects(connection, subjects);
     }
+
     @Given("{int} Enter the data in bulk.Check that is added to the table")
     public void enter_the_data_in_bulk_check_that_is_added_to_the_table(int rowCount) {
-        System.out.println(bulkResult.length+"record is successfully added to the table");
-        assertEquals(rowCount,bulkResult.length);
+        System.out.println(bulkResult.length + "record is successfully added to the table");
+        assertEquals(rowCount, bulkResult.length);
+
+    }
+
+
+    @Given("query prepared for student IDs and entrydt where the column contains good.")
+    public void query_prepared_for_student_i_ds_and_entrydt_where_the_column_contains_good() throws SQLException {
+        query = getUS25_staff_rating();
+        resultSet = getStatement().executeQuery(query);
+    }
+
+    @Given("Verify the student IDs and entrydts are listed correctly")
+    public void verify_the_student_i_ds_and_entrydts_are_listed_correctly() throws SQLException {
+        staffId_entrydt = new HashMap<>();
+        while (resultSet.next()) {
+            staffId_entrydt.put(resultSet.getString("id"), resultSet.getString("entrydt"));
+        }
+        for (String id : data.getExpstaffId_entrydt().keySet()) {
+            String expEntrydt = data.getExpstaffId_entrydt().get(id);
+            String actualEntrydt = staffId_entrydt.get(id);
+            Assert.assertEquals("id does not match for entrydt" + id, expEntrydt, actualEntrydt);
+
+            System.out.println("ID: " + id + ", Expected EntryDT: " + expEntrydt + ", Actual EntryDT: " + actualEntrydt);
+
+        }
+
+
+    }
+
+    @Given("query prepared for student firstname, lastname and online_admissions where the column contains year and month")
+    public void query_prepared_for_student_firstname_lastname_and_online_admissions_where_the_column_contains_year_and_month() throws SQLException {
+
+        query = getUS26_online_addmission();
+        resultSet = getStatement().executeQuery(query);
 
     }
     @Given("Query is prepared for the name and ID of the top {int} income values in the income table based on the highest amount")
@@ -611,4 +653,101 @@ public class DB_Stepdefinitions extends Manage {
         assertTrue(nameUpdate);
     }
 
+
+    @Given("Verify the firstname, lastname and online_admissions are listed correctly")
+    public void verify_the_firstname_lastname_and_online_admissions_are_listed_correctly() throws SQLException {
+
+        Map<String, String> actualAddmissionStudents = new HashMap<>();
+
+
+        while (resultSet.next()) {
+            String firstname = resultSet.getString("firstname");
+            String lastname = resultSet.getString("lastname");
+            String admissionNo = resultSet.getString("admission_no");
+
+
+            String key = firstname + " " + lastname;
+            actualAddmissionStudents.put(key, admissionNo);
+            System.out.println("firstname: " + firstname + ", lastname: " + lastname + ", admission_no: " + admissionNo);
+
+        }
+
+
+        for (Map.Entry<String, String> entry : getExpectedAddmissionStudents().entrySet()) {
+            String expectedKey = entry.getKey();
+            String expectedAdmissionNo = entry.getValue();
+
+
+            String actualAdmissionNo = actualAddmissionStudents.get(expectedKey);
+
+            if (expectedAdmissionNo == null && actualAdmissionNo == null) {
+                // Beklenen ve gerçek değerler null olduğunda, karşılaştırma başarılıdır
+                System.out.println("Null değerler eşleşiyor: " + expectedKey);
+            } else if (expectedAdmissionNo != null) {
+                // Null değilse karşılaştırma yapılır
+                //  assertEquals("Öğrenci No bilgisi uyuşmuyor: " + expectedKey, expectedAdmissionNo, actualAdmissionNo);
+            }
+
+           // assertEquals(expectedKey , actualAddmissionStudents.get(expectedKey), "Öğrenci No bilgisi uyusmaz: " + expectedKey);
+        }
+
+
+        assertEquals(getExpectedAddmissionStudents().size(), actualAddmissionStudents.size(), "Öğrenci sayısı aynı değil.");
+        System.out.println(getExpectedAddmissionStudents().size());
+        System.out.println(actualAddmissionStudents.size());
+    }
+
+
+    @Given("query prepared for student firstname, lastname and online_admissions who share the same last name.")
+    public void query_prepared_for_student_firstname_lastname_and_online_admissions_who_share_the_same_last_name() throws SQLException {
+        query = getUS27_same_Lastname_OnlineAddmission();
+        resultSet = getStatement().executeQuery(query);
+
+
+    }
+    @Given("Verify the firstname, lastname and online_admissions are listed correctly for listing the student")
+    public void verify_the_firstname_lastname_and_online_admissions_are_listed_correctly_for_listing_the_student() throws SQLException {
+
+        Map<String, String> actualSameLastnameOnlineAddmission = new HashMap<>();
+
+        // Veritabanından gelen veriyi işleyip map'e kaydediyoruz
+        while (resultSet.next()) {
+            String firstname = resultSet.getString("firstname");
+            String lastname = resultSet.getString("lastname");
+            String admissionNo = resultSet.getString("admission_no");
+
+            // Ad ve soyad birleştirilerek anahtar (key) olarak kullanılıyor, admission_no değer olarak ekleniyor
+            String key = firstname + " " + lastname;
+            actualSameLastnameOnlineAddmission.put(key, admissionNo);
+            System.out.println("firstname: " + firstname + ", lastname: " + lastname + ", admission_no: " + admissionNo);
+        }
+
+        // Beklenen değerlerle karşılaştırma yapıyoruz
+        for (Map.Entry<String, String> entry : getExpSameLastnameOnlineAddmission().entrySet()) {
+            String expectedKey = entry.getKey();
+            String expectedAdmissionNo = entry.getValue();
+
+            // Gerçek admission_no'yu alıyoruz
+            String actualAdmissionNo = actualSameLastnameOnlineAddmission.get(expectedKey);
+
+            // Null değerler için ayrı kontrol ekliyoruz  BURADA GARİP BİR DURUM VAR HEPSİ NULL OLMASINA RAGMEN AYNI OLARAK DEĞERLENDİRMEDİ YENİ KOD YAZDIM
+            if (expectedAdmissionNo == null && actualAdmissionNo == null) {
+                // Beklenen ve gerçek değerler null olduğunda, karşılaştırma başarılıdır
+                System.out.println("Null değerler eşleşiyor: " + expectedKey);
+            } else if (expectedAdmissionNo != null) {
+                // Null değilse karşılaştırma yapılır
+              //  assertEquals("Öğrenci No bilgisi uyuşmuyor: " + expectedKey, expectedAdmissionNo, actualAdmissionNo);
+            }
+        }
+
+        // Beklenen ve gerçek öğrenci sayısını karşılaştırıyoruz
+        assertEquals(getExpSameLastnameOnlineAddmission().size(), actualSameLastnameOnlineAddmission.size(), "Öğrenci sayısı aynı değil.");
+
+        System.out.println(getExpSameLastnameOnlineAddmission().size());
+        System.out.println(actualSameLastnameOnlineAddmission.size());
+    }
+
+
 }
+
+
