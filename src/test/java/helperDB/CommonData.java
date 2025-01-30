@@ -13,8 +13,18 @@ public class CommonData {
     public static HashMap<String,String> studentLast_FirstName;
     public static HashMap<String,String> expstudentLast_FirstName;
     public static int [] bulkResult;
+
     public static List<String> expectedEmails;
 
+    public static HashMap<String,Integer> actualIncomeListOrderByAmount;
+    public static HashMap<String,Integer> expIncomeListOrderByAmount;
+    public static List<String> actualNameList;
+    public static List<String> expectedNameList=new ArrayList<String>(Arrays.asList("Brandon","James","Jason"));
+
+
+    public static List<String> records = new ArrayList<>();
+    public static int totalUniqueStudents;
+    public static int averagePassingPercentage;
 
     public CommonData() {
         expstudentLast_FirstName=new HashMap<>();
@@ -27,6 +37,7 @@ public class CommonData {
         expstudentLast_FirstName.put("Roy","Kavya");
 
 
+
         expectedEmails = new ArrayList<>(Arrays.asList(
                 "matthew.gusikowski@hotmail.com",
                 "kandice.dickinson@hotmail.com",
@@ -34,6 +45,21 @@ public class CommonData {
                 "eleonore.aufderhar@yahoo.com",
                 "dorethea.kuvalis@hotmail.com"
         ));
+
+        expIncomeListOrderByAmount=new HashMap<>();
+        expIncomeListOrderByAmount.put("Absent Fine Charge",15);
+        expIncomeListOrderByAmount.put("Child Food",87);
+        expIncomeListOrderByAmount.put("Covid-19 Camp",23);
+        expIncomeListOrderByAmount.put("Class 1 All Subject",14);
+        expIncomeListOrderByAmount.put("School Rent",88);
+        expIncomeListOrderByAmount.put("Holi Celebration",79);
+        expIncomeListOrderByAmount.put("New Book",80);
+        expIncomeListOrderByAmount.put("NCERT",2);
+        expIncomeListOrderByAmount.put("Bridge Trust",9);
+        expIncomeListOrderByAmount.put("NCERT- All Subject",24);
+
+
+
     }
 
 
@@ -51,5 +77,8 @@ public class CommonData {
      Roy       Kavya
 
      **/
+    public static HashMap<String, Integer> getExpIncomeListOrderByAmount() {
+        return expIncomeListOrderByAmount;
+    }
 
 }
