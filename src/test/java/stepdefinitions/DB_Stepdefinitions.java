@@ -253,5 +253,52 @@ public class DB_Stepdefinitions extends Manage {
         assertEquals(rowCount,bulkResult.length);
 
     }
+    @Given("Query is prepared for the name and ID of the top {int} income values in the income table based on the highest amount")
+    public void query_is_prepared_for_the_name_and_id_of_the_top_income_values_in_the_income_table_based_on_the_highest_amount(Integer int1) throws SQLException {
+        query=getUS22_listIncomeTable();
+        resultSet=getStatement().executeQuery(query);
+    }
+
+    @Given("Query results lists the name and ID are validated.")
+    public void query_results_lists_the_name_and_id_are_validated() throws SQLException {
+
+        actualIncomeListOrderByAmount=new HashMap<>();
+        while (resultSet.next()){
+            actualIncomeListOrderByAmount.put(resultSet.getString("name"),resultSet.getInt("id"));
+        }
+        for (String name : data.getExpIncomeListOrderByAmount().keySet()){
+            int expId=data.getExpIncomeListOrderByAmount().get(name);
+            int actualId=actualIncomeListOrderByAmount.get(name);
+            assertEquals("Id does not match for name "+name, expId, actualId);
+        }
+
+    }
+
+    @Given("Query is prepared for the name of the {int} income values with the longest employement in the income table according to their departments")
+    public void query_is_prepared_for_the_name_of_the_income_values_with_the_longest_employement_in_the_income_table_according_to_their_departments(Integer int1) throws SQLException {
+        query=getUS23_listStaffTable();
+        resultSet=getStatement().executeQuery(query);
+    }
+    @Given("Query results lists the name is validated.")
+    public void query_results_lists_the_name_is_validated() throws SQLException {
+        actualNameList=new ArrayList<>();
+        while (resultSet.next()){
+
+            actualNameList.add(resultSet.getString("name"));
+
+
+        }
+        System.out.println(actualNameList);
+        System.out.println(expectedNameList);
+
+        for (int i = 0; i <actualNameList.size() ; i++) {
+
+            assertEquals(actualNameList.get(i),expectedNameList.get(i));
+
+        }
+
+
+    }
+
 
 }
