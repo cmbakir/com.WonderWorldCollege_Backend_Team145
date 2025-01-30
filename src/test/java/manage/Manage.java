@@ -19,6 +19,12 @@ public class Manage {
     private String US04_studentsTableAdmissionNo="Select lastname,firstname From students Where admission_no>18001 And admission_no<18010;";
 
 
+    private String US19_Students_LongestEmails = "SELECT email FROM students ORDER BY LENGTH(email) DESC LIMIT 5;";
+    public String getUS19_Students_LongestEmails() {
+        return US19_Students_LongestEmails;
+    }
+
+
     private String US22_listIncomeTable="SELECT name, id FROM income ORDER BY amount DESC LIMIT 10;";
 
     private String US16_List_the_last_10_records_online_admissions="SELECT * FROM online_admissions ORDER BY id DESC LIMIT ?";
@@ -29,6 +35,7 @@ public class Manage {
 
 
     private String US23_listStaffTable="SELECT name FROM staff ORDER BY work_exp DESC LIMIT 3;";
+
 
 
 }

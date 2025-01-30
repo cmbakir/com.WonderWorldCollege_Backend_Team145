@@ -52,6 +52,12 @@ Feature: DB Testing
     * Database connection is closed
 
 
+  @US19
+  Scenario: List the top 5 longest email addresses from the students table
+    * Query is prepared to find the top 5 longest emails in the students table
+    * Top 5 longest email addresses are validated.
+
+
   @US22
   Scenario: List the name and ID of the top 10 income values from the income table based on the highest amount
     * Query is prepared for the name and ID of the top 10 income values in the income table based on the highest amount
