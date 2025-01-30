@@ -36,6 +36,10 @@ public class Manage {
 
     private String US23_listStaffTable="SELECT name FROM staff ORDER BY work_exp DESC LIMIT 3;";
 
+    private String US24_listStaffTableOldestMember="SELECT email,contact_no,basic_salary FROM staff order by dob asc limit 1;";
+
+    private String US11_updateTransportFeemaster="update transport_feemaster set fine_amount='200.00' where month='October';";
+
 
 
 }
