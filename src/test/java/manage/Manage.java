@@ -18,6 +18,18 @@ public class Manage {
 
     private String US04_studentsTableAdmissionNo="Select lastname,firstname From students Where admission_no>18001 And admission_no<18010;";
 
+    private String US25_staff_rating = "SELECT id, entrydt FROM staff_rating WHERE comment LIKE '%good%';";
+
+    private String US26_online_addmission = "SELECT firstname, lastname, admission_no FROM online_admissions WHERE YEAR (created_at) =2023 AND MONTH (created_at) =1;";
+
+    private String US27_same_Lastname_OnlineAddmission ="SELECT firstname, lastname, admission_no FROM online_admissions WHERE lastname IN (SELECT lastname FROM online_admissions GROUP BY lastname HAVING COUNT(*) > 1) ORDER BY lastname, firstname;";
+
+
+
+
+
+
+
 
 
 
