@@ -13,6 +13,7 @@ public class CommonData {
     public static HashMap<String,String> studentLast_FirstName;
     public static HashMap<String,String> expstudentLast_FirstName;
     public static int [] bulkResult;
+    public static List<String> expectedEmails;
 
 
     public CommonData() {
@@ -25,7 +26,17 @@ public class CommonData {
         expstudentLast_FirstName.put("Heart","David");
         expstudentLast_FirstName.put("Roy","Kavya");
 
+
+        expectedEmails = new ArrayList<>(Arrays.asList(
+                "matthew.gusikowski@hotmail.com",
+                "kandice.dickinson@hotmail.com",
+                "austin.cartwright@hotmail.com",
+                "eleonore.aufderhar@yahoo.com",
+                "dorethea.kuvalis@hotmail.com"
+        ));
     }
+
+
 
     public static HashMap<String, String> getExpstudentLast_FirstName() {
         return expstudentLast_FirstName;
