@@ -50,3 +50,10 @@ Feature: DB Testing
     * insert 5 random subjects into the database
     * 5 Enter the data in bulk.Check that is added to the table
     * Database connection is closed
+
+  @US19
+  Scenario: List the top 5 longest email addresses from the students table
+    * Query is prepared to find the top 5 longest emails in the students table
+    * Top 5 longest email addresses are validated.
+    * Database connection is closed
+
