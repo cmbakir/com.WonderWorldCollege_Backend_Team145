@@ -253,25 +253,37 @@ public class DB_Stepdefinitions extends Manage {
 
 
     @Given("execute the query to fetch the last {int} records from online_admissions")
-    public void execute_the_query_to_fetch_the_last_records_from_online_admissions(Integer int1) {
-        try {
-            String query = "SELECT * FROM online_admissions ORDER BY created_at DESC LIMIT 10";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
+    public void execute_the_query_to_fetch_the_last_records_from_online_admissions(Integer count) {
 
+        String query = "SELECT * FROM online_admissions ORDER BY id DESC LIMIT ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, count);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            records.clear();
             while (resultSet.next()) {
-                records.add(resultSet.getString("id") + " - " + resultSet.getString("firstname")+ " " + resultSet.getString("lastname") + " - "+ resultSet.getString("email"));
+                records.add(resultSet.getString("id") + " - " +
+                        resultSet.getString("firstname") + " " +
+                        resultSet.getString("lastname") + " - " +
+                        resultSet.getString("email"));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
+
+
     @Given("should see the last {int} records displayed")
-    public void should_see_the_last_records_displayed(Integer int1) {
-        System.out.println("Last 10 Records:");
+    public void should_see_the_last_records_displayed(Integer count) {
+
+        System.out.println("Last " + count + " Records:");
         for (String record : records) {
             System.out.println(record);
         }
+
+        assertFalse("No records found!", records.isEmpty());
+        assertEquals("The number of retrieved records is incorrect!", count.intValue(), records.size());
     }
 
 
