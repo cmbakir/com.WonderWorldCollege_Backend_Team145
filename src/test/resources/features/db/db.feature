@@ -50,3 +50,15 @@ Feature: DB Testing
     * insert 5 random subjects into the database
     * 5 Enter the data in bulk.Check that is added to the table
     * Database connection is closed
+
+  @US22
+  Scenario: List the name and ID of the top 10 income values from the income table based on the highest amount
+    * Query is prepared for the name and ID of the top 10 income values in the income table based on the highest amount
+    * Query results lists the name and ID are validated.
+    * Database connection is closed
+
+  @US23
+  Scenario: List the first 3 staff members with the longest employment duration in the staff table according to their departments.
+    * Query is prepared for the name of the 3 income values with the longest employement in the income table according to their departments
+    * Query results lists the name is validated.
+    * Database connection is closed
