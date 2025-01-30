@@ -6,10 +6,7 @@ import helperDB.subjects;
 import io.cucumber.java.en.Given;
 import manage.Manage;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -253,5 +250,29 @@ public class DB_Stepdefinitions extends Manage {
         assertEquals(rowCount,bulkResult.length);
 
     }
+
+
+    @Given("execute the query to fetch the last {int} records from online_admissions")
+    public void execute_the_query_to_fetch_the_last_records_from_online_admissions(Integer int1) {
+        try {
+            String query = "SELECT * FROM online_admissions ORDER BY created_at DESC LIMIT 10";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                records.add(resultSet.getString("id") + " - " + resultSet.getString("name")); // ID ve Name alanlarını alıyoruz
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Given("should see the last {int} records displayed")
+    public void should_see_the_last_records_displayed(Integer int1) {
+        System.out.println("Last 10 Records:");
+        for (String record : records) {
+            System.out.println(record);
+        }
+    }
+
 
 }
