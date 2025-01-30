@@ -51,6 +51,7 @@ Feature: DB Testing
     * 5 Enter the data in bulk.Check that is added to the table
     * Database connection is closed
 
+
   @US22
   Scenario: List the name and ID of the top 10 income values from the income table based on the highest amount
     * Query is prepared for the name and ID of the top 10 income values in the income table based on the highest amount
@@ -62,3 +63,23 @@ Feature: DB Testing
     * Query is prepared for the name of the 3 income values with the longest employement in the income table according to their departments
     * Query results lists the name is validated.
     * Database connection is closed
+
+
+  @US16
+  Scenario: DB_US16 Retrieve the last 10 records from online_admissions table
+    * execute the query to fetch the last 10 records from online_admissions
+    * should see the last 10 records displayed
+    * Database connection is closed
+
+  @US17
+  Scenario: DB_US17 Calculate the average passing percentage
+    * execute the query to calculate the average passing percentage
+    * should see the average passing percentage displayed
+    * Database connection is closed
+
+  @US18
+  Scenario: DB_US18 Count distinct students in onlineexam_students table
+    * execute the query to count distinct student_session_id
+    * should see the total number of students displayed
+    * Database connection is closed
+

@@ -6,10 +6,7 @@ import helperDB.subjects;
 import io.cucumber.java.en.Given;
 import manage.Manage;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -298,6 +295,89 @@ public class DB_Stepdefinitions extends Manage {
         }
 
 
+    }
+
+
+
+    @Given("execute the query to fetch the last {int} records from online_admissions")
+    public void execute_the_query_to_fetch_the_last_records_from_online_admissions(Integer count) {
+        query=getUS16_List_the_last_10_records_online_admissions();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, count);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            records.clear();
+            while (resultSet.next()) {
+                records.add(resultSet.getString("id") + " - " +
+                        resultSet.getString("firstname") + " " +
+                        resultSet.getString("lastname") + " - " +
+                        resultSet.getString("email"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Given("should see the last {int} records displayed")
+    public void should_see_the_last_records_displayed(Integer count) {
+
+        System.out.println("Last " + count + " Records:");
+        for (String record : records) {
+            System.out.println(record);
+        }
+
+        assertFalse("No records found!", records.isEmpty());
+        assertEquals("The number of retrieved records is incorrect!", count.intValue(), records.size());
+    }
+
+    @Given("execute the query to calculate the average passing percentage")
+    public void execute_the_query_to_calculate_the_average_passing_percentage() {
+
+        try {
+            query=getUS17_calculateAveragePassingPercentage();
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            if (resultSet.next()) {
+                averagePassingPercentage = resultSet.getInt("average_passing_percentage");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Given("should see the average passing percentage displayed")
+    public void hould_see_the_average_passing_percentage_displayed() {
+
+        System.out.println("Average Passing Percentage: " + averagePassingPercentage);
+        assertTrue("The average passing percentage is out of expected range!", averagePassingPercentage >= 0 && averagePassingPercentage <= 100);
+    }
+
+
+    @Given("execute the query to count distinct student_session_id")
+    public void execute_the_query_to_count_distinct_student_session_id() {
+        try {
+            query=getUS18_countDistinctStudentsOnlineExamStudentsTable();
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            if (resultSet.next()) {
+                totalUniqueStudents = resultSet.getInt("total_students");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Given("should see the total number of students displayed")
+    public void should_see_the_total_number_of_students_displayed() {
+
+        System.out.println("Total Unique Students: " + totalUniqueStudents);
+
+        assertNotNull("Total number of students should not be null", totalUniqueStudents);
+        assertTrue("Total number of students should be greater than zero", totalUniqueStudents > 0);
     }
 
 

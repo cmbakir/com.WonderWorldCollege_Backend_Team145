@@ -18,6 +18,9 @@ public class CommonData {
     public static List<String> actualNameList;
     public static List<String> expectedNameList=new ArrayList<String>(Arrays.asList("Brandon","James","Jason"));
 
+    public static List<String> records = new ArrayList<>();
+    public static int totalUniqueStudents;
+    public static int averagePassingPercentage;
 
     public CommonData() {
         expstudentLast_FirstName=new HashMap<>();
