@@ -22,7 +22,7 @@ Feature: WWCAPI21 API_US027 As an administrator I should be able to delete the a
       | id   |
       | 484 |
 
-  @buradahata
+
   Scenario: Verify that a DELETE request to `/api/alumniDelete` without `id` and with valid authorization returns a
   203 status code and a "No id or wrong id. Please check your id number." message in the response body.
 
@@ -83,7 +83,7 @@ Feature: WWCAPI21 API_US027 As an administrator I should be able to delete the a
       | 489 |
 
 
-  @buradakaldım
+
   Scenario Outline: Verify that the visitor purpose record is successfully deleted by sending a POST request to
   `/api/alumniDelete` with the `DeletedId` returned in the response body to confirm the deletion.
 
