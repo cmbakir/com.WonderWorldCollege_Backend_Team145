@@ -139,4 +139,4 @@ Feature: DB Testing
 
 
 
-    #jenkins için deneme 2 2
+    #jenkins için deneme 2 2 2
