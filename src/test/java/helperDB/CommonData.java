@@ -13,7 +13,10 @@ public class CommonData {
     public static HashMap<String,String> studentLast_FirstName;
     public static HashMap<String,String> expstudentLast_FirstName;
     public static int [] bulkResult;
-
+    public static HashMap<String,String> studentMothr_MothrOcc;
+    public static HashMap<String,String> expstudentMothr_MothrOcc;
+    public static List<Integer> expstudentRoll_no=new ArrayList<>(Arrays.asList(102,107,113,202));
+    public static List<Integer> studentRoll_no;
 
     public CommonData() {
         expstudentLast_FirstName=new HashMap<>();
@@ -24,7 +27,15 @@ public class CommonData {
         expstudentLast_FirstName.put("Clinton","Laura");
         expstudentLast_FirstName.put("Heart","David");
         expstudentLast_FirstName.put("Roy","Kavya");
+        expstudentLast_FirstName.put("Singh","Kriti");
+        expstudentLast_FirstName.put("Thomas","Edward");
 
+        expstudentMothr_MothrOcc=new HashMap<>();
+        expstudentMothr_MothrOcc.put("sara","private job");
+        expstudentMothr_MothrOcc.put("Emma","House wife");
+        expstudentMothr_MothrOcc.put("Caroline Thomas","Teacher");
+        expstudentMothr_MothrOcc.put("Caroline Thomas","Teacher");
+        expstudentMothr_MothrOcc.put("Lara Peterson","Professor");
     }
 
     public static HashMap<String, String> getExpstudentLast_FirstName() {
@@ -40,5 +51,8 @@ public class CommonData {
      Roy       Kavya
 
      **/
+    public  static HashMap<String,String> getExpstudentMothr_MothrOcc(){
+        return expstudentMothr_MothrOcc;
+    }
 
 }
