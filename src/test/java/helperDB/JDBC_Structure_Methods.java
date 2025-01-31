@@ -3,9 +3,11 @@ package helperDB;
 import base.BaseTest;
 import config_Requirements.ConfigLoader;
 
+
 import com.github.javafaker.Faker;
 
 import config_Requirements.ConfigLoader;
+
 
 import java.sql.*;
 
@@ -27,6 +29,7 @@ public class JDBC_Structure_Methods extends BaseTest {
             configLoader = new ConfigLoader();  // Eğer null ise burada başlatılıyor
 
 }
+
 
 
 

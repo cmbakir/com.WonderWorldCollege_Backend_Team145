@@ -16,7 +16,17 @@ public class Manage {
 
     private String US10_deletedVisitorsBook="Delete From visitors_book WHERE id= ?";
 
-    private String US04_studentsTableAdmissionNo="Select lastname,firstname From students Where admission_no>18001 And admission_no<18010;";
+    private String US04_studentsTableAdmissionNo="SELECT lastname,firstname FROM students\n" +
+            "WHERE admission_no\n" +
+            "BETWEEN 18001 AND 18010\n" +
+            "ORDER BY admission_no ASC;";
+    private String US05_studentsTableIsmi_TileBaslayan="SELECT mother_name,mother_occupation FROM students\n" +
+            "WHERE lastname \n" +
+            "LIKE 'T%'\n" +
+            "ORDER BY lastname ASC;";
+    private String US06_studentsTableFathrOcc_OgrRoll="SELECT roll_no,father_occupation FROM students\n" +
+            "WHERE father_occupation IN ('Doctor','Police')\n" +
+            "ORDER BY roll_no ASC;";
 
 
     private String US25_staff_rating = "SELECT id, entrydt FROM staff_rating WHERE comment LIKE '%good%';";
