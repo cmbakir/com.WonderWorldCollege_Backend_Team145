@@ -3,6 +3,12 @@ package helperDB;
 import base.BaseTest;
 import config_Requirements.ConfigLoader;
 
+
+import com.github.javafaker.Faker;
+
+import config_Requirements.ConfigLoader;
+
+
 import java.sql.*;
 
 public class JDBC_Structure_Methods extends BaseTest {
@@ -11,11 +17,22 @@ public class JDBC_Structure_Methods extends BaseTest {
     public static PreparedStatement preparedStatement;
     public static ResultSet resultSet;
     public static String query;
+    public static Faker faker = new Faker();
 
     public static void createConnection() {
+
+
+        ConfigLoader configLoader = new ConfigLoader();
+
+
         if (configLoader == null) {
             configLoader = new ConfigLoader();  // Eğer null ise burada başlatılıyor
-        }
+
+}
+
+
+
+
         String url = configLoader.getDatabaseConfig("URL");
         String username = configLoader.getDatabaseConfig("USERNAME");
         String password = configLoader.getDatabaseConfig("PASSWORD");
@@ -86,7 +103,28 @@ public class JDBC_Structure_Methods extends BaseTest {
             throw new RuntimeException(e);
         }
         return preparedStatement;
+
+
     }
+
+    //ekleme
+    public static Connection getConnection(){
+
+        ConfigLoader configLoader = new ConfigLoader();
+
+        String url = configLoader.getDatabaseConfig("URL");
+        String username = configLoader.getDatabaseConfig("USERNAME");
+        String password = configLoader.getDatabaseConfig("PASSWORD");
+
+        try {
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return connection;
+    }
+
 
 
 
