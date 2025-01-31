@@ -8,7 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import manage.Manage;
 import org.junit.Assert;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 import java.sql.*;
@@ -18,16 +18,17 @@ import java.util.List;
 import java.util.Map;
 
 import static helperDB.CommonData.*;
+import static helperDB.CommonData.studentRoll_no;
 import static helperDB.JDBC_Structure_Methods.*;
 import static org.junit.Assert.*;
 
 public class DB_Stepdefinitions extends Manage {
     // DB
     CommonData data = new CommonData();
-    String QUERY;
-    Connection connection;
-    Statement statement;
-    ResultSet resultSet;
+    //String QUERY;
+    //Connection connection;
+    //Statement statement;
+    //ResultSet resultSet;
 
 
     int InsertID = faker.number().numberBetween(1, 201);
@@ -118,12 +119,21 @@ public class DB_Stepdefinitions extends Manage {
 
     @Given("Query is prepared  in the students table according to the father_occupation value")
     public void query_is_prepared_in_the_students_table_according_to_the_father_occupation_value() throws SQLException {
-
+        query=getUS06_studentsTableFathrOcc_OgrRoll();
+        resultSet=getStatement().executeQuery(query);
     }
 
     @Given("Query results lists the roll_no information are validated")
     public void query_results_lists_the_roll_no_information_are_validated() throws SQLException {
+        studentRoll_no=new ArrayList<>();
+        while (resultSet.next()){
+            studentRoll_no.add(resultSet.getInt("roll_no"));
 
+        }
+        for (int i = 0; i < studentRoll_no.size(); i++) {
+            assertEquals(expstudentRoll_no,studentRoll_no);
+
+        }
 
     }
 
@@ -264,6 +274,26 @@ public class DB_Stepdefinitions extends Manage {
         System.out.println(bulkResult.length + "record is successfully added to the table");
         assertEquals(rowCount, bulkResult.length);
 
+    }
+    @Given("The query is prepared with students whose lastname starts with T in the student table")
+    public void the_query_is_prepared_with_students_whose_name_starts_with_t_in_the_student_table() throws SQLException {
+        query=getUS05_studentsTableIsmi_TileBaslayan();
+        resultSet= getStatement().executeQuery(query);
+
+
+    }
+    @Given("Query results lists the mother:occupation and mother_name are validated.")
+    public void query_results_lists_the_mother_occupation_and_mother_name_are_validated() throws SQLException {
+        studentMothr_MothrOcc = new HashMap<>();
+        while (resultSet.next()){
+            studentMothr_MothrOcc.put(resultSet.getString("mother_name"),resultSet.getString("mother_occupation"));
+        }
+        for (String mother_name:data.getExpstudentMothr_MothrOcc().keySet() ){
+
+            String expmother_occupation=data.getExpstudentMothr_MothrOcc().get(mother_name);
+            String actmother_occupation=studentMothr_MothrOcc.get(mother_name);
+            assertEquals(expmother_occupation,actmother_occupation);
+        }
     }
 
 
@@ -653,7 +683,6 @@ public class DB_Stepdefinitions extends Manage {
         assertTrue(nameUpdate);
     }
 
-
     @Given("Verify the firstname, lastname and online_admissions are listed correctly")
     public void verify_the_firstname_lastname_and_online_admissions_are_listed_correctly() throws SQLException {
 
@@ -692,7 +721,7 @@ public class DB_Stepdefinitions extends Manage {
         }
 
 
-        assertEquals(getExpectedAddmissionStudents().size(), actualAddmissionStudents.size(), "Öğrenci sayısı aynı değil.");
+        assertEquals("Öğrenci sayısı aynı değil.", getExpectedAddmissionStudents().size(), actualAddmissionStudents.size());
         System.out.println(getExpectedAddmissionStudents().size());
         System.out.println(actualAddmissionStudents.size());
     }
@@ -741,7 +770,7 @@ public class DB_Stepdefinitions extends Manage {
         }
 
         // Beklenen ve gerçek öğrenci sayısını karşılaştırıyoruz
-        assertEquals(getExpSameLastnameOnlineAddmission().size(), actualSameLastnameOnlineAddmission.size(), "Öğrenci sayısı aynı değil.");
+        assertEquals("Öğrenci sayısı aynı değil.",getExpSameLastnameOnlineAddmission().size(), actualSameLastnameOnlineAddmission.size());
 
         System.out.println(getExpSameLastnameOnlineAddmission().size());
         System.out.println(actualSameLastnameOnlineAddmission.size());
