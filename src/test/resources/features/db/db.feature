@@ -160,6 +160,23 @@ Feature: DB Testing
     * Verifies that the data returning the name of the requested id in the topic table has been updated.
     * Database connection is closed
 
+  Scenario: WWCAPI84 DB US04 I need to be able to list the firstname and lastname information of the students
+  with admission_no between 18001 and 18010 in the students table via the database.
+    * Query is prepared  in the students table with admission numbers
+    * Query results lists the firstname and lastname are validated.
+    * Database connection is closed
 
+  Scenario: WWCAPI85 DB US05 I need to be able to list the mother_name and mother:occupation values of students
+  whose last name information starts with 'T' in the students table via the database.
+    * The query is prepared with students whose lastname starts with T in the student table
+    * Query results lists the mother:occupation and mother_name are validated.
+    * Database connection is closed
+
+  Scenario: WWCAPI86 DB US06 List the roll_no information of the students whose father_occupation
+  value in the students table in the database is Doctor or Police, from largest to smallest.
+
+    * Query is prepared  in the students table according to the father_occupation value
+    * Query results lists the roll_no information are validated
+    * Database connection is closed
 
 
