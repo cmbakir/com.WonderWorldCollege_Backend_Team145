@@ -8,7 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import manage.Manage;
 import org.junit.Assert;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 import java.sql.*;
@@ -24,10 +24,10 @@ import static org.junit.Assert.*;
 public class DB_Stepdefinitions extends Manage {
     // DB
     CommonData data = new CommonData();
-    String QUERY;
-    Connection connection;
-    Statement statement;
-    ResultSet resultSet;
+    //String QUERY;
+    //Connection connection;
+    //Statement statement;
+    //ResultSet resultSet;
 
 
     int InsertID = faker.number().numberBetween(1, 201);
@@ -653,7 +653,6 @@ public class DB_Stepdefinitions extends Manage {
         assertTrue(nameUpdate);
     }
 
-
     @Given("Verify the firstname, lastname and online_admissions are listed correctly")
     public void verify_the_firstname_lastname_and_online_admissions_are_listed_correctly() throws SQLException {
 
@@ -692,7 +691,7 @@ public class DB_Stepdefinitions extends Manage {
         }
 
 
-        assertEquals(getExpectedAddmissionStudents().size(), actualAddmissionStudents.size(), "Öğrenci sayısı aynı değil.");
+        assertEquals("Öğrenci sayısı aynı değil.", getExpectedAddmissionStudents().size(), actualAddmissionStudents.size());
         System.out.println(getExpectedAddmissionStudents().size());
         System.out.println(actualAddmissionStudents.size());
     }
@@ -741,7 +740,7 @@ public class DB_Stepdefinitions extends Manage {
         }
 
         // Beklenen ve gerçek öğrenci sayısını karşılaştırıyoruz
-        assertEquals(getExpSameLastnameOnlineAddmission().size(), actualSameLastnameOnlineAddmission.size(), "Öğrenci sayısı aynı değil.");
+        assertEquals("Öğrenci sayısı aynı değil.",getExpSameLastnameOnlineAddmission().size(), actualSameLastnameOnlineAddmission.size());
 
         System.out.println(getExpSameLastnameOnlineAddmission().size());
         System.out.println(actualSameLastnameOnlineAddmission.size());
