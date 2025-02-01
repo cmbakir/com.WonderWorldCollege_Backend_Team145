@@ -7,7 +7,7 @@ Feature: WWCAPI-7 API_US040 As an administrator (admin) I want to be able to cre
     * The api user sets "api/addNotice" path parameters.
     * The api user prepares a POST request to send to the api visitorsPurposeAdd endpoint containing the information "<type>", "<title>",  "<slug>" and "<description>".
     * The api user sends a POST request and saves the returned response.
-    * The api user verifies that the status code is 206.
+    * The api user verifies that the status code is 203.
     * The api user verifies that the "message" information in the response body is "Success".
 
     Examples:
