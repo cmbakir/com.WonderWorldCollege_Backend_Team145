@@ -1,5 +1,5 @@
 Feature: WWC-5 API_US038 As an administrator (admin) I want to be able to access the Notice List via API connection.
-  @notice
+
   Scenario Outline: WWC-103 TC_01 -> API_US038 Verify that a GET request to the /api/getNotice endpoint with valid authorization
     * The api user constructs the base url with the "adminAhmetEmail" token.
     * The api user sets "api/getNotice" path parameters.
