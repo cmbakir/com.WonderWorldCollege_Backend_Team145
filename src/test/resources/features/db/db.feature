@@ -103,7 +103,8 @@ Feature: DB Testing
     * Database connection is closed
 
   @US18
-  Scenario: DB_US18 Count distinct students in onlineexam_students table
+  Scenario: DB_US18 Count distinct students in onlineexam_snewman run C:\Users\KullanıcıAdı\Desktop\MyCollection.json
+  tudents table
     * execute the query to count distinct student_session_id
     * should see the total number of students displayed
     * Database connection is closed
